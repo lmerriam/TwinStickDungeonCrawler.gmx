@@ -63,6 +63,8 @@ alarm[1] = 1;
 var pad = 200;
 
 instance_deactivate_object(Enemy_Spawner);
+instance_deactivate_object(Drop_Parent);
+instance_deactivate_object(Enemy_Parent);
 instance_activate_region(view_xview[0]-pad,view_yview[0]-pad,view_wview[0]+2*pad,view_hview[0]+2*pad,true);
 
 alarm[1] = .5 * room_speed;
