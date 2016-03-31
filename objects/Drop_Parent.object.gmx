@@ -122,7 +122,8 @@ image_index = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>show_stats = true;
+            <string>/// Show stats and change img_index
+show_stats = true;
 image_index = 1;
 </string>
           </argument>

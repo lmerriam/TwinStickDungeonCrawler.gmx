@@ -26,11 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>/// Assign stats to player
-
+scr_send_to_inv(id);
 global.current_gem = id;
 Player.gem_buffs = buffs;
-visible = false;
-persistent = true;
 </string>
           </argument>
         </arguments>

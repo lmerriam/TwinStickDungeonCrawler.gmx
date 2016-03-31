@@ -26,10 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>/// Assign stats to player
-
-global.current_spell = id;
-visible = false;
-persistent = true;
+var space = scr_send_to_inv(id);
+if (space) {
+    global.current_spell = id;
+}
 </string>
           </argument>
         </arguments>

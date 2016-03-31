@@ -37,15 +37,14 @@ cell_padding = 10;
 cell_width = 64;
 //Get the padding required to center the items
 top_padding = (window_height - ((num_rows - 1) * cell_width + (num_rows - 1) * cell_padding)) / 2;
-left_padding = (window_width - ((num_columns - 1) * cell_width + (num_columns - 1) * cell_padding)) / 2;
-
-show_message("Window_width: " + string(window_width) + "#Window height: " + string(window_height) + "#Top padding: " + string(top_padding) + "#Left padding: " + string(left_padding));
+left_padding = 100;
+//(window_width - ((num_columns - 1) * cell_width + (num_columns - 1) * cell_padding)) / 2;
 
 // Set inventory to invisible by default
 inv_visible = false;
 
 // Init the slots
-num_slots = 16;
+cells[num_cells-1] = 0; // Fills in every index up to num_cells-1 with 0 
 </string>
           </argument>
         </arguments>
@@ -109,8 +108,9 @@ if (inv_visible) {
     draw_set_alpha(.5);
     
     for (i = 0; i &lt; num_cells; i++) {
-        var row = floor(i/4) + 1;
+        var row = floor(i/num_columns) + 1;
         var column = i - (row-1) * num_columns;
+        var item = cells[i];
         
         // Calculate offset due to padding
         var combined_left_padding = cell_padding * (column - 1);
@@ -120,13 +120,23 @@ if (inv_visible) {
         var combined_cell_width = cell_width * (column - 1);
         var combined_cell_height = cell_width * (row - 1);
         
+        // Find four points of cell
         var x1 = left_padding + combined_left_padding + combined_cell_width;
         var x2 = x1 + cell_width;
         var y1 = top_padding + combined_top_padding + combined_cell_height;
         var y2 = y1 + cell_width;
         
+        // Find center of cell
+        var x_center = x1 + cell_width/2;
+        var y_center = y1 + cell_width/2;
+        
         // Draw the cell
         draw_rectangle(x1,y1,x2,y2,false);
+        
+        // Draw the item
+        if (item != 0) {
+            draw_sprite_ext(item.sprite_index, 0, x_center, y_center, 3, 3, 45,c_white,1);
+        }
     }
     
     // Reset the color and alpha
