@@ -194,6 +194,7 @@
       <object>objects\Chest</object>
       <object>objects\Tree</object>
     </objects>
+    <object>objects\Inventory</object>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_spell_blink</timeline>

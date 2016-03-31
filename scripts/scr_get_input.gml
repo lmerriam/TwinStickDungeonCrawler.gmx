@@ -29,3 +29,5 @@ seven_key = keyboard_check_pressed(ord('7'));
 eight_key = keyboard_check_pressed(ord('8'));
 nine_key = keyboard_check_pressed(ord('9'));
 zero_key = keyboard_check_pressed(ord('0'));
+
+i_key = keyboard_check_pressed(ord('I'));

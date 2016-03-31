@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>-1</persistent>
+  <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,76 +25,23 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Move to player
-if (instance_exists(Player)) {
-    x = Player.x;
-    y = Player.y;
-}
+            <string>/// Init the inventory
 
-global.screen_shake = 0;
+// Setup inventory layout
+num_columns = 4;
+num_rows = 4;
+num_cells = num_rows * num_columns;
+cell_padding = 10;
+cell_width = 32;
+//Get the padding required to center the items
+top_padding = (view_hview - (num_rows * cell_width + (num_rows - 1) * cell_padding)) / 2;
+left_padding = (view_wview - (num_columns * cell_width + (num_rows - 1) * cell_padding)) / 2;
 
-// Get the screen shake decay going
-alarm[0] = 1;
-alarm[1] = 1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Handle instance activation
+// Set inventory to invisible by default
+inv_visible = false;
 
-var pad = 200;
-
-instance_deactivate_object(Enemy_Spawner);
-instance_deactivate_object(Drop_Parent);
-instance_deactivate_object(Enemy_Parent);
-instance_activate_region(view_xview[0]-pad,view_yview[0]-pad,view_wview[0]+2*pad,view_hview[0]+2*pad,true);
-
-alarm[1] = .5 * room_speed;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Screen shake decay
-if (global.screen_shake &gt;= 2) {
-    global.screen_shake -= 2;
-}
-alarm[0] = .2 * room_speed;
+// Init the slots
+num_slots = 16;
 </string>
           </argument>
         </arguments>
@@ -117,22 +64,66 @@ alarm[0] = .2 * room_speed;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Move 10% toward player and screen shake
+            <string>/// Open inventory on pressing 'i'
+scr_get_input();
 
-if (instance_exists(Player)) {
-    var dir = point_direction(Player.x,Player.y,mouse_x,mouse_y);
-    var dis = point_distance(Player.x,Player.y,mouse_x,mouse_y);
-    var targetx = Player.x + lengthdir_x(dis/10,dir);
-    var targety = Player.y + lengthdir_y(dis/10,dir);
-
-    x += (targetx - x) * .1  * (30/room_speed);
-    y += (targety - y) * .1 * (30/room_speed);
+if (i_key) {
+    inv_visible = true;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Draw the inventory
 
-if (global.screen_shake &gt; 4) {
-    if (global.screen_shake &gt; 6) global.screen_shake = 8;
-    x += choose(-random(global.screen_shake),random(global.screen_shake)) * (30/room_speed);
-    y += choose(-random(global.screen_shake),random(global.screen_shake)) * (30/room_speed);
+if (inv_visible) {
+
+    // Set cell color
+    draw_set_color(c_black);
+    draw_set_alpha(.5);
+    
+    for (i = 0; i &lt;= num_cells; i++) {
+        var row = floor(i/4) + 1;
+        var column = i - (row-1) * num_columns;
+        
+        // Calculate offset due to padding
+        var combined_left_padding = cell_padding * (column - 1);
+        var combined_top_padding = cell_padding * (row - 1);
+        
+        // Calculate offset due to cell width
+        var combined_cell_width = cell_width * (column - 1);
+        var combined_cell_height = cell_width * (row - 1);
+        
+        var x1 = left_padding + combined_left_padding + combined_cell_width;
+        var x2 = x1 + cell_width;
+        var y1 = top_padding + combined_top_padding + combined_cell_height;
+        var y2 = y1 + cell_width;
+        
+        // Draw the cell
+        draw_rectangle(x1,y1,x2,y2,false);
+    }
+    
+    // Reset the color and alpha
+    draw_set_color(c_white);
+    draw_set_alpha(1);
 }
 </string>
           </argument>

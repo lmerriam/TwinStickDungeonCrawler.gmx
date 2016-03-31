@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>/// Init the slime
 event_inherited();
-image_speed = .1;
+image_speed = .1 * (30/room_speed);
 
 level = 1;
 
@@ -46,7 +46,7 @@ xp = starting_xp;
 
 // Constant stats
 knockback = 5;
-spd = 1;
+spd = 1 * (30/room_speed);
 
 // Loot
 loot = ds_map_create();

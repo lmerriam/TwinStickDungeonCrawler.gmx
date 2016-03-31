@@ -102,8 +102,6 @@
     <instance objName="Enemy_Spawner" x="4320" y="1888" name="inst_F984BF64" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="4608" y="1184" name="inst_55213153" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="5600" y="608" name="inst_ADBB6BC1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="Enemy_Spawner" x="6272" y="512" name="inst_53F42E58" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="Enemy_Spawner" x="7328" y="608" name="inst_4A7B5B40" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="8576" y="1056" name="inst_9BC18A55" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="9024" y="1888" name="inst_23C1215F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="9408" y="3392" name="inst_2947F158" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -149,9 +147,6 @@
     <instance objName="Enemy_Spawner" x="5248" y="1536" name="inst_46932146" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="4896" y="1824" name="inst_6D9F6B24" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="4576" y="2048" name="inst_91B981DF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="Enemy_Spawner" x="3904" y="1824" name="inst_DDC3CFE0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="Enemy_Spawner" x="3200" y="1536" name="inst_D3323D7E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="Enemy_Spawner" x="2848" y="1664" name="inst_D88C1CA9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="2368" y="2336" name="inst_22947FD0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="2368" y="2816" name="inst_D8D8149D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="2848" y="3264" name="inst_AAC6ED3C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -196,14 +191,11 @@
     <instance objName="Enemy_Spawner" x="6432" y="1056" name="inst_4D7C63A4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="5440" y="960" name="inst_671844C1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="5024" y="768" name="inst_D76303C5" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="Enemy_Spawner" x="4192" y="480" name="inst_995C9542" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="Enemy_Spawner" x="3232" y="352" name="inst_5BDFADE6" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="Enemy_Spawner" x="2432" y="384" name="inst_03EA9810" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="1888" y="768" name="inst_FCA88C0D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="1376" y="1280" name="inst_7CF24AFC" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="1088" y="1568" name="inst_88AD1065" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Enemy_Spawner" x="864" y="1856" name="inst_B566AB17" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="Enemy_Spawner" x="4128" y="1504" name="inst_D840B0E8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="Enemy_Spawner" x="8800" y="5120" name="inst_629843B4" locked="0" code="" scaleX="2" scaleY="-1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tileset1" x="0" y="0" w="32" h="32" xo="0" yo="0" id="10000001" name="inst_9EAE36DE" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
