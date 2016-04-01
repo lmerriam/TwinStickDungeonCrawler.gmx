@@ -92,7 +92,7 @@
       <script>scripts\scr_create_instance_with_level.gml</script>
       <script>scripts\scr_compare_to_equipped.gml</script>
       <script>scripts\scr_send_to_inv.gml</script>
-      <script>scripts\script42.gml</script>
+      <script>scripts\scr_equip.gml</script>
     </scripts>
     <scripts name="Catalogs">
       <script>scripts\scr_weapon_list.gml</script>
@@ -132,6 +132,7 @@
     <object>objects\Expr</object>
     <object>objects\Door</object>
     <object>objects\Speaker_Parent</object>
+    <object>objects\Inventory</object>
     <object>objects\Dialog_Box</object>
     <object>objects\Particles</object>
     <object>objects\Spawn_Button</object>
@@ -196,7 +197,6 @@
       <object>objects\Chest</object>
       <object>objects\Tree</object>
     </objects>
-    <object>objects\Inventory</object>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_spell_blink</timeline>

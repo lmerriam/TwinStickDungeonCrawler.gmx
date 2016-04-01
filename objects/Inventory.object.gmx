@@ -27,24 +27,52 @@
             <kind>1</kind>
             <string>/// Init the inventory
 
+// Init the drag item
+global.drag_item = noone;
+
 // Setup inventory layout
 var window_width = window_get_width();
 var window_height = window_get_height();
-num_columns = 4;
-num_rows = 4;
-num_cells = num_rows * num_columns;
-cell_padding = 10;
-cell_width = 64;
+slot_width = 64;
+
 //Get the padding required to center the items
-top_padding = (window_height - ((num_rows - 1) * cell_width + (num_rows - 1) * cell_padding)) / 2;
-left_padding = 100;
-//(window_width - ((num_columns - 1) * cell_width + (num_columns - 1) * cell_padding)) / 2;
+top_padding = 200;
+left_padding = 200;
 
 // Set inventory to invisible by default
 inv_visible = false;
 
 // Init the slots
-cells[num_cells-1] = 0; // Fills in every index up to num_cells-1 with 0 
+slots = ds_grid_create(4,4);
+slots = ds_grid_clear(slots,noone);
+
+// Get grid height and width
+grid_height = ds_grid_height(slots);
+grid_width = ds_grid_width(slots);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Destroy DS
+if (ds_exists(slots,ds_type_grid)) ds_grid_destroy(slots);
 </string>
           </argument>
         </arguments>
@@ -82,6 +110,49 @@ if (i_key) {
         </arguments>
       </action>
     </event>
+    <event eventtype="6" enumb="53">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Check inventory item click
+if (inv_visible = true) {
+    var mousex = window_mouse_get_x();
+    var mousey = window_mouse_get_y();
+    var combined_slot_width = slot_width * grid_width;
+    var combined_slot_height = slot_width * grid_height;
+    if (mousex &gt; left_padding and mousex &lt; left_padding + combined_slot_width and mousey &gt; top_padding and mousey &lt; top_padding + combined_slot_height) {
+        var inv_x = floor((mousex - left_padding) / slot_width);
+        var inv_y = floor((mousey - top_padding) / slot_width);
+        
+        // Get item that's already in the slot
+        var prev_item = slots[# inv_x,inv_y];
+        
+        // Set slot to new item
+        slots[# inv_x,inv_y] = global.drag_item;
+        
+        // Set drag item to previous slot occupant
+        global.drag_item = prev_item;
+        
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -107,36 +178,25 @@ if (inv_visible) {
     draw_set_color(c_black);
     draw_set_alpha(.5);
     
-    for (i = 0; i &lt; num_cells; i++) {
-        var row = floor(i/num_columns) + 1;
-        var column = i - (row-1) * num_columns;
-        var item = cells[i];
-        
-        // Calculate offset due to padding
-        var combined_left_padding = cell_padding * (column - 1);
-        var combined_top_padding = cell_padding * (row - 1);
-        
-        // Calculate offset due to cell width
-        var combined_cell_width = cell_width * (column - 1);
-        var combined_cell_height = cell_width * (row - 1);
-        
-        // Find four points of cell
-        var x1 = left_padding + combined_left_padding + combined_cell_width;
-        var x2 = x1 + cell_width;
-        var y1 = top_padding + combined_top_padding + combined_cell_height;
-        var y2 = y1 + cell_width;
-        
-        // Find center of cell
-        var x_center = x1 + cell_width/2;
-        var y_center = y1 + cell_width/2;
-        
-        // Draw the cell
-        draw_rectangle(x1,y1,x2,y2,false);
-        
-        // Draw the item
-        if (item != 0) {
-            draw_sprite_ext(item.sprite_index, 0, x_center, y_center, 3, 3, 45,c_white,1);
+    // Draw the inventory
+    for (column = 0; column &lt; grid_width; column++) {
+        for (row = 0; row &lt; grid_height; row++) {
+            x1 = column * slot_width + left_padding;
+            y1 = row * slot_width + top_padding;
+            x2 = x1 + slot_width;
+            y2 = y1 + slot_width;
+            
+            draw_rectangle(x1,y1,x2,y2,false);
+            if(slots[# column,row] != noone and slots[# column,row] != global.drag_item) {
+                draw_sprite_ext(slots[# column,row].sprite_index, 0,x1+(slot_width/2),y1+(slot_width/2),3,3,45,c_white,1);
+            }
         }
+    }
+    
+    if (global.drag_item != noone) {
+        var mousex = window_mouse_get_x();
+        var mousey = window_mouse_get_y();
+        draw_sprite_ext(global.drag_item.sprite_index, 0,mousex,mousey,4,4,45,c_white,1);
     }
     
     // Reset the color and alpha

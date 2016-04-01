@@ -45,17 +45,10 @@ hp = base_maxhp;
 stamina = base_maxstamina;
 
 // Init slots
-global.current_weapon = instance_create(x,y,Shotgun);
-global.current_weapon.persistent = true;
-
-global.current_spell = instance_create(x,y,Scroll_Column);
-global.current_spell.persistent = true;
-
-global.current_armor = instance_create(x,y,Armor_Heavy);
-global.current_armor.persistent = true;
-
-global.current_gem = instance_create(x,y,Gem_Burn);
-global.current_gem.persistent = true;
+scr_equip(instance_create(x,y,Shotgun));
+scr_equip(instance_create(x,y,Armor_Heavy));
+scr_equip(instance_create(x,y,Scroll_Column));
+scr_equip(instance_create(x,y,Gem_Combust));
 </string>
           </argument>
         </arguments>
@@ -348,6 +341,17 @@ hp = min(hp+5, maxhp); // min always returns the minimum of the array, helps us 
             <string>/// Go through door
 
 if (room_exists(other.new_room)) {
+
+    // Activate objects that need to persist
+    // They will automatically be deactivated again by the view after they've transitioned to the new room
+    for (i=0; i &lt; ds_grid_height(Inventory.slots); i++) {
+        instance_activate_object(Inventory.slots[# 4,i]);
+    }
+    instance_activate_object(global.current_weapon);
+    instance_activate_object(global.current_spell);
+    instance_activate_object(global.current_armor);
+    instance_activate_object(global.current_gem);
+    
     room_goto(other.new_room);
     x = other.new_x;
     y = other.new_y;
