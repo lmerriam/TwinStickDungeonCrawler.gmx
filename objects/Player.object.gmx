@@ -253,7 +253,7 @@ var weapon = global.current_weapon;
 var spell = global.current_spell;
 
 // Left Attack
-if (mouse_left and alarm[2] &lt;= 0) {
+if (mouse_left and alarm[2] &lt;= 0 and global.drag_item == noone) {
     script_execute(weapon.script);
     alarm[2] = weapon.cd * room_speed;
 }
@@ -344,8 +344,10 @@ if (room_exists(other.new_room)) {
 
     // Activate objects that need to persist
     // They will automatically be deactivated again by the view after they've transitioned to the new room
-    for (i=0; i &lt; ds_grid_height(Inventory.slots); i++) {
-        instance_activate_object(Inventory.slots[# 4,i]);
+    for (column = 0; column &lt; Inventory.grid_width; column++) {
+        for (row = 0; row &lt; Inventory.grid_height; row++) {
+            instance_activate_object(Inventory.slots[# column,row]);
+        }
     }
     instance_activate_object(global.current_weapon);
     instance_activate_object(global.current_spell);

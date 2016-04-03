@@ -123,8 +123,10 @@ image_index = 0;
           <argument>
             <kind>1</kind>
             <string>/// Show stats and change img_index
-show_stats = true;
-image_index = 1;
+if (!scr_mouse_over_inv()) {
+    show_stats = true;
+    image_index = 1;
+}
 </string>
           </argument>
         </arguments>
@@ -148,8 +150,9 @@ image_index = 1;
           <argument>
             <kind>1</kind>
             <string>/// Send to inventory
-scr_send_to_inv(id);
-scr_equip(id);
+if (!scr_mouse_over_inv()) {
+    scr_send_to_inv(id);
+}
 </string>
           </argument>
         </arguments>

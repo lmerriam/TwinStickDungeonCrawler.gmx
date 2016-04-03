@@ -37,7 +37,7 @@ script = scr_attack_pistol;
 // Roll stats
 damage = irandom_range(3,5);
 knockback = irandom_range(5,8);
-cd = 2;
+cd = 1;
 </string>
           </argument>
         </arguments>

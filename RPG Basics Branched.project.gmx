@@ -61,6 +61,7 @@
     <sprite>sprites\spr_map2</sprite>
     <sprite>sprites\spr_map1</sprite>
     <sprite>sprites\spr_player_arrow</sprite>
+    <sprite>sprites\spr_teleporter</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_grass</background>
@@ -93,6 +94,10 @@
       <script>scripts\scr_compare_to_equipped.gml</script>
       <script>scripts\scr_send_to_inv.gml</script>
       <script>scripts\scr_equip.gml</script>
+      <script>scripts\scr_mouse_over_ui.gml</script>
+      <script>scripts\scr_mouse_over_inv.gml</script>
+      <script>scripts\scr_drop_item.gml</script>
+      <script>scripts\scr_draw_inv_slot.gml</script>
     </scripts>
     <scripts name="Catalogs">
       <script>scripts\scr_weapon_list.gml</script>
@@ -106,6 +111,7 @@
     <script>scripts\scr_init_flare.gml</script>
     <scripts name="Attacks">
       <script>scripts\scr_attack_blade.gml</script>
+      <script>scripts\scr_attack_unarmed.gml</script>
       <script>scripts\scr_attack_pistol.gml</script>
       <script>scripts\scr_attack_smg.gml</script>
       <script>scripts\scr_attack_bomb.gml</script>
@@ -197,6 +203,7 @@
       <object>objects\Chest</object>
       <object>objects\Tree</object>
     </objects>
+    <object>objects\Teleporter</object>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_spell_blink</timeline>
