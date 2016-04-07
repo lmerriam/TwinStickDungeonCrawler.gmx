@@ -346,7 +346,7 @@ if (room_exists(other.new_room)) {
     // They will automatically be deactivated again by the view after they've transitioned to the new room
     for (column = 0; column &lt; Inventory.grid_width; column++) {
         for (row = 0; row &lt; Inventory.grid_height; row++) {
-            instance_activate_object(Inventory.slots[# column,row]);
+            instance_activate_object(Inventory.inventory_slots[# column,row]);
         }
     }
     instance_activate_object(global.current_weapon);

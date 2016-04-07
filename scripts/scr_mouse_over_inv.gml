@@ -1,2 +1,2 @@
 // Get inventory bounds
-return scr_mouse_over_ui(Inventory.inv_x1,Inventory.inv_y1,Inventory.inv_x2,Inventory.inv_y2);
+return scr_mouse_over_ui(Inventory.inventory_coords[0],Inventory.inventory_coords[1],Inventory.inventory_coords[2],Inventory.inventory_coords[3]);

@@ -103,6 +103,7 @@
       <script>scripts\scr_toggle_menu.gml</script>
       <script>scripts\scr_handle_deactivation.gml</script>
       <script>scripts\scr_draw_inventory.gml</script>
+      <script>scripts\scr_init_inventory.gml</script>
     </scripts>
     <scripts name="Catalogs">
       <script>scripts\scr_weapon_list.gml</script>

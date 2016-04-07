@@ -3,10 +3,14 @@ var drop = argument[0];
 
 // Find an inventory slot
 var space = false;
-var slots = Inventory.slots;
+var slots = Inventory.inventory_slots;
 
-for (row = 0; row < Inventory.grid_height; row++) {
-    for (column = 0; column < Inventory.grid_width; column++) {
+// Get the inventory height and width
+var grid_width = ds_grid_width(Inventory.inventory_slots);
+var grid_height = ds_grid_height(Inventory.inventory_slots);
+
+for (row = 0; row < grid_height; row++) {
+    for (column = 0; column < grid_width; column++) {
         if (slots[# column,row] = noone) {
             // Assign to cell
             slots[# column,row] = drop;

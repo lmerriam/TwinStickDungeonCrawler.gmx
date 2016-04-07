@@ -1,9 +1,9 @@
 ///scr_draw_inv_slot(x1,y1,x2,y2,obj)
-x1 = argument[0];
-y1 = argument[1];
-x2 = argument[2];
-y2 = argument[3];
-obj = argument[4];
+var x1 = argument[0];
+var y1 = argument[1];
+var x2 = argument[2];
+var y2 = argument[3];
+var obj = argument[4];
 
 draw_rectangle(x1,y1,x2,y2,false);
 if(obj != noone and obj != global.drag_item) {

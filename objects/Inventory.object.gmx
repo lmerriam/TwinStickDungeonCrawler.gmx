@@ -29,46 +29,44 @@
 
 // Init the drag item
 global.drag_item = noone;
+current_inventory = noone;
+current_slot_x = 0;
+current_slot_y = 0;
 
-// Init the slots
-slots = ds_grid_create(4,4);
-slots = ds_grid_clear(slots,noone);
-
-// Set up the equipment slots
-equipment[0] = global.current_weapon;
-equipment[1] = global.current_spell;
-equipment[2] = global.current_armor;
-equipment[3] = global.current_gem;
-
-// Setup inventory layout
-var window_width = window_get_width();
-var window_height = window_get_height();
+// Setup some layout stuff
 slot_width = 64;
 equipment_left_padding = 20;
 
-// Get grid height and width
-grid_height = ds_grid_height(slots);
-grid_width = ds_grid_width(slots);
 
-//Get the padding required to center the items
-top_padding = (window_height - slot_width * grid_width) / 2;
-left_padding = 100;
 
-// Store the coordinates of the inventory
-inv_x1 = left_padding;
-inv_y1 = top_padding;
-inv_x2 = left_padding + grid_width * slot_width;
-inv_y2 = top_padding + grid_height * slot_width;
+// Init the inventory slots
+inventory_slots = ds_grid_create(4,4);
+inventory_slots = ds_grid_clear(inventory_slots,noone);
 
-// Store coordinates of the slots
-weapon_x = inv_x2 + equipment_left_padding;
-weapon_y = top_padding;
-armor_x = inv_x2 + equipment_left_padding;
-armor_y = top_padding + slot_width;
-spell_x = inv_x2 + equipment_left_padding;
-spell_y = top_padding + slot_width*2;
-gem_x = inv_x2 + equipment_left_padding;
-gem_y = top_padding + slot_width*3;
+// Set up the inventory offsets
+// Centering that shit
+var inventory_offset_left = (window_get_height() - slot_width * ds_grid_height(inventory_slots)) / 2;
+var inventory_offset_top = 100;
+
+// Get the inventory coordinates
+inventory_coords = scr_init_inventory(inventory_slots, slot_width, inventory_offset_left, inventory_offset_top);
+
+
+
+// Set up the equipment slots
+equipment_slots = ds_grid_create(1,4);
+equipment_slots[# 0,0] = instance_create(0,0,Shotgun);
+equipment_slots[# 0,1] = instance_create(0,0,Scroll_Column);
+equipment_slots[# 0,2] = instance_create(0,0,Armor_Heavy);
+equipment_slots[# 0,3] = instance_create(0,0,Gem_Burn);
+
+// Set up the equipment slot offsets
+var equipment_offset_left = inventory_coords[2] + equipment_left_padding;
+var equipment_offset_top = inventory_coords[1];
+
+// Get the equipment slot coordinates
+equipment_coords = scr_init_inventory(equipment_slots, slot_width, equipment_offset_left, equipment_offset_top);
+
 </string>
           </argument>
         </arguments>
@@ -116,12 +114,19 @@ if (ds_exists(slots,ds_type_grid)) ds_grid_destroy(slots);
           <argument>
             <kind>1</kind>
             <string>/// Detect the Inventory slot the mouse is over and store it
+var mousex = window_mouse_get_x();
+var mousey = window_mouse_get_y();
+
 if (scr_mouse_over_inv()) {
-    var inv_x = (mousex - inv_x1) div slot_width;
-    var inv_y = (mousey - inv_y1) div slot_width;
-    current_slot = slots[# inv_x, inv_y];
-} else if (scr_mouse_over_ui(weapon_x,weapon_y,weapon_x+slot_width,weapon_y+slot_width)) {
-    current_slot = global.current_weapon;
+    current_inventory = inventory_slots;
+    current_slot_x = (mousex - inventory_coords[0]) div slot_width;
+    current_slot_y = (mousey - inventory_coords[1]) div slot_width;
+} else if (scr_mouse_over_ui(equipment_coords[0],equipment_coords[1],equipment_coords[2],equipment_coords[3])) {
+    current_inventory = equipment_slots;
+    current_slot_x = (mousex - equipment_coords[0]) div slot_width;
+    current_slot_y = (mousey - equipment_coords[1]) div slot_width;
+} else {
+    current_inventory = noone;
 }
 </string>
           </argument>
@@ -146,70 +151,24 @@ if (scr_mouse_over_inv()) {
           <argument>
             <kind>1</kind>
             <string>/// Check inventory item click
-var mousex = window_mouse_get_x();
-var mousey = window_mouse_get_y();
 
-if (scr_mouse_over_inv()) {
-    var inv_x = (mousex - inv_x1) div slot_width;
-    var inv_y = (mousey - inv_y1) div slot_width;
+if (current_inventory != noone) {
+    // Store the item that is in the slot at time of click
+    var prev_item = current_inventory[# current_slot_x, current_slot_y];
+
+    // Assign the dragged item to the slot
+    // Make a check for equipment slots and only allow assigning the correct item type
+    if (current_inventory = equipment_slots) {
+        switch current_slot_y {
+            case 0: 
+        }
+    }
+    current_inventory[# current_slot_x, current_slot_y] = global.drag_item;
     
-    // Get item that's already in the slot
-    var prev_item = slots[# inv_x,inv_y];
-    
-    // Set slot to new item
-    slots[# inv_x,inv_y] = global.drag_item;
-    
-    // Set drag item to previous slot occupant
+    // Make the item that was previously in the slot the new drag item
     global.drag_item = prev_item;
-    
-} else if (scr_mouse_over_ui(weapon_x,weapon_y,weapon_x+slot_width,weapon_y+slot_width)) {
-
-    // Get item that's already in the slot
-    var prev_item = global.current_weapon;
-    
-    // Set slot to new item
-    if (global.drag_item != noone and object_is_ancestor(global.drag_item.object_index,Drop_Weapon_Parent)) {
-        scr_equip(global.drag_item);
-        global.drag_item = prev_item;
-    }
-    
-} else if (scr_mouse_over_ui(armor_x,armor_y,armor_x+slot_width,armor_y+slot_width)) {
-
-    // Get item that's already in the slot
-    var prev_item = global.current_armor;
-    
-    // Set slot to new item
-    if (global.drag_item != noone and object_is_ancestor(global.drag_item.object_index,Drop_Armor_Parent)) {
-        scr_equip(global.drag_item);
-        global.drag_item = prev_item;
-    }
-    
-} else if (scr_mouse_over_ui(spell_x,spell_y,spell_x+slot_width,spell_y+slot_width)) {
-
-    // Get item that's already in the slot
-    var prev_item = global.current_spell;
-    
-    // Set slot to new item
-    if (global.drag_item != noone and object_is_ancestor(global.drag_item.object_index,Drop_Scroll_Parent)) {
-        scr_equip(global.drag_item);
-        global.drag_item = prev_item;
-    }
-    
-} else if (scr_mouse_over_ui(gem_x,gem_y,gem_x+slot_width,gem_y+slot_width)) {
-
-    // Get item that's already in the slot
-    var prev_item = global.current_gem;
-    
-    // Set slot to new item
-    if (global.drag_item != noone and object_is_ancestor(global.drag_item.object_index,Drop_Gem_Parent)) {
-        scr_equip(global.drag_item);
-        global.drag_item = prev_item;
-    }
-    
-} else {
-    if (global.drag_item != noone) {
-        scr_drop_item(global.drag_item);
-    }
+} else if (current_inventory = noone and global.drag_item != noone) {
+    scr_drop_item(global.drag_item);
 }
 </string>
           </argument>
@@ -239,25 +198,11 @@ if (scr_mouse_over_inv()) {
 draw_set_color(c_black);
 draw_set_alpha(.5);
 
-scr_draw_inventory(ds_grid,slot_width,offset_left,offset_right);
-
-// Draw the inventory
-for (column = 0; column &lt; grid_width; column++) {
-    for (row = 0; row &lt; grid_height; row++) {
-        var x1 = column * slot_width + left_padding;
-        var y1 = row * slot_width + top_padding;
-        var x2 = x1 + slot_width;
-        var y2 = y1 + slot_width;
-        
-        scr_draw_inv_slot(x1,y1,x2,y2,slots[# column,row]);
-    }
-}
+// Draw the inventory slots
+scr_draw_inventory(inventory_slots, slot_width, inventory_coords[0], inventory_coords[1]);
 
 // Draw the equipment slots
-scr_draw_inv_slot(weapon_x,weapon_y,weapon_x+slot_width,weapon_y+slot_width,global.current_weapon);
-scr_draw_inv_slot(armor_x,armor_y,armor_x+slot_width,armor_y+slot_width,global.current_armor);
-scr_draw_inv_slot(spell_x,spell_y,spell_x+slot_width,spell_y+slot_width,global.current_spell);
-scr_draw_inv_slot(gem_x,gem_y,gem_x+slot_width,gem_y+slot_width,global.current_gem);
+scr_draw_inventory(equipment_slots, slot_width, equipment_coords[0], equipment_coords[1]);
 
 // Show sprite on mouse if dragging
 if (global.drag_item != noone) {
