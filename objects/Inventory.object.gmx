@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>-1</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>Menu_Parent</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -54,10 +54,7 @@ grid_width = ds_grid_width(slots);
 top_padding = (window_height - slot_width * grid_width) / 2;
 left_padding = 100;
 
-// Set inventory to invisible by default
-inv_visible = false;
-
-// Store the coordinates of the inventory and equipment slots
+// Store the coordinates of the inventory
 inv_x1 = left_padding;
 inv_y1 = top_padding;
 inv_x2 = left_padding + grid_width * slot_width;
@@ -72,7 +69,6 @@ spell_x = inv_x2 + equipment_left_padding;
 spell_y = top_padding + slot_width*2;
 gem_x = inv_x2 + equipment_left_padding;
 gem_y = top_padding + slot_width*3;
-
 </string>
           </argument>
         </arguments>
@@ -119,15 +115,13 @@ if (ds_exists(slots,ds_type_grid)) ds_grid_destroy(slots);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Open inventory on pressing 'i'
-scr_get_input();
-
-if (i_key) {
-    if (inv_visible) {
-        inv_visible = false;
-    } else {
-        inv_visible = true;
-    }
+            <string>/// Detect the Inventory slot the mouse is over and store it
+if (scr_mouse_over_inv()) {
+    var inv_x = (mousex - inv_x1) div slot_width;
+    var inv_y = (mousey - inv_y1) div slot_width;
+    current_slot = slots[# inv_x, inv_y];
+} else if (scr_mouse_over_ui(weapon_x,weapon_y,weapon_x+slot_width,weapon_y+slot_width)) {
+    current_slot = global.current_weapon;
 }
 </string>
           </argument>
@@ -152,44 +146,69 @@ if (i_key) {
           <argument>
             <kind>1</kind>
             <string>/// Check inventory item click
-if (inv_visible  = true) {
-    var mousex = window_mouse_get_x();
-    var mousey = window_mouse_get_y();
+var mousex = window_mouse_get_x();
+var mousey = window_mouse_get_y();
+
+if (scr_mouse_over_inv()) {
+    var inv_x = (mousex - inv_x1) div slot_width;
+    var inv_y = (mousey - inv_y1) div slot_width;
     
-    if (scr_mouse_over_inv()) {
-        var inv_x = (mousex - inv_x1) div slot_width;
-        var inv_y = (mousey - inv_y1) div slot_width;
-        
-        // Get item that's already in the slot
-        var prev_item = slots[# inv_x,inv_y];
-        
-        // Set slot to new item
-        slots[# inv_x,inv_y] = global.drag_item;
-        
-        // Set drag item to previous slot occupant
+    // Get item that's already in the slot
+    var prev_item = slots[# inv_x,inv_y];
+    
+    // Set slot to new item
+    slots[# inv_x,inv_y] = global.drag_item;
+    
+    // Set drag item to previous slot occupant
+    global.drag_item = prev_item;
+    
+} else if (scr_mouse_over_ui(weapon_x,weapon_y,weapon_x+slot_width,weapon_y+slot_width)) {
+
+    // Get item that's already in the slot
+    var prev_item = global.current_weapon;
+    
+    // Set slot to new item
+    if (global.drag_item != noone and object_is_ancestor(global.drag_item.object_index,Drop_Weapon_Parent)) {
+        scr_equip(global.drag_item);
         global.drag_item = prev_item;
-        
-    } else if (scr_mouse_over_ui(weapon_x,weapon_y,weapon_x+slot_width,weapon_y+slot_width)) {
+    }
     
-         // Get item that's already in the slot
-        var prev_item = global.current_weapon;
-        
-        // Set slot to new item
-        if (global.drag_item != noone and object_is_ancestor(global.drag_item.object_index,Drop_Weapon_Parent)) {
-            scr_equip(global.drag_item);
-            global.drag_item = prev_item;
-        }
-        
-    } else if (scr_mouse_over_ui(armor_x,armor_y,armor_x+slot_width,armor_y+slot_width)) {
-        
-    } else if (scr_mouse_over_ui(spell_x,spell_y,spell_x+slot_width,spell_y+slot_width)) {
-        
-    } else if (scr_mouse_over_ui(gem_x,gem_y,gem_x+slot_width,gem_y+slot_width)) {
-        
-    } else {
-        if (global.drag_item != noone) {
-            scr_drop_item(global.drag_item);
-        }
+} else if (scr_mouse_over_ui(armor_x,armor_y,armor_x+slot_width,armor_y+slot_width)) {
+
+    // Get item that's already in the slot
+    var prev_item = global.current_armor;
+    
+    // Set slot to new item
+    if (global.drag_item != noone and object_is_ancestor(global.drag_item.object_index,Drop_Armor_Parent)) {
+        scr_equip(global.drag_item);
+        global.drag_item = prev_item;
+    }
+    
+} else if (scr_mouse_over_ui(spell_x,spell_y,spell_x+slot_width,spell_y+slot_width)) {
+
+    // Get item that's already in the slot
+    var prev_item = global.current_spell;
+    
+    // Set slot to new item
+    if (global.drag_item != noone and object_is_ancestor(global.drag_item.object_index,Drop_Scroll_Parent)) {
+        scr_equip(global.drag_item);
+        global.drag_item = prev_item;
+    }
+    
+} else if (scr_mouse_over_ui(gem_x,gem_y,gem_x+slot_width,gem_y+slot_width)) {
+
+    // Get item that's already in the slot
+    var prev_item = global.current_gem;
+    
+    // Set slot to new item
+    if (global.drag_item != noone and object_is_ancestor(global.drag_item.object_index,Drop_Gem_Parent)) {
+        scr_equip(global.drag_item);
+        global.drag_item = prev_item;
+    }
+    
+} else {
+    if (global.drag_item != noone) {
+        scr_drop_item(global.drag_item);
     }
 }
 </string>
@@ -216,41 +235,40 @@ if (inv_visible  = true) {
             <kind>1</kind>
             <string>/// Draw the inventory
 
-if (inv_visible) {
+// Set cell color
+draw_set_color(c_black);
+draw_set_alpha(.5);
 
-    // Set cell color
-    draw_set_color(c_black);
-    draw_set_alpha(.5);
-    
-    // Draw the inventory
-    for (column = 0; column &lt; grid_width; column++) {
-        for (row = 0; row &lt; grid_height; row++) {
-            var x1 = column * slot_width + left_padding;
-            var y1 = row * slot_width + top_padding;
-            var x2 = x1 + slot_width;
-            var y2 = y1 + slot_width;
-            
-            scr_draw_inv_slot(x1,y1,x2,y2,slots[# column,row]);
-        }
+scr_draw_inventory(ds_grid,slot_width,offset_left,offset_right);
+
+// Draw the inventory
+for (column = 0; column &lt; grid_width; column++) {
+    for (row = 0; row &lt; grid_height; row++) {
+        var x1 = column * slot_width + left_padding;
+        var y1 = row * slot_width + top_padding;
+        var x2 = x1 + slot_width;
+        var y2 = y1 + slot_width;
+        
+        scr_draw_inv_slot(x1,y1,x2,y2,slots[# column,row]);
     }
-    
-    // Draw the equipment slots
-    scr_draw_inv_slot(weapon_x,weapon_y,weapon_x+slot_width,weapon_y+slot_width,global.current_weapon);
-    scr_draw_inv_slot(armor_x,armor_y,armor_x+slot_width,armor_y+slot_width,global.current_armor);
-    scr_draw_inv_slot(spell_x,spell_y,spell_x+slot_width,spell_y+slot_width,global.current_spell);
-    scr_draw_inv_slot(gem_x,gem_y,gem_x+slot_width,gem_y+slot_width,global.current_gem);
-    
-    // Show sprite on mouse if dragging
-    if (global.drag_item != noone) {
-        var mousex = window_mouse_get_x();
-        var mousey = window_mouse_get_y();
-        draw_sprite_ext(global.drag_item.sprite_index, 0,mousex,mousey,4,4,45,c_white,1);
-    }
-    
-    // Reset the color and alpha
-    draw_set_color(c_white);
-    draw_set_alpha(1);
 }
+
+// Draw the equipment slots
+scr_draw_inv_slot(weapon_x,weapon_y,weapon_x+slot_width,weapon_y+slot_width,global.current_weapon);
+scr_draw_inv_slot(armor_x,armor_y,armor_x+slot_width,armor_y+slot_width,global.current_armor);
+scr_draw_inv_slot(spell_x,spell_y,spell_x+slot_width,spell_y+slot_width,global.current_spell);
+scr_draw_inv_slot(gem_x,gem_y,gem_x+slot_width,gem_y+slot_width,global.current_gem);
+
+// Show sprite on mouse if dragging
+if (global.drag_item != noone) {
+    var mousex = window_mouse_get_x();
+    var mousey = window_mouse_get_y();
+    draw_sprite_ext(global.drag_item.sprite_index, 0,mousex,mousey,4,4,45,c_white,1);
+}
+
+// Reset the color and alpha
+draw_set_color(c_white);
+draw_set_alpha(1);
 </string>
           </argument>
         </arguments>

@@ -52,7 +52,7 @@ damage = damage + ((level-1) * damage * .2);
             <string>/// Draw tooltip
 draw_self();
 
-scr_get_input();
+// TODO: find some way of comparing directly from the drop stats without constructing these fucking things
 
 //Name
 text[0,0] = string(name);
@@ -79,6 +79,7 @@ text[4,0] = "Atk Delay: " + string(cd);
 text[4,1] = cd_compare[0];
 text[4,2] = cd_compare[1];
 
+//Print current_weapon stats
 text2[0] = global.current_weapon.name;
 text2[1] = "Level " + string(global.current_weapon.level);
 text2[2] = "Damage: " + string(global.current_weapon.damage);
@@ -88,9 +89,8 @@ text2[4] = "Atk Delay: " + string(global.current_weapon.cd);
 if (show_stats) {
     scr_draw_equipment_comparison(text,-25,-50,50);
     scr_draw_tooltip(text2, 30, -50, 50);
+    draw_set_color(c_white);
 }
-
-draw_set_color(c_white);
 </string>
           </argument>
         </arguments>
