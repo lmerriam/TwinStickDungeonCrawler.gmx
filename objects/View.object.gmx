@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>-1</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>self</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -62,6 +62,37 @@ show_debug_overlay(true);
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Pause and menus
+
+// We do not start in a menu
+in_menu = false;
+
+// Set the various menus to not open (TODO: should these vars be in the respective menus?
+// ...cont Then we wouldn't have to pass them to the toggle_menu script separately)
+pause_menu_open = false;
+inv_open = false;
+
+instance_deactivate_object(Menu_Parent);
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="1">
       <action>
@@ -81,14 +112,9 @@ show_debug_overlay(true);
           <argument>
             <kind>1</kind>
             <string>/// Handle instance activation
-
-var pad = 200;
-
-instance_deactivate_object(Enemy_Spawner);
-instance_deactivate_object(Drop_Parent);
-instance_deactivate_object(Enemy_Parent);
-instance_activate_region(view_xview[0]-pad,view_yview[0]-pad,view_wview[0]+2*pad,view_hview[0]+2*pad,true);
-
+if (!in_menu) {
+    scr_handle_deactivation(noone);
+}
 alarm[1] = .5 * room_speed;
 </string>
           </argument>
@@ -156,6 +182,54 @@ if (global.screen_shake &gt; 4) {
     x += choose(-random(global.screen_shake),random(global.screen_shake)) * (30/room_speed);
     y += choose(-random(global.screen_shake),random(global.screen_shake)) * (30/room_speed);
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="73">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Open inventory
+inv_open = scr_toggle_menu(inv_open,Inventory);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="27">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Pause the game
+pause_menu_open = scr_toggle_menu(pause_menu_open,Pause_Menu);
 </string>
           </argument>
         </arguments>

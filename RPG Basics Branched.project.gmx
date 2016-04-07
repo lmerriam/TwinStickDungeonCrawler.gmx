@@ -98,6 +98,11 @@
       <script>scripts\scr_mouse_over_inv.gml</script>
       <script>scripts\scr_drop_item.gml</script>
       <script>scripts\scr_draw_inv_slot.gml</script>
+      <script>scripts\scr_activate_onscreen_instances.gml</script>
+      <script>scripts\scr_toggle.gml</script>
+      <script>scripts\scr_toggle_menu.gml</script>
+      <script>scripts\scr_handle_deactivation.gml</script>
+      <script>scripts\scr_draw_inventory.gml</script>
     </scripts>
     <scripts name="Catalogs">
       <script>scripts\scr_weapon_list.gml</script>
@@ -138,7 +143,6 @@
     <object>objects\Expr</object>
     <object>objects\Door</object>
     <object>objects\Speaker_Parent</object>
-    <object>objects\Inventory</object>
     <object>objects\Dialog_Box</object>
     <object>objects\Particles</object>
     <object>objects\Spawn_Button</object>
@@ -202,8 +206,14 @@
       <object>objects\Wall</object>
       <object>objects\Chest</object>
       <object>objects\Tree</object>
+      <object>objects\Teleporter</object>
     </objects>
-    <object>objects\Teleporter</object>
+    <objects name="Menus">
+      <object>objects\Menu_Parent</object>
+      <object>objects\Inventory</object>
+      <object>objects\Pause_Menu</object>
+    </objects>
+    <object>objects\UI_Controller</object>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_spell_blink</timeline>

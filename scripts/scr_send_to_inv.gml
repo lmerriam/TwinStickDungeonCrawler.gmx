@@ -15,6 +15,7 @@ for (row = 0; row < Inventory.grid_height; row++) {
             // Move it out of room so it isn't reactivated by view
             drop.phy_position_x = -999;
             drop.phy_position_y = -999;
+            drop.persistent = true;
             instance_deactivate_object(drop);
             
             // Return the fact that a slot was found
