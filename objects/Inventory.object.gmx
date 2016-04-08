@@ -38,34 +38,32 @@ slot_width = 64;
 equipment_left_padding = 20;
 
 
-
-// Init the inventory slots
-inventory_slots = ds_grid_create(4,4);
-inventory_slots = ds_grid_clear(inventory_slots,noone);
+// Set up inv slots
+global.inventory_slots = ds_grid_create(4,4);
+ds_grid_clear(global.inventory_slots,noone);
 
 // Set up the inventory offsets
 // Centering that shit
-var inventory_offset_left = (window_get_height() - slot_width * ds_grid_height(inventory_slots)) / 2;
+var inventory_offset_left = (window_get_height() - slot_width * ds_grid_height(global.inventory_slots)) / 2;
 var inventory_offset_top = 100;
 
 // Get the inventory coordinates
-inventory_coords = scr_init_inventory(inventory_slots, slot_width, inventory_offset_left, inventory_offset_top);
-
+inventory_coords = scr_init_inventory(global.inventory_slots, slot_width, inventory_offset_left, inventory_offset_top);
 
 
 // Set up the equipment slots
-equipment_slots = ds_grid_create(1,4);
-equipment_slots[# 0,0] = instance_create(0,0,Shotgun);
-equipment_slots[# 0,1] = instance_create(0,0,Scroll_Column);
-equipment_slots[# 0,2] = instance_create(0,0,Armor_Heavy);
-equipment_slots[# 0,3] = instance_create(0,0,Gem_Burn);
+global.equipment_slots = ds_grid_create(1,4);
+global.equipment_slots[# 0,0] = instance_create(0,0,Shotgun);
+global.equipment_slots[# 0,1] = instance_create(0,0,Scroll_Column);
+global.equipment_slots[# 0,2] = instance_create(0,0,Armor_Heavy);
+global.equipment_slots[# 0,3] = instance_create(0,0,Gem_Burn);
 
 // Set up the equipment slot offsets
 var equipment_offset_left = inventory_coords[2] + equipment_left_padding;
 var equipment_offset_top = inventory_coords[1];
 
 // Get the equipment slot coordinates
-equipment_coords = scr_init_inventory(equipment_slots, slot_width, equipment_offset_left, equipment_offset_top);
+equipment_coords = scr_init_inventory(global.equipment_slots, slot_width, equipment_offset_left, equipment_offset_top);
 
 </string>
           </argument>
@@ -118,11 +116,11 @@ var mousex = window_mouse_get_x();
 var mousey = window_mouse_get_y();
 
 if (scr_mouse_over_inv()) {
-    current_inventory = inventory_slots;
+    current_inventory = global.inventory_slots;
     current_slot_x = (mousex - inventory_coords[0]) div slot_width;
     current_slot_y = (mousey - inventory_coords[1]) div slot_width;
 } else if (scr_mouse_over_ui(equipment_coords[0],equipment_coords[1],equipment_coords[2],equipment_coords[3])) {
-    current_inventory = equipment_slots;
+    current_inventory = global.equipment_slots;
     current_slot_x = (mousex - equipment_coords[0]) div slot_width;
     current_slot_y = (mousey - equipment_coords[1]) div slot_width;
 } else {
@@ -159,13 +157,13 @@ if (current_inventory != noone) {
     
     // Assign the dragged item to the slot
     // Make a check for equipment slots and only allow assigning the correct item type
-    if (current_inventory == equipment_slots and object_get_parent(prev_item.object_index) == object_get_parent(global.drag_item.object_index)) {
+    if (current_inventory == global.equipment_slots and object_get_parent(prev_item.object_index) == object_get_parent(global.drag_item.object_index)) {
         //Equip the item and send the prev_item back to the inv
         scr_equip(global.drag_item);
         scr_send_to_inv(prev_item);
         global.drag_item = noone;
         
-    } else if (current_inventory == inventory_slots) {
+    } else if (current_inventory == global.inventory_slots) {
         // Set the drag_item to the slot
         current_inventory[# current_slot_x, current_slot_y] = global.drag_item;
         // Make the item that was previously in the slot the new drag item
@@ -204,10 +202,10 @@ draw_set_color(c_black);
 draw_set_alpha(.5);
 
 // Draw the inventory slots
-scr_draw_inventory(inventory_slots, slot_width, inventory_coords[0], inventory_coords[1]);
+scr_draw_inventory(global.inventory_slots, slot_width, inventory_coords[0], inventory_coords[1]);
 
 // Draw the equipment slots
-scr_draw_inventory(equipment_slots, slot_width, equipment_coords[0], equipment_coords[1]);
+scr_draw_inventory(global.equipment_slots, slot_width, equipment_coords[0], equipment_coords[1]);
 
 // Show sprite on mouse if dragging
 if (global.drag_item != noone) {

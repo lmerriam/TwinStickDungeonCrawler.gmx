@@ -87,6 +87,8 @@ in_menu = false;
 // ...cont Then we wouldn't have to pass them to the toggle_menu script separately)
 pause_menu_open = false;
 inv_open = false;
+
+instance_deactivate_object(Menu_Parent);
 </string>
           </argument>
         </arguments>
