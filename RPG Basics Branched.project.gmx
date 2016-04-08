@@ -93,7 +93,6 @@
       <script>scripts\scr_create_instance_with_level.gml</script>
       <script>scripts\scr_compare_to_equipped.gml</script>
       <script>scripts\scr_send_to_inv.gml</script>
-      <script>scripts\scr_equip.gml</script>
       <script>scripts\scr_mouse_over_ui.gml</script>
       <script>scripts\scr_mouse_over_inv.gml</script>
       <script>scripts\scr_drop_item.gml</script>
@@ -136,6 +135,13 @@
       <script>scripts\scr_turret_follow_state.gml</script>
     </scripts>
     <script>scripts\scr_apply_gem_effects.gml</script>
+    <scripts name="Equipment">
+      <script>scripts\scr_equip.gml</script>
+      <script>scripts\scr_get_weapon.gml</script>
+      <script>scripts\scr_get_spell.gml</script>
+      <script>scripts\scr_get_armor.gml</script>
+      <script>scripts\scr_get_gem.gml</script>
+    </scripts>
   </scripts>
   <objects name="objects">
     <object>objects\Player</object>

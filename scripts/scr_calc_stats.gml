@@ -1,8 +1,8 @@
 ///scr_calc_stats
-var armor = global.current_armor;
-var spell = global.current_spell;
-var weapon = global.current_weapon;
-var gem = global.current_gem;
+var armor = scr_get_armor();
+var spell = scr_get_spell();
+var weapon = scr_get_weapon();
+var gem = scr_get_gem();
 
 // Stat totals
 maxstamina = base_maxstamina + armor.stamina;

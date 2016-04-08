@@ -54,36 +54,38 @@ draw_self();
 
 scr_get_input();
 
+var spell = scr_get_spell();
+
 //Name
 text[0,0] = string(name);
 text[0,1] = "";
 text[0,2] = c_white;
 //Level
-var level_compare = scr_compare_to_equipped(level,global.current_spell.level,1);
+var level_compare = scr_compare_to_equipped(level,spell.level,1);
 text[1,0] = "Level " + string(level);
 text[1,1] = level_compare[0];
 text[1,2] = level_compare[1];
 //Damage
-var damage_compare = scr_compare_to_equipped(damage,global.current_spell.damage,1);
+var damage_compare = scr_compare_to_equipped(damage,spell.damage,1);
 text[2,0] = "Damage: " + string(damage);
 text[2,1] = damage_compare[0];
 text[2,2] = damage_compare[1];
 //Cooldown
-var cd_compare = scr_compare_to_equipped(cd,global.current_spell.cd,-1);
+var cd_compare = scr_compare_to_equipped(cd,spell.cd,-1);
 text[3,0] = "Cooldown: " + string(cd);
 text[3,1] = cd_compare[0];
 text[3,2] = cd_compare[1];
 //Fatigue
-var fatigue_compare = scr_compare_to_equipped(fatigue,global.current_spell.fatigue,-1);
+var fatigue_compare = scr_compare_to_equipped(fatigue,spell.fatigue,-1);
 text[4,0] = "Fatigue: " + string(cd);
 text[4,1] = fatigue_compare[0];
 text[4,2] = fatigue_compare[1];
 
-text2[0] = global.current_spell.name;
-text2[1] = "Level " + string(global.current_spell.level);
-text2[2] = "Damage: " + string(global.current_spell.damage);
-text2[3] = "Cooldown: " + string(global.current_spell.cd);
-text2[4] = "Fatigue: " + string(global.current_spell.fatigue);
+text2[0] = spell.name;
+text2[1] = "Level " + string(spell.level);
+text2[2] = "Damage: " + string(spell.damage);
+text2[3] = "Cooldown: " + string(spell.cd);
+text2[4] = "Fatigue: " + string(spell.fatigue);
 
 if (show_stats) {
     scr_draw_equipment_comparison(text,-25,-50,50);

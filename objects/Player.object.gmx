@@ -43,12 +43,6 @@ base_spd = 2;
 
 hp = base_maxhp;
 stamina = base_maxstamina;
-
-// Init slots
-scr_equip(instance_create(x,y,Shotgun));
-scr_equip(instance_create(x,y,Armor_Heavy));
-scr_equip(instance_create(x,y,Scroll_Column));
-scr_equip(instance_create(x,y,Gem_Combust));
 </string>
           </argument>
         </arguments>
@@ -249,8 +243,8 @@ vspd = lengthdir_y(len,dir);
 phy_position_x += hspd;
 phy_position_y += vspd;
 
-var weapon = global.current_weapon;
-var spell = global.current_spell;
+var weapon = scr_get_weapon();
+var spell = scr_get_spell();
 
 // Left Attack
 if (mouse_left and alarm[2] &lt;= 0) {
@@ -349,10 +343,10 @@ if (room_exists(other.new_room)) {
             instance_activate_object(Inventory.inventory_slots[# column,row]);
         }
     }
-    instance_activate_object(global.current_weapon);
-    instance_activate_object(global.current_spell);
-    instance_activate_object(global.current_armor);
-    instance_activate_object(global.current_gem);
+    instance_activate_object(scr_get_weapon());
+    instance_activate_object(scr_get_spell());
+    instance_activate_object(scr_get_armor());
+    instance_activate_object(scr_get_gem());
     
     room_goto(other.new_room);
     x = other.new_x;
@@ -424,9 +418,6 @@ if (expr &gt;= maxexpr) {
 draw_set_color(c_white);
 
 draw_text(32,96,"LVL " + string(level));
-
-//draw_sprite(global.current_weapon.sprite_index,0,32,128)
-//draw_sprite(global.current_spell.sprite_index,0,64,128)
 
 // Draw health and stamina
 var hbar = 8;

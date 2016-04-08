@@ -54,42 +54,44 @@ defense += ((level-1) * defense) * .2;
             <string>/// Draw tooltip
 draw_self();
 
+var armor = scr_get_armor();
+
 //Name
 text[0,0] = string(name);
 text[0,1] = "";
 text[0,2] = c_white;
 //Level
-var level_compare = scr_compare_to_equipped(level,global.current_armor.level,1);
+var level_compare = scr_compare_to_equipped(level,armor.level,1);
 text[1,0] = "Level " + string(level);
 text[1,1] = level_compare[0];
 text[1,2] = level_compare[1];
 //Defense
-var def_compare = scr_compare_to_equipped(defense,global.current_armor.defense,1);
+var def_compare = scr_compare_to_equipped(defense,armor.defense,1);
 text[2,0] = "Defense: " + string(defense);
 text[2,1] = def_compare[0];
 text[2,2] = def_compare[1];
 //Damage
-var spd_compare = scr_compare_to_equipped(spd,global.current_armor.spd,1);
+var spd_compare = scr_compare_to_equipped(spd,armor.spd,1);
 text[3,0] = "Speed: " + string(spd);
 text[3,1] = spd_compare[0];
 text[3,2] = spd_compare[1];
 //Knockback
-var stamina_regen_compare = scr_compare_to_equipped(stamina_regen,global.current_armor.stamina_regen,1);
+var stamina_regen_compare = scr_compare_to_equipped(stamina_regen,armor.stamina_regen,1);
 text[4,0] = "Stam Regen: " + string(stamina_regen);
 text[4,1] = stamina_regen_compare[0];
 text[4,2] = stamina_regen_compare[1];
 //Attack speed
-var hp_regen_compare = scr_compare_to_equipped(hp_regen,global.current_armor.hp_regen,1);
+var hp_regen_compare = scr_compare_to_equipped(hp_regen,armor.hp_regen,1);
 text[5,0] = "HP Regen: " + string(hp_regen);
 text[5,1] = hp_regen_compare[0];
 text[5,2] = hp_regen_compare[1];
 
-text2[0] = global.current_armor.name;
-text2[1] = "Level " + string(global.current_armor.level);
-text2[2] = "Defense: " + string(global.current_armor.defense);
-text2[3] = "Speed: " + string(global.current_armor.spd);
-text2[4] = "Stam regen: " + string(global.current_armor.stamina_regen);
-text2[5] = "HP regen: " + string(global.current_armor.hp_regen);
+text2[0] = armor.name;
+text2[1] = "Level " + string(armor.level);
+text2[2] = "Defense: " + string(armor.defense);
+text2[3] = "Speed: " + string(armor.spd);
+text2[4] = "Stam regen: " + string(armor.stamina_regen);
+text2[5] = "HP regen: " + string(armor.hp_regen);
 
 if (show_stats) {
     scr_draw_equipment_comparison(text,-25,-50,50);

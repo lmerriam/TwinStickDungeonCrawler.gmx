@@ -3,13 +3,13 @@ obj = argument[0];
 var inst = obj.object_index;
 
 if (object_is_ancestor(inst,Drop_Weapon_Parent)) {
-    global.current_weapon = obj;
+    Inventory.equipment_slots[# 0,0] = obj;
 } else if (object_is_ancestor(inst,Drop_Scroll_Parent)) {
-    global.current_spell = obj;
+    Inventory.equipment_slots[# 0,1] = obj;
 } else if (object_is_ancestor(inst,Drop_Armor_Parent)) {
-    global.current_armor = obj;
+    Inventory.equipment_slots[# 0,2] = obj;
 } else if (object_is_ancestor(inst,Drop_Gem_Parent)) {
-    global.current_gem = obj;
+    Inventory.equipment_slots[# 0,3] = obj;
 } else {
     show_message("Cant equip that object");
 }

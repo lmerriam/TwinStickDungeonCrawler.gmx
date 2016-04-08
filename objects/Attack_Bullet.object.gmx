@@ -85,7 +85,7 @@ var victim = scr_hitscan(x, y, targetx, targety, Enemy_Parent, false, true);
 
 if (victim != noone) {
     victim.hp -= damage;
-    ds_map_copy(victim.effects, global.current_gem.buffs);
+    ds_map_copy(victim.effects, scr_get_gem().buffs);
     
     scr_knockback(Player, victim, Player.knockback);
     
