@@ -31,8 +31,8 @@ minimap = noone;
 fullscreen_map = noone;
 minimap_width = 120;
 minimap_height = 120;
-window_width = window_get_width();
-window_height = window_get_height();
+window_width = global.window_width;
+window_height = global.window_height;
 
 fullscreen_map_visible = false;
 </string>

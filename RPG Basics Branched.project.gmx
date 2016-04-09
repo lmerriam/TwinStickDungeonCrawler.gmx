@@ -220,7 +220,6 @@
       <object>objects\Inventory</object>
       <object>objects\Pause_Menu</object>
     </objects>
-    <object>objects\UI_Controller</object>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_spell_blink</timeline>

@@ -53,10 +53,10 @@ inventory_coords = scr_init_inventory(global.inventory_slots, slot_width, invent
 
 // Set up the equipment slots
 global.equipment_slots = ds_grid_create(1,4);
-global.equipment_slots[# 0,0] = instance_create(0,0,Shotgun);
-global.equipment_slots[# 0,1] = instance_create(0,0,Scroll_Column);
-global.equipment_slots[# 0,2] = instance_create(0,0,Armor_Heavy);
-global.equipment_slots[# 0,3] = instance_create(0,0,Gem_Burn);
+scr_equip(instance_create(0,0,Shotgun));
+scr_equip(instance_create(0,0,Scroll_Column));
+scr_equip(instance_create(0,0,Armor_Heavy));
+scr_equip(instance_create(0,0,Gem_Burn));
 
 // Set up the equipment slot offsets
 var equipment_offset_left = inventory_coords[2] + equipment_left_padding;
@@ -196,6 +196,7 @@ if (current_inventory != noone) {
           <argument>
             <kind>1</kind>
             <string>/// Draw the inventory
+event_inherited();
 
 // Set cell color
 draw_set_color(c_black);

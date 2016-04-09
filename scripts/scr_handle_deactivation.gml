@@ -9,5 +9,4 @@ if (menu != noone) {
     instance_activate_object(menu);
 } else {
     scr_activate_onscreen_instances();
-    instance_activate_object(Menu_Parent);
 }

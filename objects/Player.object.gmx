@@ -348,11 +348,16 @@ if (room_exists(other.new_room)) {
     instance_activate_object(scr_get_armor());
     instance_activate_object(scr_get_gem());
     
+    instance_activate_object(Menu_Parent);
+    
     room_goto(other.new_room);
     x = other.new_x;
     y = other.new_y;
     View.x = other.new_x;
     View.y = other.new_y;
+    
+    instance_deactivate_object(Menu_Parent);
+    
 }
 </string>
           </argument>
@@ -428,8 +433,8 @@ draw_healthbar(windowpadding,windowpadding,windowpadding+lbar,windowpadding+hbar
 draw_healthbar(windowpadding,windowpadding+hbar+padding,windowpadding+lbar,windowpadding+hbar*2+padding,stamina/maxstamina*100,c_black,c_blue,c_blue,0,true,true);
 
 // Draw expr
-var hwindow = window_get_height();
-var wwindow = window_get_width();
+var hwindow = global.window_width;
+var wwindow = global.window_height;
 var hbar = 3;
 draw_healthbar(0,hwindow-hbar,wwindow,hwindow,expr/maxexpr*100,c_black,c_white,c_white,0,true,true);
 </string>

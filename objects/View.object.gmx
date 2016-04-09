@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>-1</persistent>
-  <parentName>self</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -79,6 +79,8 @@ show_debug_overlay(true);
           <argument>
             <kind>1</kind>
             <string>/// Pause and menus
+global.window_width = window_get_width();
+global.window_height = window_get_height();
 
 // We do not start in a menu
 in_menu = false;
@@ -205,6 +207,7 @@ if (global.screen_shake &gt; 4) {
           <argument>
             <kind>1</kind>
             <string>/// Open inventory
+
 inv_open = scr_toggle_menu(inv_open,Inventory);
 </string>
           </argument>
