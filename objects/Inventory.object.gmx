@@ -30,6 +30,7 @@
 // Init the drag item
 global.drag_item = noone;
 current_inventory = noone;
+current_item = noone;
 current_slot_x = 0;
 current_slot_y = 0;
 
@@ -39,13 +40,13 @@ equipment_left_padding = 20;
 
 
 // Set up inv slots
-global.inventory_slots = ds_grid_create(4,4);
+global.inventory_slots = ds_grid_create(6,6);
 ds_grid_clear(global.inventory_slots,noone);
 
 // Set up the inventory offsets
 // Centering that shit
-var inventory_offset_left = (window_get_height() - slot_width * ds_grid_height(global.inventory_slots)) / 2;
-var inventory_offset_top = 100;
+var inventory_offset_left = (window_get_width() - slot_width * ds_grid_width(global.inventory_slots)) / 2;
+var inventory_offset_top = (window_get_height() - slot_width * ds_grid_height(global.inventory_slots)) / 2;
 
 // Get the inventory coordinates
 inventory_coords = scr_init_inventory(global.inventory_slots, slot_width, inventory_offset_left, inventory_offset_top);
@@ -119,12 +120,17 @@ if (scr_mouse_over_inv()) {
     current_inventory = global.inventory_slots;
     current_slot_x = (mousex - inventory_coords[0]) div slot_width;
     current_slot_y = (mousey - inventory_coords[1]) div slot_width;
+    current_item = global.inventory_slots[# current_slot_x,current_slot_y];
 } else if (scr_mouse_over_ui(equipment_coords[0],equipment_coords[1],equipment_coords[2],equipment_coords[3])) {
     current_inventory = global.equipment_slots;
     current_slot_x = (mousex - equipment_coords[0]) div slot_width;
     current_slot_y = (mousey - equipment_coords[1]) div slot_width;
+    current_item = global.equipment_slots[# current_slot_x,current_slot_y];
 } else {
     current_inventory = noone;
+    current_slot_x = 0;
+    current_slot_y = 0;
+    current_item = noone;
 }
 </string>
           </argument>
@@ -157,7 +163,7 @@ if (current_inventory != noone) {
     
     // Assign the dragged item to the slot
     // Make a check for equipment slots and only allow assigning the correct item type
-    if (current_inventory == global.equipment_slots and object_get_parent(prev_item.object_index) == object_get_parent(global.drag_item.object_index)) {
+    if (current_inventory == global.equipment_slots and global.drag_item != noone and object_get_parent(prev_item.object_index) == object_get_parent(global.drag_item.object_index)) {
         //Equip the item and send the prev_item back to the inv
         scr_equip(global.drag_item);
         scr_send_to_inv(prev_item);
@@ -213,6 +219,10 @@ if (global.drag_item != noone) {
     var mousex = window_mouse_get_x();
     var mousey = window_mouse_get_y();
     draw_sprite_ext(global.drag_item.sprite_index, 0,mousex,mousey,4,4,45,c_white,1);
+}
+
+if (global.drag_item == noone and current_item != noone) {
+    scr_draw_inv_tooltip(current_item.text,window_mouse_get_x(),window_mouse_get_y(),200);
 }
 
 // Reset the color and alpha

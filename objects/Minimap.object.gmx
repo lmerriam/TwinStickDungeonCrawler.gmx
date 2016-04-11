@@ -28,13 +28,10 @@
             <string>/// Init minimap
 
 minimap = noone;
-fullscreen_map = noone;
 minimap_width = 120;
 minimap_height = 120;
 window_width = global.window_width;
 window_height = global.window_height;
-
-fullscreen_map_visible = false;
 </string>
           </argument>
         </arguments>
@@ -109,7 +106,7 @@ if (surface_exists(minimap)) {
     // Draw outline
     draw_rectangle_colour(minimap_window_x, minimap_window_y, minimap_window_x+minimap_width, minimap_window_y+minimap_height, c_black, c_black, c_black, c_black, true);
     // Draw player position arrow
-    draw_sprite_ext(spr_player_arrow,0,(minimap_window_x + (minimap_width/2)),(minimap_window_y + (minimap_height/2)),1,1,Player.image_angle,c_white,1);
+    draw_sprite_ext(spr_player_arrow,0,(minimap_window_x + (minimap_width/2)),(minimap_window_y + (minimap_height/2)),1,1,global.mousedir,c_white,1);
     
 } else {
     minimap = surface_create(minimap_width,minimap_height);
@@ -132,82 +129,6 @@ if (space_key) {
         + "#minimap spr height = " + string(minimap_spr_height)
     );
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>// Draw fullscreen map
-var map = global.current_map;
-var ratio = window_width / room_width;
-var fullscreen_map_x = Player.x * ratio;
-var fullscreen_map_y = Player.y * ratio;
-var map_width = sprite_get_width(map);
-var map_height = sprite_get_height(map);
-var map_sprite_x = (window_width / 2) - map_width / 2;
-var map_sprite_y = (window_height / 2) - map_height / 2;
-
-if (fullscreen_map_visible) {
-    if (surface_exists(fullscreen_map)) {
-        surface_set_target(fullscreen_map);
-        draw_clear_alpha(c_black,0.5);
-        draw_sprite(map, 0, map_sprite_x, map_sprite_y);
-        surface_reset_target();
-        // Draw fullscreen_map
-        draw_surface(fullscreen_map, 0, 0);
-        // Draw player position arrow
-        draw_circle_colour(fullscreen_map_x,fullscreen_map_y,1,c_yellow,c_yellow,false);
-        
-        for (i = 0; i &lt; instance_number(Teleporter); i ++) {
-            var inst = instance_find(Teleporter,i);
-            draw_sprite(Teleporter.sprite_index,0,inst.x*ratio,inst.y*ratio)
-        }
-    } else {
-        fullscreen_map = surface_create(window_width,window_height);
-        surface_set_target(fullscreen_map);
-        draw_clear_alpha(c_black,0.5);
-        surface_reset_target();
-    }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="9" enumb="77">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Toggle the map visibility
-if (!fullscreen_map_visible) fullscreen_map_visible = true else fullscreen_map_visible = false;
 </string>
           </argument>
         </arguments>

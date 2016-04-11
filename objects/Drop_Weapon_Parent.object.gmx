@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>/// Level stats
 damage = damage + ((level-1) * damage * .2);
+scr_update_drop_tooltip(object_index);
 </string>
           </argument>
         </arguments>
@@ -52,45 +53,8 @@ damage = damage + ((level-1) * damage * .2);
             <string>/// Draw tooltip
 draw_self();
 
-var weapon = scr_get_weapon();
-
-// TODO: find some way of comparing directly from the drop stats without constructing these fucking things
-
-//Name
-text[0,0] = string(name);
-text[0,1] = "";
-text[0,2] = c_white;
-//Level
-var level_compare = scr_compare_to_equipped(level,weapon.level,1);
-text[1,0] = "Level " + string(level);
-text[1,1] = level_compare[0];
-text[1,2] = level_compare[1];
-//Damage
-var damage_compare = scr_compare_to_equipped(damage,weapon.damage,1);
-text[2,0] = "Damage: " + string(damage);
-text[2,1] = damage_compare[0];
-text[2,2] = damage_compare[1];
-//Knockback
-var knockback_compare = scr_compare_to_equipped(knockback,weapon.knockback,1);
-text[3,0] = "Knockback: " + string(knockback);
-text[3,1] = knockback_compare[0];
-text[3,2] = knockback_compare[1];
-//Attack speed
-var cd_compare = scr_compare_to_equipped(cd,weapon.cd,-1);
-text[4,0] = "Atk Delay: " + string(cd);
-text[4,1] = cd_compare[0];
-text[4,2] = cd_compare[1];
-
-//Print current_weapon stats
-text2[0] = weapon.name;
-text2[1] = "Level " + string(weapon.level);
-text2[2] = "Damage: " + string(weapon.damage);
-text2[3] = "Knockback: " + string(weapon.knockback);
-text2[4] = "Atk Delay: " + string(weapon.cd);
-
 if (show_stats) {
     scr_draw_equipment_comparison(text,-25,-50,50);
-    scr_draw_tooltip(text2, 30, -50, 50);
     draw_set_color(c_white);
 }
 </string>

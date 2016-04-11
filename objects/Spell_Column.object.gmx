@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>/// Rotate object
 event_inherited();
-phy_rotation = -point_direction(x, y, mouse_x, mouse_y);
+phy_rotation = -global.mousedir;
 </string>
           </argument>
         </arguments>

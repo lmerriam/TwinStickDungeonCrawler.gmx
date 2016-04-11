@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>/// Set angle
 event_inherited();
-phy_rotation = -Player.image_angle;
+phy_rotation = global.mousedir;
 </string>
           </argument>
         </arguments>
