@@ -10,6 +10,8 @@ if (variable) {
     // Make sure we know we're in a menu
     in_menu = true;
     scr_handle_deactivation(menu);
+    menu.x = x;
+    menu.y = y;
 } else {
     // Make sure we know we're not in a menu
     in_menu = false;

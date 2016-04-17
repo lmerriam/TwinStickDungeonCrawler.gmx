@@ -96,6 +96,32 @@ instance_deactivate_object(Menu_Parent);
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Resize viewport to fit
+
+view_wport[0] = display_get_width();
+view_hport[0] = display_get_height();
+
+surface_resize(application_surface, view_wport[0], view_hport[0]);
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="1">
       <action>
@@ -172,10 +198,15 @@ alarm[0] = .2 * room_speed;
             <string>/// Move 10% toward player and screen shake
 
 if (instance_exists(Player)) {
-    var dir = point_direction(Player.x,Player.y,mouse_x,mouse_y);
-    var dis = point_distance(Player.x,Player.y,mouse_x,mouse_y);
-    var targetx = Player.x + lengthdir_x(dis/10,dir);
-    var targety = Player.y + lengthdir_y(dis/10,dir);
+    var dis;
+    
+    if (os_type = os_android) {
+        dis = 128;
+    } else {
+        dis = point_distance(Player.x,Player.y,mouse_x,mouse_y);
+    }
+    var targetx = Player.x + lengthdir_x(dis/10,global.mousedir);
+    var targety = Player.y + lengthdir_y(dis/10,global.mousedir);
 
     x += (targetx - x) * .1  * (30/room_speed);
     y += (targety - y) * .1 * (30/room_speed);

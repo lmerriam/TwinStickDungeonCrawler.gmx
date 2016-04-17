@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>/// Rotate and set alarm
 event_inherited();
-phy_rotation = global.mousedir;
+phy_rotation = -global.mousedir;
 alarm[0] = 2 * room_speed;
 </string>
           </argument>
