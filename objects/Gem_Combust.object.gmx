@@ -25,16 +25,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Init gem
-event_inherited();
+            <string>    /// Init gem
+    event_inherited();
 
-name = "Combustible gem";
+    name = "Combustible gem";
 
-image_blend = c_orange;
+    image_blend = c_orange;
 
-buffs = ds_map_create();
-buffs[? "combust_duration"] = irandom_range(5,10) * room_speed;
-buffs[? "combust_damage"] = irandom_range(3,7);
+    buffs = ds_map_create();
+    buffs[? "combust_duration"] = irandom_range(5,10) * room_speed;
+    buffs[? "combust_damage"] = irandom_range(3,7);
 </string>
           </argument>
         </arguments>
@@ -60,14 +60,8 @@ buffs[? "combust_damage"] = irandom_range(3,7);
             <string>/// Draw tooltip
 draw_self();
 
-//text[0] = string(type);
-if (ds_exists(buffs,ds_type_map)) {
-    text[0] = name;
-    text[1] = "Combust duration: " + string(buffs[? "combust_duration"]);
-    text[2] = "Combust damage: " + string(buffs[? "combust_damage"]);
-}
 if (show_stats) {
-    scr_draw_tooltip(text, -25, -35, 50);
+    //scr_draw_tooltip(text, -25, -35, 50);
 }
 </string>
           </argument>

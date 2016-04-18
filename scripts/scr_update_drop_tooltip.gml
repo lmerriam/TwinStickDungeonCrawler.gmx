@@ -90,5 +90,5 @@ if (object_get_parent(drop_index) == Drop_Weapon_Parent) {
     text[5,2] = hp_regen_compare[1];
     
 } else if (object_get_parent(drop_index) == Drop_Gem_Parent) {
-    
+
 }

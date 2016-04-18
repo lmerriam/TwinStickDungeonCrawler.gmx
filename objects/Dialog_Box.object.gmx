@@ -25,15 +25,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Init the dialog object
-text = noone;
-text_visible = "";
-text_page = 0;
-text_count = 0;
-text_speed = .5;
-display_scale = display_get_gui_width()/view_wview[0];
-width = sprite_width*display_scale;
-margin = 8;
+            <string>    /// Init the dialog object
+    text = noone;
+    text_visible = "";
+    text_page = 0;
+    text_count = 0;
+    text_speed = .5;
+    display_scale = display_get_gui_width()/view_wview[0];
+    width = sprite_width*display_scale;
+    margin = 8;
 </string>
           </argument>
         </arguments>
@@ -56,36 +56,36 @@ margin = 8;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Draw dialog
+            <string>    /// Draw dialog
+    var last_space;
+    //Get the last space
+    if (string_char_at(text[text_page], text_count) == " ") {
+        last_space = text_count;
+    }
 
-//Get the last space
-if (string_char_at(text[text_page], text_count) == " ") {
-    last_space = text_count;
-}
+    // Add smart returns
+    var text_words = scr_string_copy_words(text[text_page], 1, text_count);
+    if (string_width(text_words) &gt;= width-(margin*2)) {
+        //Remove the space
+        text[text_page] = string_delete(text[text_page], last_space, 1);
+        
+        //Add a return
+        text[text_page] = string_insert("#", text[text_page], last_space);
+        
+    }
 
-// Add smart returns
-var text_words = scr_string_copy_words(text[text_page], 1, text_count);
-if (string_width(text_words) &gt;= width-(margin*2)) {
-    //Remove the space
-    text[text_page] = string_delete(text[text_page], last_space, 1);
-    
-    //Add a return
-    text[text_page] = string_insert("#", text[text_page], last_space);
-    
-}
+    //Get the visible text
+    text_visible = string_copy(text[text_page], 0, text_count);
 
-//Get the visible text
-text_visible = string_copy(text[text_page], 0, text_count);
+    //Update the text location
+    var xx = (x-view_xview[0])*display_scale;
+    var yy = (y-view_yview[0])*display_scale;
 
-//Update the text location
-var xx = (x-view_xview[0])*display_scale;
-var yy = (y-view_yview[0])*display_scale;
+    //Draw the text
+    draw_text_ext(xx+margin, yy+margin, text_visible, -1, width-(margin*2));
 
-//Draw the text
-draw_text_ext(xx+margin, yy+margin, text_visible, -1, width-(margin*2));
-
-// Add to the count
-text_count += text_speed;
+    // Add to the count
+    text_count += text_speed;
 </string>
           </argument>
         </arguments>

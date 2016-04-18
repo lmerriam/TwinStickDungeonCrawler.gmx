@@ -25,16 +25,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Init gem
-event_inherited();
+            <string>    /// Init gem
+    event_inherited();
 
-name = "Frozen gem";
+    name = "Frozen gem";
 
-image_blend = c_aqua;
+    image_blend = c_aqua;
 
-buffs = ds_map_create();
-buffs[? "freeze_duration"] = irandom_range(5,10) * room_speed;
-buffs[? "freeze_slow"] = random_range(.3, .5);
+    buffs = ds_map_create();
+    buffs[? "freeze_duration"] = irandom_range(5,10) * room_speed;
+    buffs[? "freeze_slow"] = random_range(.3, .5);
 </string>
           </argument>
         </arguments>
@@ -60,13 +60,12 @@ buffs[? "freeze_slow"] = random_range(.3, .5);
             <string>/// Draw tooltip
 draw_self();
 
-//text[0] = string(type);
-if (ds_exists(buffs,ds_type_map)) {
-    text[0] = name;
-    text[1] = "Freeze duration: " + string(buffs[? "freeze_duration"]);
-    text[2] = "Slow amount: " + string(buffs[? "freeze_slow"]);
-}
 if (show_stats) {
+    if (ds_exists(buffs,ds_type_map)) {
+        text[0] = name;
+        text[1] = "Freeze duration: " + string(buffs[? "freeze_duration"]);
+        text[2] = "Slow amount: " + string(buffs[? "freeze_slow"]);
+    }
     scr_draw_tooltip(text, -25, -35, 50);
 }
 </string>

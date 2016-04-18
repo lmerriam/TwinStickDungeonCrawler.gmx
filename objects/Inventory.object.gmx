@@ -27,6 +27,10 @@
             <kind>1</kind>
             <string>/// Init the inventory
 
+// Set up inv slots
+global.inventory_slots = ds_grid_create(6,6);
+ds_grid_clear(global.inventory_slots,noone);
+
 // Init the drag item
 global.drag_item = noone;
 current_inventory = noone;
@@ -35,13 +39,8 @@ current_slot_x = 0;
 current_slot_y = 0;
 
 // Setup some layout stuff
-slot_width = 64;
+slot_width = window_get_height() / (ds_grid_height(global.inventory_slots) + 2) ;
 equipment_left_padding = 20;
-
-
-// Set up inv slots
-global.inventory_slots = ds_grid_create(6,6);
-ds_grid_clear(global.inventory_slots,noone);
 
 // Set up the inventory offsets
 // Centering that shit
@@ -50,7 +49,6 @@ var inventory_offset_top = (window_get_height() - slot_width * ds_grid_height(gl
 
 // Get the inventory coordinates
 inventory_coords = scr_init_inventory(global.inventory_slots, slot_width, inventory_offset_left, inventory_offset_top);
-
 
 // Set up the equipment slots
 global.equipment_slots = ds_grid_create(1,4);
@@ -204,6 +202,8 @@ if (current_inventory != noone) {
             <string>/// Draw the inventory
 event_inherited();
 
+draw_text(32, 200, current_item);
+
 // Set cell color
 draw_set_color(c_black);
 draw_set_alpha(.5);
@@ -221,7 +221,7 @@ if (global.drag_item != noone) {
     draw_sprite_ext(global.drag_item.sprite_index, 0,mousex,mousey,4,4,45,c_white,1);
 }
 
-if (global.drag_item == noone and current_item != noone) {
+if (global.drag_item == noone and current_item != noone and current_item != 0) {
     scr_draw_inv_tooltip(current_item.text,window_mouse_get_x(),window_mouse_get_y(),200);
 }
 

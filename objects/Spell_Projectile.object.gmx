@@ -25,10 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Rotate and set alarm
-event_inherited();
-phy_rotation = -global.mousedir;
-alarm[0] = 2 * room_speed;
+            <string>    /// Rotate and set alarm
+    event_inherited();
+    phy_rotation = -global.mousedir;
+    alarm[0] = 2 * room_speed;
 </string>
           </argument>
         </arguments>
@@ -51,11 +51,11 @@ alarm[0] = 2 * room_speed;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Move in direction of mouse
-dir = -phy_rotation;
-len = 10;
-phy_position_x += lengthdir_x(len,dir);
-phy_position_y += lengthdir_y(len,dir);
+            <string>    /// Move in direction of mouse
+    var dir = -phy_rotation;
+    var len = 10;
+    phy_position_x += lengthdir_x(len,dir);
+    phy_position_y += lengthdir_y(len,dir);
 </string>
           </argument>
         </arguments>
@@ -78,13 +78,13 @@ phy_position_y += lengthdir_y(len,dir);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Damage all life forms
-event_inherited();
+            <string>    /// Damage all life forms
+    event_inherited();
 
-if (other.id != creator) { //Make sure the damage object doesn't damage the player
-    other.hp -= Player.spell_damage;
-    scr_knockback(self, other, Player.spell_knockback);
-}
+    if (other.id != creator) { //Make sure the damage object doesn't damage the player
+        other.hp -= Player.spell_damage;
+        scr_knockback(self, other, Player.spell_knockback);
+    }
 </string>
           </argument>
         </arguments>

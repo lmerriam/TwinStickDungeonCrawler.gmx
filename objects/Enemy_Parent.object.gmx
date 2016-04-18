@@ -25,9 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Trigger init alarm
-event_inherited();
-alarm[2] = 1;
+            <string>    /// Trigger init alarm
+    event_inherited();
+    alarm[2] = 1;
 </string>
           </argument>
         </arguments>
@@ -50,20 +50,20 @@ alarm[2] = 1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Loot and XP
-event_inherited();
+            <string>    /// Loot and XP
+    event_inherited();
 
-for (i = 0; i &lt;= xp; i++) {
-  instance_create(x+random_range(-16,16),y+random_range(-16,16),Expr);
-}
-
-var current_key = ds_map_find_first(loot); // Start with the first key in the map
-for (i=0; i &lt; ds_map_size(loot); i++) {
-    if (scr_chance(ds_map_find_value(loot, current_key))) { // Get the spawn chance of the current drop
-        scr_spawn_drop(x, y, current_key, level-(irandom_range(0,level/5))); // Spawn the current drop
+    for (var i = 0; i &lt;= xp; i++) {
+        instance_create(x+random_range(-16,16),y+random_range(-16,16),Expr);
     }
-    current_key = ds_map_find_next(loot,current_key); // Move to next key
-}
+
+    var current_key = ds_map_find_first(loot); // Start with the first key in the map
+    for (i=0; i &lt; ds_map_size(loot); i++) {
+        if (scr_chance(ds_map_find_value(loot, current_key))) { // Get the spawn chance of the current drop
+            scr_spawn_drop(x, y, current_key, level-(irandom_range(0,level/5))); // Spawn the current drop
+        }
+        current_key = ds_map_find_next(loot,current_key); // Move to next key
+    }
 </string>
           </argument>
         </arguments>
@@ -86,7 +86,7 @@ for (i=0; i &lt; ds_map_size(loot); i++) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Stall alarm
+            <string>    /// Stall alarm
 </string>
           </argument>
         </arguments>
@@ -109,7 +109,7 @@ for (i=0; i &lt; ds_map_size(loot); i++) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Wander alarm
+            <string>    /// Wander alarm
 </string>
           </argument>
         </arguments>
@@ -132,9 +132,9 @@ for (i=0; i &lt; ds_map_size(loot); i++) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Run current state
-event_inherited();
-script_execute(state);
+            <string>    /// Run current state
+    event_inherited();
+    script_execute(state);
 </string>
           </argument>
         </arguments>
@@ -157,15 +157,15 @@ script_execute(state);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Draw health bar
-draw_self();
+            <string>    /// Draw health bar
+    draw_self();
 
-var percent = (hp / base_hp) * 100;
+    var percent = (hp / base_hp) * 100;
 
-draw_text(x, y-30, string(level));
-draw_healthbar(x-10,y-20,x+10,y-19,percent,c_black,c_red,c_red,0,true,false);
-//draw_rectangle_color(x-10, y-20, x+10, y-19, c_black, c_black, c_black, c_black, false);
-//draw_rectangle_color(x-10, y-20, x+((percent*20)-10), y-19, c_red, c_red, c_red, c_red, false);
+    draw_text(x, y-30, string(level));
+    draw_healthbar(x-10,y-20,x+10,y-19,percent,c_black,c_red,c_red,0,true,false);
+    //draw_rectangle_color(x-10, y-20, x+10, y-19, c_black, c_black, c_black, c_black, false);
+    //draw_rectangle_color(x-10, y-20, x+((percent*20)-10), y-19, c_red, c_red, c_red, c_red, false);
 </string>
           </argument>
         </arguments>

@@ -29,6 +29,7 @@
 show_stats = false;
 image_speed = 0;
 level = 1;
+text = noone;
 </string>
           </argument>
         </arguments>

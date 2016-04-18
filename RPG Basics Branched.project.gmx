@@ -68,6 +68,7 @@
       <sprite>sprites\spr_player_running_back</sprite>
       <sprite>sprites\spr_player</sprite>
     </sprites>
+    <sprite>sprites\spr_menu_button</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_grass</background>
@@ -156,7 +157,7 @@
   <objects name="objects">
     <object>objects\Player</object>
     <object>objects\View</object>
-    <object>objects\Minimap</object>
+    <object>objects\GUI</object>
     <object>objects\Expr</object>
     <object>objects\Door</object>
     <object>objects\Speaker_Parent</object>
@@ -243,8 +244,8 @@
     <rtf>help.rtf</rtf>
   </help>
   <TutorialState>
-    <IsTutorial>-1</IsTutorial>
-    <TutorialName>C:\Users\Logan\AppData\Local\gamemaker_studio\tutorials\Scrolling_Shooter_Part1\</TutorialName>
+    <IsTutorial>0</IsTutorial>
+    <TutorialName></TutorialName>
     <TutorialPage>0</TutorialPage>
   </TutorialState>
 </assets>
