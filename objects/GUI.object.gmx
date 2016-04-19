@@ -33,7 +33,11 @@ windowpadding = .01 * window_width;
 // Init minimap
 minimap_width = 120;
 minimap_height = 120;
+minimap_window = 200;
+minimap_window_x = window_width - minimap_width - 32;
+minimap_window_y = 32;
 minimap = -1;
+minimap_section = -1;
 
 /// Init menu button
 var width = .1 * window_width;
@@ -175,22 +179,19 @@ if (surface_exists(minimap)) {
             <string>/// Draw minimap
 
 // Position minimap window
-
 if (surface_exists(minimap)) {
-    var minimap_window_x = window_width - minimap_width - 32;
-    var minimap_window_y = 32;
-    var offset_x = minimap_width/2;
-    var offset_y = minimap_width/2;
-    var minimap_window = 200;
-    var scale = .3;
+
+    if (surface_exists(minimap_section)) {
+        // Draw minimap
+        surface_copy_part(minimap_section,0,0,minimap,Player.x-minimap_window/2,Player.y-minimap_window/2,minimap_window,minimap_window);
+        draw_surface_stretched(minimap_section,minimap_window_x,minimap_window_y,minimap_width,minimap_width);
+    } else {
+        minimap_section = surface_create(minimap_window,minimap_window);
+    }
     
-    // Draw minimap
-    var minimap_section = surface_create(minimap_window, minimap_window);
-    surface_copy_part(minimap_section,0,0,minimap,Player.x-minimap_window/2,Player.y-minimap_window/2,minimap_window,minimap_window);
-    draw_surface_stretched(minimap_section,minimap_window_x,minimap_window_y,minimap_width,minimap_width);
-    surface_free(minimap_section);
     // Draw outline
     draw_rectangle_colour(minimap_window_x, minimap_window_y, minimap_window_x+minimap_width, minimap_window_y+minimap_height, c_black, c_black, c_black, c_black, true);
+    
     // Draw player position arrow
     draw_sprite_ext(spr_player_arrow,0,(minimap_window_x + (minimap_width/2)),(minimap_window_y + (minimap_height/2)),1,1,global.mousedir,c_white,1);
 } else {
