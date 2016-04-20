@@ -158,7 +158,7 @@
           <argument>
             <kind>1</kind>
             <string>    /// Draw health bar
-    draw_self();
+    event_inherited();
 
     var percent = (hp / base_hp) * 100;
 

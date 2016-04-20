@@ -195,7 +195,7 @@ alarm[0] = .2 * room_speed;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Move 10% toward player and screen shake
+            <string>/// Move view0 10% toward player and screen shake
 
 if (instance_exists(Player)) {
     var dis;

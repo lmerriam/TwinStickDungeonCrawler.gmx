@@ -31,13 +31,12 @@ window_height = global.window_height;
 windowpadding = .01 * window_width;
 
 // Init minimap
-minimap_width = 120;
-minimap_height = 120;
-minimap_window = 200;
+minimap_width = window_height/5;
+minimap_height = minimap_width;
+minimap_window = 500;
 minimap_window_x = window_width - minimap_width - 32;
 minimap_window_y = 32;
 minimap = -1;
-minimap_section = -1;
 
 /// Init menu button
 var width = .1 * window_width;
@@ -73,6 +72,9 @@ menu_btn_y2 = menu_btn_y1 + height;
             <string>/// Follow player
 x = Player.x;
 y = Player.y;
+
+view_xview[1] = Player.x - view_wview[1]/2;
+view_yview[1] = Player.y - view_hview[1]/2;
 </string>
           </argument>
         </arguments>
@@ -126,8 +128,12 @@ if (xx &gt; menu_btn_x1 and xx &lt; menu_btn_x2 and yy &gt; menu_btn_y1 and yy &
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Clear minimap
+            <string>/// Reset the views
+
+// Clear the minimap surface
 minimap = -1;
+
+
 </string>
           </argument>
         </arguments>
@@ -178,31 +184,7 @@ if (surface_exists(minimap)) {
             <kind>1</kind>
             <string>/// Draw minimap
 
-// Position minimap window
-if (surface_exists(minimap)) {
-
-    if (surface_exists(minimap_section)) {
-        // Draw minimap
-        surface_copy_part(minimap_section,0,0,minimap,Player.x-minimap_window/2,Player.y-minimap_window/2,minimap_window,minimap_window);
-        draw_surface_stretched(minimap_section,minimap_window_x,minimap_window_y,minimap_width,minimap_width);
-    } else {
-        minimap_section = surface_create(minimap_window,minimap_window);
-    }
-    
-    // Draw outline
-    draw_rectangle_colour(minimap_window_x, minimap_window_y, minimap_window_x+minimap_width, minimap_window_y+minimap_height, c_black, c_black, c_black, c_black, true);
-    
-    // Draw player position arrow
-    draw_sprite_ext(spr_player_arrow,0,(minimap_window_x + (minimap_width/2)),(minimap_window_y + (minimap_height/2)),1,1,global.mousedir,c_white,1);
-} else {
-    minimap = surface_create(room_width, room_height);
-    surface_set_target(minimap);
-    var tiles = tile_get_ids();
-    for(var i = 0; i &lt; array_length_1d(tiles); i++){
-        draw_background_part(tile_get_background(tiles[i]), tile_get_left(tiles[i]), tile_get_top(tiles[i]), tile_get_width(tiles[i]), tile_get_height(tiles[i]), tile_get_x(tiles[i]), tile_get_y(tiles[i]));
-    }
-    surface_reset_target();
-}
+draw_surface_stretched(minimap,minimap_window_x,minimap_window_y,minimap_width,minimap_height);
 
 /// Draw menu button
 draw_sprite(spr_menu_button,0,menu_btn_origin_x,menu_btn_origin_y);
@@ -226,6 +208,41 @@ var hbar = 3;
 var expr = Player.expr;
 var maxexpr = Player.maxexpr;
 draw_healthbar(0,window_height-hbar,window_width,window_height,expr/maxexpr*100,c_black,c_white,c_white,0,true,true);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Draw the minimap surface
+
+if (!surface_exists(minimap)) {
+    minimap = surface_create(view_wview[1], view_hview[1]);
+    
+    surface_set_target(minimap);
+    
+    if (!view_visible[1]) view_visible[1] = true;
+    
+    view_surface_id[1] = minimap;
+
+    surface_reset_target();
+}
 </string>
           </argument>
         </arguments>
