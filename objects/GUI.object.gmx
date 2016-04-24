@@ -47,10 +47,6 @@ menu_btn_x1 = windowpadding;
 menu_btn_x2 = menu_btn_x1+width;
 menu_btn_y1 = windowpadding;
 menu_btn_y2 = menu_btn_y1 + height;
-
-// Init announcement
-global.announcement = "";
-announce_opacity = 0;
 </string>
           </argument>
         </arguments>
@@ -99,12 +95,7 @@ view_yview[1] = Player.y - view_hview[1]/2;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Fade announcement
-
-if (announce_opacity &gt; 0) {
-    announce_opacity -= room_speed/5000;
-}
-</string>
+            <string></string>
           </argument>
         </arguments>
       </action>
@@ -241,30 +232,6 @@ var hbar = 3;
 var expr = Player.expr;
 var maxexpr = Player.maxexpr;
 draw_healthbar(0,window_height-hbar,window_width,window_height,expr/maxexpr*100,c_black,c_white,c_white,0,true,true);
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Draw announcement
-if (announce_opacity &gt; 0 ) {
-    scr_draw_text_shadow(window_width/2,window_height*.75,global.announcement,c_white,c_black,1,3,270,announce_opacity,fa_center);
-}
 </string>
           </argument>
         </arguments>
