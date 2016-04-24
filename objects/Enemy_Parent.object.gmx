@@ -157,15 +157,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>    /// Draw health bar
-    event_inherited();
+            <string>/// Draw health bar
+event_inherited();
 
+if (view_current == 0) {
     var percent = (hp / base_hp) * 100;
-
+    
     draw_text(x, y-30, string(level));
     draw_healthbar(x-10,y-20,x+10,y-19,percent,c_black,c_red,c_red,0,true,false);
-    //draw_rectangle_color(x-10, y-20, x+10, y-19, c_black, c_black, c_black, c_black, false);
-    //draw_rectangle_color(x-10, y-20, x+((percent*20)-10), y-19, c_red, c_red, c_red, c_red, false);
+}
 </string>
           </argument>
         </arguments>

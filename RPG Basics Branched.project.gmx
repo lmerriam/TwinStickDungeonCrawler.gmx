@@ -69,12 +69,32 @@
       <sprite>sprites\spr_player</sprite>
     </sprites>
     <sprite>sprites\spr_menu_button</sprite>
+    <sprite>sprites\spr_location</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_grass</background>
     <background>background\tileset1</background>
     <background>background\house</background>
     <background>background\TilesetDesert</background>
+    <background>background\terrain</background>
+    <backgrounds name="demo_map">
+      <background>background\background8</background>
+      <background>background\background9</background>
+      <background>background\background10</background>
+      <background>background\background11</background>
+      <background>background\background12</background>
+      <background>background\background13</background>
+      <background>background\background14</background>
+      <background>background\background15</background>
+      <background>background\background16</background>
+      <background>background\background17</background>
+      <background>background\background18</background>
+      <background>background\background19</background>
+      <background>background\background20</background>
+      <background>background\background21</background>
+      <background>background\background22</background>
+      <background>background\background23</background>
+    </backgrounds>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -112,6 +132,7 @@
       <script>scripts\scr_handle_deactivation.gml</script>
       <script>scripts\scr_draw_inventory.gml</script>
       <script>scripts\scr_init_inventory.gml</script>
+      <script>scripts\scr_draw_text_shadow.gml</script>
     </scripts>
     <scripts name="Catalogs">
       <script>scripts\scr_weapon_list.gml</script>
@@ -167,6 +188,7 @@
     <object>objects\Enemy_Spawner</object>
     <object>objects\Lifeform_Parent</object>
     <object>objects\Powerup_Parent</object>
+    <object>objects\Location</object>
     <objects name="Damage">
       <object>objects\Damage_Parent</object>
       <object>objects\Attack_Radius</object>
@@ -239,6 +261,8 @@
   <rooms name="rooms">
     <room>rooms\rm1</room>
     <room>rooms\rm2</room>
+    <room>rooms\gmare_test</room>
+    <room>rooms\rm_demo</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

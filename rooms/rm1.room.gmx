@@ -70,6 +70,8 @@
     <instance objName="Pause_Menu" x="-224" y="-160" name="inst_EB657B28" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Map" x="-288" y="-160" name="inst_245EC5D8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Player" x="864" y="320" name="inst_6749F7D4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="Door" x="160" y="288" name="inst_9DD64752" locked="0" code="new_x = 128;&#xA;new_y = 128;&#xA;new_room = rm_demo;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="Location" x="448" y="64" name="inst_39E6367A" locked="0" code="name = &quot;Top right&quot;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tileset1" x="32" y="32" w="32" h="32" xo="0" yo="0" id="10000668" name="inst_3AB2037C" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

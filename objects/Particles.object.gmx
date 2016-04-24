@@ -28,7 +28,7 @@
             <string>/// Init particle system
 
 global.particles_below = part_system_create();
-part_system_depth(global.particles_below, 9999999);
+part_system_depth(global.particles_below, 500);
 
 scr_init_blood();
 
