@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>/// Init location
 name = "Inidentificado";
+creator = noone;
 
 image_xscale = 5;
 image_yscale = 5;
@@ -58,7 +59,9 @@ alarm[0] = 1;
             <string>/// Check for player near
 if (discovered == false and distance_to_object(Player) &lt; 600) {
     discovered = true;
-    (instance_create(Player.x,Player.y,Announcement)).text = "Discovered " + name;
+    inst = instance_create(Player.x,Player.y,Announcement);
+    inst.text = "Discovered " + name;
+    inst.creator = id;
     alarm[0] = -1;
 } else {
     alarm[0] = 0.5 * room_speed;

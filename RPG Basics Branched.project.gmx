@@ -71,6 +71,7 @@
     <sprite>sprites\spr_menu_button</sprite>
     <sprite>sprites\spr_location</sprite>
     <sprite>sprites\spr_crosshair</sprite>
+    <sprite>sprites\spr_location_pointer</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_grass</background>
@@ -112,6 +113,7 @@
       <script>scripts\scr_calc_stats.gml</script>
       <script>scripts\scr_draw_tooltip.gml</script>
       <script>scripts\scr_draw_equipment_comparison.gml</script>
+      <script>scripts\scr_draw_nearest_comparison.gml</script>
       <script>scripts\scr_draw_inv_tooltip.gml</script>
       <script>scripts\scr_spawn_drop.gml</script>
       <script>scripts\scr_calc_length.gml</script>

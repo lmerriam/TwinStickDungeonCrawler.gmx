@@ -39,13 +39,14 @@ current_slot_x = 0;
 current_slot_y = 0;
 
 // Setup some layout stuff
-slot_width = window_get_height() / (ds_grid_height(global.inventory_slots) + 2) ;
+slot_width = 64 ;
 equipment_left_padding = 20;
 
 // Set up the inventory offsets
 // Centering that shit
-var inventory_offset_left = (window_get_width() - slot_width * ds_grid_width(global.inventory_slots)) / 2;
-var inventory_offset_top = (window_get_height() - slot_width * ds_grid_height(global.inventory_slots)) / 2;
+// TODO: why the fuck can I not get global.window_width yet
+var inventory_offset_left = (view_wport[0] - slot_width * ds_grid_width(global.inventory_slots)) / 2;
+var inventory_offset_top = (view_hport[0] - slot_width * ds_grid_height(global.inventory_slots)) / 2;
 
 // Get the inventory coordinates
 inventory_coords = scr_init_inventory(global.inventory_slots, slot_width, inventory_offset_left, inventory_offset_top);
@@ -63,7 +64,31 @@ var equipment_offset_top = inventory_coords[1];
 
 // Get the equipment slot coordinates
 equipment_coords = scr_init_inventory(global.equipment_slots, slot_width, equipment_offset_left, equipment_offset_top);
-
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Set up the inventory close btn
+close_btn_x1 = 16;
+close_btn_y1 = 16;
+close_btn_x2 = 128;
+close_btn_y2 = 128;
 </string>
           </argument>
         </arguments>
@@ -114,15 +139,17 @@ if (ds_exists(slots,ds_type_grid)) ds_grid_destroy(slots);
 var mousex = window_mouse_get_x();
 var mousey = window_mouse_get_y();
 
+// TODO: figure out why the fuck div seems to be rounding up so I can remove these -3s
 if (scr_mouse_over_inv()) {
     current_inventory = global.inventory_slots;
-    current_slot_x = (mousex - inventory_coords[0]) div slot_width;
-    current_slot_y = (mousey - inventory_coords[1]) div slot_width;
+    current_slot_x = (mousex - inventory_coords[0]-3) div slot_width;
+    current_slot_y = (mousey - inventory_coords[1]-3) div slot_width;
+    if(current_slot_x == 6) show_message(string(mousex - inventory_coords[0]) + " " + string(slot_width));
     current_item = global.inventory_slots[# current_slot_x,current_slot_y];
 } else if (scr_mouse_over_ui(equipment_coords[0],equipment_coords[1],equipment_coords[2],equipment_coords[3])) {
     current_inventory = global.equipment_slots;
-    current_slot_x = (mousex - equipment_coords[0]) div slot_width;
-    current_slot_y = (mousey - equipment_coords[1]) div slot_width;
+    current_slot_x = (mousex - equipment_coords[0]-3) div slot_width;
+    current_slot_y = (mousey - equipment_coords[1]-3) div slot_width;
     current_item = global.equipment_slots[# current_slot_x,current_slot_y];
 } else {
     current_inventory = noone;
@@ -181,6 +208,30 @@ if (current_inventory != noone) {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Check close btn pressed
+if (scr_mouse_over_ui(close_btn_x1,close_btn_y1,close_btn_x2,close_btn_y2)) {
+    with (View) event_perform(ev_keypress,ord('I'));
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -221,13 +272,35 @@ if (global.drag_item != noone) {
     draw_sprite_ext(global.drag_item.sprite_index, 0,mousex,mousey,4,4,45,c_white,1);
 }
 
-if (global.drag_item == noone and current_item != noone and current_item != 0) {
+if (global.drag_item == noone and current_item != noone) {
     scr_draw_inv_tooltip(current_item.text,window_mouse_get_x(),window_mouse_get_y(),200);
 }
 
 // Reset the color and alpha
 draw_set_color(c_white);
 draw_set_alpha(1);
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Draw the close btn
+draw_sprite(spr_menu_button,0,close_btn_x1,close_btn_y1);
 </string>
           </argument>
         </arguments>

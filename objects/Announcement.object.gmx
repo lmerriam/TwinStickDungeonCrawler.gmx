@@ -95,6 +95,31 @@ y = Player.y;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Set up pointer
+var len = 32;
+pointer_dir = point_direction(x,y,creator.x,creator.y);
+pointer_x = Player.x + lengthdir_x(len,pointer_dir);
+pointer_y = Player.y + lengthdir_y(len,pointer_dir);
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -115,6 +140,32 @@ y = Player.y;
             <kind>1</kind>
             <string>/// Draw the announcement
 scr_draw_text_shadow(global.window_width/2,global.window_height*.75,text,c_white,c_black,1,3,270,text_opacity,fa_center);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Draw pointer to location
+if (view_current = 0) {
+    draw_sprite_ext(spr_location_pointer,0,pointer_x,pointer_y,1,1,pointer_dir,c_white,text_opacity);
+}
 </string>
           </argument>
         </arguments>

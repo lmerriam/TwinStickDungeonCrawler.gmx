@@ -4,8 +4,8 @@ var y1 = argument[1];
 var x2 = argument[2];
 var y2 = argument[3];
 
-var mousex = window_mouse_get_x();
-var mousey = window_mouse_get_y();
+var mousex = device_mouse_x_to_gui(0);
+var mousey = device_mouse_y_to_gui(0);
 
 if (mousex > x1 and mousex < x2 and mousey > y1 and mousey < y2) {
     return true;
