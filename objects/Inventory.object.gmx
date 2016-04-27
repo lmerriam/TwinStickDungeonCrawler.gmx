@@ -33,6 +33,7 @@ ds_grid_clear(global.inventory_slots,noone);
 
 // Init the drag item
 global.drag_item = noone;
+selected_item = noone;
 current_inventory = noone;
 current_item = noone;
 current_slot_x = 0;
@@ -183,26 +184,8 @@ if (scr_mouse_over_inv()) {
 
 if (current_inventory != noone) {
 
-    // Store the item that is in the slot at time of click
-    var prev_item = current_inventory[# current_slot_x, current_slot_y];
+    selected_item = current_item;
     
-    // Assign the dragged item to the slot
-    // Make a check for equipment slots and only allow assigning the correct item type
-    if (current_inventory == global.equipment_slots and global.drag_item != noone and object_get_parent(prev_item.object_index) == object_get_parent(global.drag_item.object_index)) {
-        //Equip the item and send the prev_item back to the inv
-        scr_equip(global.drag_item);
-        scr_send_to_inv(prev_item);
-        global.drag_item = noone;
-        
-    } else if (current_inventory == global.inventory_slots) {
-        // Set the drag_item to the slot
-        current_inventory[# current_slot_x, current_slot_y] = global.drag_item;
-        // Make the item that was previously in the slot the new drag item
-        global.drag_item = prev_item;
-    }
-
-} else if (current_inventory == noone and global.drag_item != noone) {
-    scr_drop_item(global.drag_item);
 }
 </string>
           </argument>
@@ -265,15 +248,8 @@ scr_draw_inventory(global.inventory_slots, slot_width, inventory_coords[0], inve
 // Draw the equipment slots
 scr_draw_inventory(global.equipment_slots, slot_width, equipment_coords[0], equipment_coords[1]);
 
-// Show sprite on mouse if dragging
-if (global.drag_item != noone) {
-    var mousex = window_mouse_get_x();
-    var mousey = window_mouse_get_y();
-    draw_sprite_ext(global.drag_item.sprite_index, 0,mousex,mousey,4,4,45,c_white,1);
-}
-
-if (global.drag_item == noone and current_item != noone) {
-    scr_draw_inv_tooltip(current_item.text,window_mouse_get_x(),window_mouse_get_y(),200);
+if (selected_item != noone) {
+    scr_draw_inv_tooltip(selected_item.text,32,64,200);
 }
 
 // Reset the color and alpha
