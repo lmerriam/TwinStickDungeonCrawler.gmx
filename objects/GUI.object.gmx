@@ -145,7 +145,7 @@ if (xx &gt; menu_btn_x1 and xx &lt; menu_btn_x2 and yy &gt; menu_btn_y1 and yy &
     with(View) {
         event_perform(ev_keypress,ord('I'));
     }
-} else if (scr_mouse_over_ui(nearest_button_x1,nearest_button_y1,nearest_button_x2,nearest_button_y2)) {
+} else if (nearest_drop != noone and scr_mouse_over_ui(nearest_button_x1,nearest_button_y1,nearest_button_x2,nearest_button_y2)) {
     scr_send_to_inv(nearest_drop);
 }
 </string>

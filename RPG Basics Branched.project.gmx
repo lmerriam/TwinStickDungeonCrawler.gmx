@@ -178,6 +178,7 @@
       <script>scripts\scr_activate_inv.gml</script>
     </scripts>
   </scripts>
+  <shaders name="shaders"/>
   <objects name="objects">
     <object>objects\Player</object>
     <object>objects\View</object>

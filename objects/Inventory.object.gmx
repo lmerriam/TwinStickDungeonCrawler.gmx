@@ -55,7 +55,8 @@ inventory_coords = scr_init_inventory(global.inventory_slots, slot_width, invent
 
 // Set up the equipment slots
 global.equipment_slots = ds_grid_create(1,4);
-scr_equip(instance_create(0,0,Shotgun));
+ds_grid_clear(global.equipment_slots,noone);
+scr_equip(instance_create(0,0,Bomb));
 scr_equip(instance_create(0,0,Scroll_Column));
 scr_equip(instance_create(0,0,Armor_Heavy));
 scr_equip(instance_create(0,0,Gem_Burn));
@@ -91,6 +92,39 @@ close_btn_x1 = 16;
 close_btn_y1 = 16;
 close_btn_x2 = 128;
 close_btn_y2 = 128;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Set up inventory tooltip and equip button
+inv_tooltip_width = 200;
+inv_tooltip_x = inventory_coords[0] - 16 - inv_tooltip_width; 
+inv_tooltip_y = inventory_coords[1];
+inv_tooltip_line_height = 20;
+inv_tooltip_padding = 3;
+inv_tooltip_height = 0;
+
+eqp_btn_x1 = inv_tooltip_x;
+eqp_btn_x2 = eqp_btn_x1 + inv_tooltip_width;
+eqp_btn_y1 = 0;
+eqp_btn_y2 = eqp_btn_y1 + 32;
+
 </string>
           </argument>
         </arguments>
@@ -138,8 +172,8 @@ if (ds_exists(slots,ds_type_grid)) ds_grid_destroy(slots);
           <argument>
             <kind>1</kind>
             <string>/// Detect the Inventory slot the mouse is over and store it
-var mousex = window_mouse_get_x();
-var mousey = window_mouse_get_y();
+var mousex = device_mouse_x_to_gui(0);
+var mousey = device_mouse_y_to_gui(0);
 
 // TODO: figure out why the fuck div seems to be rounding up so I can remove these -3s
 if (scr_mouse_over_inv()) {
@@ -161,15 +195,8 @@ if (scr_mouse_over_inv()) {
 }
 
 if (selected_item != noone) {
-    inv_tooltip_width = 200;
-    inv_tooltip_x = inventory_coords[0] - 16 - inv_tooltip_width; 
-    inv_tooltip_y = inventory_coords[1];
-    inv_tooltip_line_height = 20;
-    inv_tooltip_padding = 3;
     inv_tooltip_height = array_height_2d(selected_item.text)*inv_tooltip_line_height+inv_tooltip_padding*2;
     if (eqp_btn) {
-        eqp_btn_x1 = inv_tooltip_x;
-        eqp_btn_x2 = eqp_btn_x1 + inv_tooltip_width;
         eqp_btn_y1 = inv_tooltip_y + inv_tooltip_height + 16;
         eqp_btn_y2 = eqp_btn_y1 + 32;
     }
@@ -196,35 +223,30 @@ if (selected_item != noone) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Check inventory item click
+            <string>/// Check inventory clicks
+
+// Check for equip btn
+if (eqp_btn and scr_mouse_over_ui(eqp_btn_x1,eqp_btn_y1,eqp_btn_x2,eqp_btn_y2)) {
+    global.inventory_slots[# selected_item_x,selected_item_y] = noone;
+    scr_equip(selected_item);
+    
+// Check for close button
+} else if (scr_mouse_over_ui(close_btn_x1,close_btn_y1,close_btn_x2,close_btn_y2)) {
+    with (View) event_perform(ev_keypress,ord('I'));
+}
+
 
 selected_item = current_item;
+selected_item_x = current_slot_x;
+selected_item_y = current_slot_y;
 
 // Show/hide eqp btn
-if (current_inventory == global.inventory_slots and selected_item != noone) eqp_btn = true else eqp_btn = false;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Check close btn pressed
-if (scr_mouse_over_ui(close_btn_x1,close_btn_y1,close_btn_x2,close_btn_y2)) {
-    with (View) event_perform(ev_keypress,ord('I'));
+if (current_inventory == global.inventory_slots and current_item != noone) {
+    eqp_btn = true
+
+// Turn off eqp button
+} else {
+    eqp_btn = false;
 }
 </string>
           </argument>

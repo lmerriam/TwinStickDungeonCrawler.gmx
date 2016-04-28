@@ -101,7 +101,7 @@ stamina = base_maxstamina;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>    /// Stamina regen
+            <string>/// Stamina regen
 </string>
           </argument>
         </arguments>
@@ -124,7 +124,7 @@ stamina = base_maxstamina;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>    /// Weapon cooldown
+            <string>/// Weapon cooldown
 </string>
           </argument>
         </arguments>
@@ -147,7 +147,7 @@ stamina = base_maxstamina;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>    ///Spell cooldown
+            <string>///Spell cooldown
 </string>
           </argument>
         </arguments>
@@ -493,8 +493,8 @@ if (spell_button and stamina &gt;= spell.fatigue and alarm[1] &lt;= 0) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>    /// Set fixed rotation again
-    phy_fixed_rotation = true;
+            <string>/// Set fixed rotation again
+phy_fixed_rotation = true;
 </string>
           </argument>
         </arguments>
