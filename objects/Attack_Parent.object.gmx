@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>Damage_Parent</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -25,12 +25,94 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Init damage object
-event_inherited();
-
+            <string>/// Init the damage object
+image_speed = 0;
 damage = 0;
 knockback = 0;
 creator = noone;
+buffs = ds_map_create();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="Enemy_Parent">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Damage all life forms
+
+if (creator == Player.id) {
+    other.hp -= damage;
+    scr_knockback(self, other, knockback);
+    
+    // Blood particles
+    part_particles_create(global.particles_below, other.x, other.y, global.blood_particles, 10);
+    
+    // Shake the screen
+    global.screen_shake += 3;
+    
+    if(ds_exists(other.effects,ds_type_map) and ds_exists(buffs,ds_type_map)) {
+        // Confer effects
+        ds_map_copy(other.effects,buffs);
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="Player">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Damage player
+
+if (other.id != creator) {
+    other.hp -= clamp(damage-(scr_get_armor().defense/2),1,9999);
+    
+    //knockback
+    scr_knockback(self, other, knockback);
+    
+    // Blood particles
+    part_particles_create(global.particles_below, other.x, other.y, global.blood_particles, 10);
+    
+    // Shake the screen
+    global.screen_shake += 3;
+    
+    // Armor effects
+    // Thorns
+    if (scr_get_armor().buffs[? "thorns"] = true and instance_exists(creator)) {
+        //scr_damage(other.x,other.y,Attack_R
+        creator.hp -= scr_get_armor().buffs[? "thorns_damage"];
+    }
+}
 </string>
           </argument>
         </arguments>

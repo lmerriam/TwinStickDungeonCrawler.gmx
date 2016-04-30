@@ -59,7 +59,7 @@ physics_apply_local_impulse(random_range(-1,1), random_range(-1,1), lengthdir_x(
             <kind>1</kind>
             <string>/// Explode
 
-scr_damage(xprevious,yprevious,Attack_Radius_Large,Player.id,Player.damage,scr_get_weapon().knockback,scr_get_gem().buffs);
+scr_damage(xprevious,yprevious,Attack_Radius_Medium,Player.id,Player.damage,scr_get_weapon().knockback,scr_get_gem().buffs);
 </string>
           </argument>
         </arguments>

@@ -22,6 +22,7 @@
     </sprites>
     <sprite>sprites\spr_damage</sprite>
     <sprite>sprites\spr_damage_large</sprite>
+    <sprite>sprites\spr_damage_medium</sprite>
     <sprite>sprites\spr_exp</sprite>
     <sprite>sprites\spr_health</sprite>
     <sprite>sprites\spr_door</sprite>
@@ -72,6 +73,9 @@
     <sprite>sprites\spr_location</sprite>
     <sprite>sprites\spr_crosshair</sprite>
     <sprite>sprites\spr_location_pointer</sprite>
+    <sprite>sprites\spr_hammer</sprite>
+    <sprite>sprites\spr_hammer_slash</sprite>
+    <sprite>sprites\spr_barrel</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_grass</background>
@@ -149,6 +153,7 @@
     <script>scripts\scr_init_flare.gml</script>
     <scripts name="Attacks">
       <script>scripts\scr_attack_blade.gml</script>
+      <script>scripts\scr_attack_hammer.gml</script>
       <script>scripts\scr_attack_unarmed.gml</script>
       <script>scripts\scr_attack_pistol.gml</script>
       <script>scripts\scr_attack_smg.gml</script>
@@ -197,6 +202,7 @@
       <object>objects\Damage_Parent</object>
       <object>objects\Attack_Radius</object>
       <object>objects\Attack_Radius_Large</object>
+      <object>objects\Attack_Radius_Medium</object>
     </objects>
     <objects name="Drops">
       <object>objects\Drop_Parent</object>
@@ -209,6 +215,7 @@
       <object>objects\Bomb</object>
       <object>objects\Shotgun</object>
       <object>objects\Blade</object>
+      <object>objects\Hammer</object>
       <object>objects\Gem_Burn</object>
       <object>objects\Gem_Combust</object>
       <object>objects\Gem_Freeze</object>
@@ -224,6 +231,8 @@
     <objects name="Attacks">
       <object>objects\Attack_Bomb</object>
       <object>objects\Attack_Bullet</object>
+      <object>objects\Attack_Hammer</object>
+      <object>objects\Attack_Parent</object>
     </objects>
     <objects name="Enemies">
       <object>objects\Enemy_Parent</object>
@@ -251,6 +260,7 @@
       <object>objects\Chest</object>
       <object>objects\Tree</object>
       <object>objects\Teleporter</object>
+      <object>objects\Barrel</object>
     </objects>
     <objects name="Menus">
       <object>objects\Menu_Parent</object>

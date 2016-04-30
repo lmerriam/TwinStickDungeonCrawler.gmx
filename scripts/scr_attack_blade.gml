@@ -1,5 +1,5 @@
 ///scr_attack_blade(creator)
-var dir = point_direction(x,y,mouse_x,mouse_y)
+var dir = global.mousedir;
 var target_x = lengthdir_x(attack_range,dir);
 var target_y = lengthdir_y(attack_range,dir);
 
