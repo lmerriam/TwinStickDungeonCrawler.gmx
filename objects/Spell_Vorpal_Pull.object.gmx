@@ -56,7 +56,7 @@ instance_destroy();
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="Lifeform_Parent">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -74,7 +74,12 @@ instance_destroy();
           <argument>
             <kind>1</kind>
             <string>/// Pull lifeforms
-scr_knockback(self, other, -5);
+with (Lifeform_Parent) {
+    if (distance_to_object(other) &lt; 64) {
+        phy_position_x = 64/(x - other.x);
+        phy_position_y = 64/(y - other.y);
+    }
+}
 </string>
           </argument>
         </arguments>
