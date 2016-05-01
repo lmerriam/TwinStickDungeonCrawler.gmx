@@ -59,9 +59,7 @@ alarm[0] = 1;
             <string>/// Check for player near
 if (discovered == false and distance_to_object(Player) &lt; 600) {
     discovered = true;
-    inst = instance_create(Player.x,Player.y,Announcement);
-    inst.text = "Discovered " + name;
-    inst.creator = id;
+    scr_announce("Discovered " + name);
     alarm[0] = -1;
 } else {
     alarm[0] = 0.5 * room_speed;

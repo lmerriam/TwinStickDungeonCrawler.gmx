@@ -3,6 +3,42 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
+  <datafiles number="2" name="datafiles">
+    <datafile>
+      <name>terrain.png</name>
+      <exists>-1</exists>
+      <size>160884</size>
+      <exportAction>2</exportAction>
+      <exportDir></exportDir>
+      <overwrite>0</overwrite>
+      <freeData>-1</freeData>
+      <removeEnd>0</removeEnd>
+      <store>0</store>
+      <ConfigOptions>
+        <Config name="Default">
+          <CopyToMask>9223372036854775807</CopyToMask>
+        </Config>
+      </ConfigOptions>
+      <filename>terrain.png</filename>
+    </datafile>
+    <datafile>
+      <name>tsdcTest.json</name>
+      <exists>-1</exists>
+      <size>82903</size>
+      <exportAction>2</exportAction>
+      <exportDir></exportDir>
+      <overwrite>0</overwrite>
+      <freeData>-1</freeData>
+      <removeEnd>0</removeEnd>
+      <store>0</store>
+      <ConfigOptions>
+        <Config name="Default">
+          <CopyToMask>9223372036854775807</CopyToMask>
+        </Config>
+      </ConfigOptions>
+      <filename>tsdcTest.json</filename>
+    </datafile>
+  </datafiles>
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
@@ -34,13 +70,16 @@
     <sprite>sprites\spr_area_damage</sprite>
     <sprite>sprites\spr_column_damage</sprite>
     <sprite>sprites\spr_projectile_damage</sprite>
-    <sprite>sprites\spr_scroll_projectile</sprite>
-    <sprite>sprites\spr_scroll_column</sprite>
-    <sprite>sprites\spr_scroll_area</sprite>
-    <sprite>sprites\spr_scroll_vorpal</sprite>
-    <sprite>sprites\spr_scroll_blink</sprite>
-    <sprite>sprites\spr_scroll_push</sprite>
-    <sprite>sprites\spr_scroll_pull</sprite>
+    <sprites name="scrolls">
+      <sprite>sprites\spr_scroll_push</sprite>
+      <sprite>sprites\spr_scroll_column</sprite>
+      <sprite>sprites\spr_scroll_projectile</sprite>
+      <sprite>sprites\spr_scroll_area</sprite>
+      <sprite>sprites\spr_scroll_blink</sprite>
+      <sprite>sprites\spr_scroll_vorpal</sprite>
+      <sprite>sprites\spr_scroll_pull</sprite>
+      <sprite>sprites\spr_scroll_lineup</sprite>
+    </sprites>
     <sprite>sprites\spr_items</sprite>
     <sprite>sprites\spr_sword</sprite>
     <sprite>sprites\spr_bomb</sprite>
@@ -101,6 +140,7 @@
       <background>background\background22</background>
       <background>background\background23</background>
     </backgrounds>
+    <background>background\Terrain2</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -116,6 +156,7 @@
       <script>scripts\scr_get_input.gml</script>
       <script>scripts\scr_calc_stats.gml</script>
       <script>scripts\scr_draw_tooltip.gml</script>
+      <script>scripts\scr_announce.gml</script>
       <script>scripts\scr_draw_equipment_comparison.gml</script>
       <script>scripts\scr_draw_nearest_comparison.gml</script>
       <script>scripts\scr_draw_inv_tooltip.gml</script>
@@ -162,6 +203,7 @@
     </scripts>
     <scripts name="Spells">
       <script>scripts\scr_spell_area.gml</script>
+      <script>scripts\scr_spell_lineup.gml</script>
       <script>scripts\scr_spell_blink.gml</script>
       <script>scripts\scr_spell_vorpal.gml</script>
       <script>scripts\scr_spell_column.gml</script>
@@ -182,8 +224,8 @@
       <script>scripts\scr_update_drop_tooltip.gml</script>
       <script>scripts\scr_activate_inv.gml</script>
     </scripts>
+    <script>scripts\scr_load_map.gml</script>
   </scripts>
-  <shaders name="shaders"/>
   <objects name="objects">
     <object>objects\Player</object>
     <object>objects\View</object>
@@ -221,6 +263,7 @@
       <object>objects\Gem_Freeze</object>
       <object>objects\Scroll_Projectile</object>
       <object>objects\Scroll_Column</object>
+      <object>objects\Scroll_Lineup</object>
       <object>objects\Scroll_Area</object>
       <object>objects\Scroll_Vorpal</object>
       <object>objects\Scroll_Blink</object>
@@ -243,7 +286,7 @@
       <object>objects\Spell_Column</object>
       <object>objects\Spell_Projectile</object>
       <object>objects\Spell_Area</object>
-      <object>objects\Spell_Vorpal_Pull</object>
+      <object>objects\Spell_Lineup</object>
       <object>objects\Spell_Vorpal_Emitter</object>
       <object>objects\Spell_Cone</object>
       <object>objects\Spell_Cone_Pull</object>
@@ -274,6 +317,7 @@
     <timeline>timelines\tl_spell_blink</timeline>
   </timelines>
   <rooms name="rooms">
+    <room>rooms\room5</room>
     <room>rooms\rm1</room>
     <room>rooms\rm2</room>
     <room>rooms\gmare_test</room>

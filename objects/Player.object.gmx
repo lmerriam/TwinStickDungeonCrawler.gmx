@@ -387,11 +387,11 @@ if (spell_button and stamina &gt;= spell.fatigue and alarm[1] &lt;= 0) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>    /// Collect health
-    with (other) instance_destroy();
+            <string>/// Collect health
+with (other) instance_destroy();
 
-    // Health up
-    hp = min(hp+5, maxhp); // min always returns the minimum of the array, helps us not go over maxhp
+// Health up
+hp = min(hp+5, maxhp); // min always returns the minimum of the array, helps us not go over maxhp
 
 
 </string>
@@ -468,6 +468,7 @@ if (spell_button and stamina &gt;= spell.fatigue and alarm[1] &lt;= 0) {
         hp = maxhp;
         base_maxstamina += 2;
         stamina = maxstamina;
+        
     }
 
 
