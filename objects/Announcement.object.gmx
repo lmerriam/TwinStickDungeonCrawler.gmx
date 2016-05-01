@@ -112,10 +112,12 @@ y = Player.y;
           <argument>
             <kind>1</kind>
             <string>/// Set up pointer
-var len = 32;
-pointer_dir = point_direction(x,y,creator.x,creator.y);
-pointer_x = Player.x + lengthdir_x(len,pointer_dir);
-pointer_y = Player.y + lengthdir_y(len,pointer_dir);
+if (creator != noone) {
+    var len = 32;
+    pointer_dir = point_direction(x,y,creator.x,creator.y);
+    pointer_x = Player.x + lengthdir_x(len,pointer_dir);
+    pointer_y = Player.y + lengthdir_y(len,pointer_dir);
+}
 </string>
           </argument>
         </arguments>
@@ -163,7 +165,7 @@ scr_draw_text_shadow(global.window_width/2,global.window_height*.75,text,c_white
           <argument>
             <kind>1</kind>
             <string>/// Draw pointer to location
-if (view_current = 0) {
+if (view_current = 0 and creator != noone) {
     draw_sprite_ext(spr_location_pointer,0,pointer_x,pointer_y,1,1,pointer_dir,c_white,text_opacity);
 }
 </string>

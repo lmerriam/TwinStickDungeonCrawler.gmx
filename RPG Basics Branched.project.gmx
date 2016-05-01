@@ -181,6 +181,7 @@
       <script>scripts\scr_draw_inventory.gml</script>
       <script>scripts\scr_init_inventory.gml</script>
       <script>scripts\scr_draw_text_shadow.gml</script>
+      <script>scripts\scr_stun.gml</script>
     </scripts>
     <scripts name="Catalogs">
       <script>scripts\scr_weapon_list.gml</script>

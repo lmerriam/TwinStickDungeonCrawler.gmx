@@ -468,7 +468,7 @@ hp = min(hp+5, maxhp); // min always returns the minimum of the array, helps us 
         hp = maxhp;
         base_maxstamina += 2;
         stamina = maxstamina;
-        
+        scr_announce("Achieved level " + string(level), noone);
     }
 
 
