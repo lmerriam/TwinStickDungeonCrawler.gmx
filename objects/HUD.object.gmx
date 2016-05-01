@@ -29,13 +29,22 @@
 window_width = global.window_width;
 window_height = global.window_height;
 windowpadding = .01 * window_width;
+draw_set_font(PixelSmall);
+
+// Init cast mode
+cast_mode = false;
+cast_btn_width = 64;
+cast_btn_x1 = window_width - cast_btn_width - windowpadding;
+cast_btn_y1 = window_height/2;
+cast_btn_x2 = cast_btn_x1 + cast_btn_width;
+cast_btn_y2 = cast_btn_y1 + cast_btn_width;
 
 // Init minimap
 minimap_width = window_height/5;
 minimap_height = minimap_width;
 minimap_window = 500;
-minimap_window_x = window_width - minimap_width - 32;
-minimap_window_y = 32;
+minimap_window_x = window_width - minimap_width - windowpadding;
+minimap_window_y = windowpadding;
 minimap = -1;
 
 // Init menu button
@@ -79,41 +88,24 @@ nearest_button_y2 = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Follow player
+            <string>/// Check HUD taps
 x = Player.x;
 y = Player.y;
 
 view_xview[1] = Player.x - view_wview[1]/2;
 view_yview[1] = Player.y - view_hview[1]/2;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Check for nearby drop
-nearest_drop = instance_nearest(x,y,Drop_Parent);
-if (distance_to_object(nearest_drop) &lt; 32) {
-    nearest_drop_in_range = true;
-    with(nearest_drop) {
-        image_index = 1;
+
+if (!cast_mode) {
+    // Check for nearest drop
+    nearest_drop = instance_nearest(x,y,Drop_Parent);
+    if (distance_to_object(nearest_drop) &lt; 32) {
+        nearest_drop_in_range = true;
+        with(nearest_drop) {
+            image_index = 1;
+        }
+    } else {
+        nearest_drop_in_range = false;   
     }
-} else {
-    nearest_drop_in_range = false;   
 }
 </string>
           </argument>
@@ -141,12 +133,26 @@ if (distance_to_object(nearest_drop) &lt; 32) {
 var xx = device_mouse_x_to_gui(0);
 var yy = device_mouse_y_to_gui(0);
 
-if (xx &gt; menu_btn_x1 and xx &lt; menu_btn_x2 and yy &gt; menu_btn_y1 and yy &lt; menu_btn_y2) {
-    with(View) {
-        event_perform(ev_keypress,ord('I'));
+if (cast_mode) {
+    var spell = scr_get_spell().script;
+    //scr_announce("Cast " + string(spell) + " at " + string(xx) + " " + string(yy),noone);
+    script_execute(spell);
+    cast_mode = false;
+} else {
+    // Detect click on cast mode butn
+    if (scr_mouse_over_ui(cast_btn_x1,cast_btn_y1,cast_btn_x2,cast_btn_y2)) {
+        cast_mode = true;
+        
+    // Detect click on menu btn
+    } else if (xx &gt; menu_btn_x1 and xx &lt; menu_btn_x2 and yy &gt; menu_btn_y1 and yy &lt; menu_btn_y2) {
+        with(View) {
+            event_perform(ev_keypress,ord('I'));
+        }
+        
+    // Detect pickup button click
+    } else if (nearest_drop != noone and scr_mouse_over_ui(nearest_button_x1,nearest_button_y1,nearest_button_x2,nearest_button_y2)) {
+        scr_send_to_inv(nearest_drop);
     }
-} else if (nearest_drop != noone and scr_mouse_over_ui(nearest_button_x1,nearest_button_y1,nearest_button_x2,nearest_button_y2)) {
-    scr_send_to_inv(nearest_drop);
 }
 </string>
           </argument>
@@ -224,59 +230,47 @@ if (surface_exists(minimap)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Draw minimap
-
-
-// Draw the minimap
-draw_surface_stretched(minimap,minimap_window_x,minimap_window_y,minimap_width,minimap_height);
-draw_rectangle_colour(minimap_window_x, minimap_window_y, minimap_window_x+minimap_width, minimap_window_y+minimap_height, c_black, c_black, c_black, c_black, true);
-draw_sprite_ext(spr_player_arrow,0,(minimap_window_x + (minimap_width/2)),(minimap_window_y + (minimap_height/2)),1,1,global.mousedir,c_white,1);
-
-// Draw menu button
-draw_sprite(spr_menu_button,0,menu_btn_x1,menu_btn_y1);
-
-// Draw the stats
-draw_text(32,96,"LVL " + string(Player.level));
-
-// Draw health and stamina
-var hp = Player.hp;
-var maxhp = Player.maxhp;
-var stamina = Player.stamina;
-var maxstamina = Player.maxstamina;
-var hbar = .025*window_height;
-var lbar = .25*window_width;
-var padding = .01*window_height;
-draw_healthbar(menu_btn_x2+padding,windowpadding,menu_btn_x2+padding+lbar,windowpadding+hbar,hp/maxhp*100,c_black,c_red,c_green,0,true,true);
-draw_healthbar(menu_btn_x2+padding,windowpadding+hbar+padding,menu_btn_x2+padding+lbar,windowpadding+hbar*2+padding,stamina/maxstamina*100,c_black,c_blue,c_blue,0,true,true);
-
-// Draw expr
-var hbar = 3;
-var expr = Player.expr;
-var maxexpr = Player.maxexpr;
-draw_healthbar(0,window_height-hbar,window_width,window_height,expr/maxexpr*100,c_black,c_white,c_white,0,true,true);
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Draw nearest drop tooltip
-if (nearest_drop_in_range) {
-    scr_draw_nearest_comparison(nearest_drop.text,16,128,200);
+            <string>/// Draw HUD elements
+if (cast_mode) {
+    draw_set_alpha(.1);
+    draw_rectangle_colour(0,0,global.window_width,global.window_height,c_fuchsia,c_fuchsia,c_fuchsia,c_fuchsia,false);
+    draw_set_alpha(1);
+} else {
+    // Draw nearest drop tooltip
+    if (nearest_drop_in_range) {
+        scr_draw_nearest_comparison(nearest_drop.text,16,128,200);
+    }
+    
+    // Draw cast button
+    draw_sprite_stretched(spr_menu_button,0,cast_btn_x1,cast_btn_y1,cast_btn_width,cast_btn_width);
+    
+    // Draw the minimap
+    draw_surface_stretched(minimap,minimap_window_x,minimap_window_y,minimap_width,minimap_height);
+    draw_rectangle_colour(minimap_window_x, minimap_window_y, minimap_window_x+minimap_width, minimap_window_y+minimap_height, c_black, c_black, c_black, c_black, true);
+    draw_sprite_ext(spr_player_arrow,0,(minimap_window_x + (minimap_width/2)),(minimap_window_y + (minimap_height/2)),1,1,global.mousedir,c_white,1);
+    
+    // Draw menu button
+    draw_sprite(spr_menu_button,0,menu_btn_x1,menu_btn_y1);
+    
+    // Draw the stats
+    draw_text(32,96,"LVL " + string(Player.level));
+    
+    // Draw health and stamina
+    var hp = Player.hp;
+    var maxhp = Player.maxhp;
+    var stamina = Player.stamina;
+    var maxstamina = Player.maxstamina;
+    var hbar = .025*window_height;
+    var lbar = .25*window_width;
+    var padding = .01*window_height;
+    draw_healthbar(menu_btn_x2+padding,windowpadding,menu_btn_x2+padding+lbar,windowpadding+hbar,hp/maxhp*100,c_black,c_red,c_green,0,true,true);
+    draw_healthbar(menu_btn_x2+padding,windowpadding+hbar+padding,menu_btn_x2+padding+lbar,windowpadding+hbar*2+padding,stamina/maxstamina*100,c_black,c_blue,c_blue,0,true,true);
+    
+    // Draw expr
+    var hbar = 3;
+    var expr = Player.expr;
+    var maxexpr = Player.maxexpr;
+    draw_healthbar(0,window_height-hbar,window_width,window_height,expr/maxexpr*100,c_black,c_white,c_white,0,true,true);
 }
 </string>
           </argument>

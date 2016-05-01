@@ -227,10 +227,13 @@
     </scripts>
     <script>scripts\scr_load_map.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\PixelSmall</font>
+  </fonts>
   <objects name="objects">
     <object>objects\Player</object>
     <object>objects\View</object>
-    <object>objects\GUI</object>
+    <object>objects\HUD</object>
     <object>objects\Expr</object>
     <object>objects\Door</object>
     <object>objects\Speaker_Parent</object>
