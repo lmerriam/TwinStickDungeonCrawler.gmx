@@ -32,7 +32,7 @@ windowpadding = .01 * window_width;
 draw_set_font(PixelSmall);
 
 // Init cast mode
-cast_mode = false;
+global.cast_mode = false;
 cast_btn_width = 64;
 cast_btn_x1 = window_width - cast_btn_width - windowpadding;
 cast_btn_y1 = window_height/2;
@@ -95,7 +95,7 @@ y = Player.y;
 view_xview[1] = Player.x - view_wview[1]/2;
 view_yview[1] = Player.y - view_hview[1]/2;
 
-if (!cast_mode) {
+if (!global.cast_mode) {
     // Check for nearest drop
     nearest_drop = instance_nearest(x,y,Drop_Parent);
     if (distance_to_object(nearest_drop) &lt; 32) {
@@ -133,15 +133,16 @@ if (!cast_mode) {
 var xx = device_mouse_x_to_gui(0);
 var yy = device_mouse_y_to_gui(0);
 
-if (cast_mode) {
+if (global.cast_mode) {
     var spell = scr_get_spell().script;
-    //scr_announce("Cast " + string(spell) + " at " + string(xx) + " " + string(yy),noone);
     script_execute(spell);
-    cast_mode = false;
+    global.cast_mode = false;
+    global.timescale = 1;
 } else {
     // Detect click on cast mode butn
-    if (scr_mouse_over_ui(cast_btn_x1,cast_btn_y1,cast_btn_x2,cast_btn_y2)) {
-        cast_mode = true;
+    if (scr_mouse_over_ui(cast_btn_x1,cast_btn_y1,cast_btn_x2,cast_btn_y2) and Player.alarm[1] &lt;= 0 and Player.stamina &gt;= scr_get_spell().fatigue) {
+        global.cast_mode = true;
+        global.timescale = .1;
         
     // Detect click on menu btn
     } else if (xx &gt; menu_btn_x1 and xx &lt; menu_btn_x2 and yy &gt; menu_btn_y1 and yy &lt; menu_btn_y2) {
@@ -231,7 +232,7 @@ if (surface_exists(minimap)) {
           <argument>
             <kind>1</kind>
             <string>/// Draw HUD elements
-if (cast_mode) {
+if (global.cast_mode) {
     draw_set_alpha(.1);
     draw_rectangle_colour(0,0,global.window_width,global.window_height,c_fuchsia,c_fuchsia,c_fuchsia,c_fuchsia,false);
     draw_set_alpha(1);

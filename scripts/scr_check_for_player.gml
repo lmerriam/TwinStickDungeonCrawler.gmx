@@ -1,4 +1,4 @@
-///scr_check_for_player()
+///scr_check_for_player
 if (instance_exists(Player)) {
     var dis = point_distance(x,y,Player.x,Player.y);
     if (dis < sight) {

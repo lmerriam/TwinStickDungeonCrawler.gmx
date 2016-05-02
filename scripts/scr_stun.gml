@@ -3,4 +3,4 @@ var enemy = argument0;
 var dur = argument1;
 
 enemy.state = scr_enemy_stall_state;
-enemy.alarm[1] = dur * room_speed;
+enemy.stall_alarm = scr_sec_from_now(1.5);

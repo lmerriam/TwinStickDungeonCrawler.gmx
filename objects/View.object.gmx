@@ -118,7 +118,7 @@ show_debug_overlay(true);
           <argument>
             <kind>1</kind>
             <string>/// Set up game time and shit
-global.gamespeed = 1;
+global.timescale = 1;
 </string>
           </argument>
         </arguments>
@@ -200,21 +200,25 @@ alarm[0] = .2 * room_speed;
 
 if (instance_exists(Player)) {
     var dis;
-    
-    if (os_type = os_android) {
-        dis = 128;
+    if (global.cast_mode) {
+        x += (Player.x - x) * .3;
+        y += (Player.y - y) * .3;
     } else {
-        dis = point_distance(Player.x,Player.y,mouse_x,mouse_y);
-    }
-    var targetx = Player.x + lengthdir_x(dis/5,global.mousedir);
-    var targety = Player.y + lengthdir_y(dis/5,global.mousedir);
+        if (os_type = os_android) {
+            dis = 128;
+        } else {
+            dis = point_distance(Player.x,Player.y,mouse_x,mouse_y);
+        }
+        var targetx = Player.x + lengthdir_x(dis/5,global.mousedir);
+        var targety = Player.y + lengthdir_y(dis/5,global.mousedir);
+        
+        global.crosshair_x = targetx;
+        global.crosshair_y = targety;
     
-    global.crosshair_x = targetx;
-    global.crosshair_y = targety;
-
-    x += (targetx - x) * .1  * (30/room_speed);
-    y += (targety - y) * .1 * (30/room_speed);
-
+        x += (targetx - x) * .1  * (30/room_speed);
+        y += (targety - y) * .1 * (30/room_speed);
+    
+    }
 }
 
 if (global.screen_shake &gt; 4) {

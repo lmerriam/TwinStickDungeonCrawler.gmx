@@ -20,10 +20,10 @@
     draw_set_halign(argument9);
     draw_set_color(argument4);
     draw_set_alpha(a * argument5);
-    draw_text_ext_transformed(argument0 + i, argument1 + j, argument2, -1, -1, 2, 2,0);
+    draw_text_ext_transformed(argument0 + i, argument1 + j, argument2, -1, -1, 1, 1,0);
     draw_set_color(argument3);
     draw_set_alpha(a);
-    draw_text_ext_transformed(argument0, argument1, argument2, -1, -1, 2, 2,0);
+    draw_text_ext_transformed(argument0, argument1, argument2, -1, -1, 1, 1, 0);
     draw_set_color(c);
     draw_set_alpha(1);
     draw_set_halign(fa_left);

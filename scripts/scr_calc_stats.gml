@@ -7,7 +7,7 @@ var gem = scr_get_gem();
 // Stat totals
 maxstamina = base_maxstamina + armor.stamina;
 maxhp = base_maxhp + armor.hp;
-spd = (base_spd + armor.spd) * (30/room_speed);
+spd = (base_spd + armor.spd) * (30/room_speed) * global.timescale;
 hp_regen = armor.hp_regen;
 stamina_regen = armor.stamina_regen;
 

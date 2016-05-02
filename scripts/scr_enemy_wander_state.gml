@@ -1,6 +1,6 @@
 ///scr_enemy_wander_state
 scr_check_for_player();
-var spd_final = spd - freeze_slow;
+var spd_final = (spd - freeze_slow) * global.timescale;
 
 if (point_distance(x,y,targetx,targety) > spd) {
     var dir = point_direction(x,y,targetx,targety);

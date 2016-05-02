@@ -53,8 +53,8 @@ image_speed = 0;
             <kind>1</kind>
             <string>/// Move toward player
 if (instance_exists(Player)) {
-    phy_position_x += (Player.x - x) * .1  * (30/room_speed);
-    phy_position_y += (Player.y - y) * .1 * (30/room_speed);
+    phy_position_x += (Player.x - x) * .1  * global.timescale;
+    phy_position_y += (Player.y - y) * .1 * global.timescale;
 }
 </string>
           </argument>

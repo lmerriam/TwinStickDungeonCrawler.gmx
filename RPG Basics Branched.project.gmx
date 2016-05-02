@@ -182,6 +182,9 @@
       <script>scripts\scr_init_inventory.gml</script>
       <script>scripts\scr_draw_text_shadow.gml</script>
       <script>scripts\scr_stun.gml</script>
+      <script>scripts\scr_sec_from_now.gml</script>
+      <script>scripts\scr_alarm_passed.gml</script>
+      <script>scripts\scr_alarm_running.gml</script>
     </scripts>
     <scripts name="Catalogs">
       <script>scripts\scr_weapon_list.gml</script>
@@ -316,6 +319,7 @@
       <object>objects\Map</object>
     </objects>
     <object>objects\Announcement</object>
+    <object>objects\Time</object>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_spell_blink</timeline>
