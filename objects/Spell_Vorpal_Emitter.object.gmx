@@ -26,59 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>/// Init vorpal emitter
-alarm[0] = 3 * room_speed;
-alarm[1] = .3 * room_speed;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="1">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Emit damage
-
-scr_damage(x,y,Attack_Radius_Medium,Player.id,Player.spell_damage,0,0);
-
-alarm[1] = .3 * room_speed;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Expire
-instance_destroy();
+expire_alarm = scr_sec_from_now(3);
+emit_alarm = scr_sec_from_now(.3);
 </string>
           </argument>
         </arguments>
@@ -101,7 +50,9 @@ instance_destroy();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Pull lifeforms
+            <string>/// Pull lifeforms and emit damage
+event_inherited();
+
 with (Enemy_Parent) {
     var len = distance_to_object(other);
     if (len &lt; 64) {
@@ -110,6 +61,10 @@ with (Enemy_Parent) {
         phy_position_y += lengthdir_y(len,dir)/10;
     }
 }
+
+// emit damage and reset emit timer
+scr_damage(x,y,Attack_Radius_Medium,Player.id,Player.spell_damage,0,0);
+emit_alarm = scr_sec_from_now(.3);
 </string>
           </argument>
         </arguments>

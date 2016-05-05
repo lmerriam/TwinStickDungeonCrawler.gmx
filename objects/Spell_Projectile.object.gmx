@@ -28,7 +28,7 @@
             <string>/// Rotate and set alarm
 event_inherited();
 phy_rotation = -global.mousedir;
-alarm[0] = 2 * room_speed;
+expire_timer = scr_sec_from_now(2);
 </string>
           </argument>
         </arguments>
@@ -52,6 +52,7 @@ alarm[0] = 2 * room_speed;
           <argument>
             <kind>1</kind>
             <string>/// Move in direction of mouse
+event_inherited();
 var dir = -phy_rotation;
 var len = 10;
 phy_position_x += lengthdir_x(len,dir);

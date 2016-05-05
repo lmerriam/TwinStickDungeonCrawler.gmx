@@ -34,8 +34,6 @@ follow_point_y = Player.y;
 follow_point_range = 16;
 follow_point_angle = 0;
 follow_point_interval = .1*room_speed;
-
-alarm[0] = .1;
 </string>
           </argument>
         </arguments>
@@ -59,7 +57,7 @@ alarm[0] = .1;
           <argument>
             <kind>1</kind>
             <string>/// Control turret
-
+event_inherited();
 // Execute state
 script_execute(state);
 
