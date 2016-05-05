@@ -1,2 +1,3 @@
 ///scr_sec_from_now(seconds)
-return Time.now * room_speed * argument0;
+var time = Time.now + (argument0 * room_speed);
+return time;

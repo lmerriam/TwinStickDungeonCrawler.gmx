@@ -76,13 +76,15 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
                 if object_exists(object_type){
                     show_debug_message("exists at " + string(object_x) + ", " + string(object_y));
                     var object = instance_create( object_x, object_y, object_type);
-                    var object_scale_x =  (object_width / object.sprite_width);
-                    var object_scale_y = ( object_height / object.sprite_height);
+                    //var object_scale_x =  (object_width / object.sprite_width);
+                    //var object_scale_y = ( object_height / object.sprite_height);
                     //scale object and reposition based on offset
-                    object.image_xscale = object_scale_x;
-                    object.image_yscale = object_scale_y;
-                    object.x = object_x + ( object.sprite_xoffset);
-                    object.y = object_y + ( object.sprite_yoffset);
+                    //object.image_xscale = object_scale_x;
+                    //object.image_yscale = object_scale_y;
+                    //object.x = object_x + ( object.sprite_xoffset);
+                    //object.y = object_y + ( object.sprite_yoffset);
+                    object.x = object_x;
+                    object.y = object_y;
                 }
             }
             ds_list_destroy(lst_objects);

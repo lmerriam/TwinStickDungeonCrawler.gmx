@@ -33,6 +33,9 @@ surface_resize(application_surface, view_wview[0], view_hview[0]);
 //application_surface_enable(false);
 // Set GUI size
 
+screen_scale = 1;
+prev_screen_scale = screen_scale;
+
 
 // We do not start in a menu
 in_menu = false;
@@ -40,6 +43,7 @@ in_menu = false;
 // Set the various menus to not open (TODO: should these vars be in the respective menus?
 // ...cont Then we wouldn't have to pass them to the toggle_menu script separately)
 pause_menu_open = false;
+map_open = false;
 inv_open = false;
 menu_open = false;
 
@@ -75,50 +79,6 @@ global.screen_shake = 0;
 // Get the screen shake decay going
 alarm[0] = 1;
 alarm[1] = 1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Show debug
-show_debug_overlay(true);
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Set up game time and shit
-global.timescale = 1;
 </string>
           </argument>
         </arguments>
@@ -230,6 +190,38 @@ if (global.screen_shake &gt; 4) {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// In cast mode, get larger
+
+if (global.cast_mode) {
+   if (screen_scale &lt; 1.2) screen_scale += .05;
+} else {
+   if (screen_scale &gt; 1) screen_scale -= .05;
+}
+
+// Scale the view if the screen scale has changed
+if (prev_screen_scale != screen_scale) scr_scale_view(screen_scale*320,screen_scale*180);
+
+prev_screen_scale = screen_scale;
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="9" enumb="77">
       <action>
@@ -249,12 +241,9 @@ if (global.screen_shake &gt; 4) {
           <argument>
             <kind>1</kind>
             <string>/// Show map
-if (!in_menu) {
-    global.player_x = Player.x;
-    global.player_y = Player.y;
-}
+map_open = scr_toggle(map_open);
 
-scr_toggle_menu(menu_open,Map);
+if (map_open) scr_scale_view(room_width,room_height) else scr_scale_view(320,180); view_xview[0] = Player.x; view_yview[0] = Player.y;
 </string>
           </argument>
         </arguments>

@@ -28,6 +28,7 @@
             <string>/// Init the slime
 event_inherited();
 image_speed = .1 * (30/room_speed);
+base_image_speed = image_speed;
 
 level = 1;
 

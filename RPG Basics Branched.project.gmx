@@ -185,6 +185,7 @@
       <script>scripts\scr_sec_from_now.gml</script>
       <script>scripts\scr_alarm_passed.gml</script>
       <script>scripts\scr_alarm_running.gml</script>
+      <script>scripts\scr_scale_view.gml</script>
     </scripts>
     <scripts name="Catalogs">
       <script>scripts\scr_weapon_list.gml</script>
