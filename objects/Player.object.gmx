@@ -55,6 +55,11 @@ base_spd = 2;
 
 hp = base_maxhp;
 stamina = base_maxstamina;
+
+// Timers
+attack_timer = 0;
+spell_timer = 0;
+stamina_timer = 0;
 </string>
           </argument>
         </arguments>
@@ -228,9 +233,9 @@ if (hp &lt; 0) {
 }
 
 // Stamina regen
-if (stamina &lt; maxstamina and alarm[3] &lt;= 0) {
+if (stamina &lt; maxstamina and scr_alarm_passed(stamina_timer)) {
     stamina++;
-    alarm[3] = 1 * room_speed;
+    stamina_timer = scr_sec_from_now(1);
 }
 </string>
           </argument>
@@ -380,16 +385,16 @@ var weapon = scr_get_weapon();
 var spell = scr_get_spell();
 
 // Left Attack
-if (attack_button and alarm[2] &lt;= 0) {
+if (attack_button and scr_alarm_passed(attack_timer)) {
     script_execute(weapon.script);
-    alarm[2] = weapon.cd * room_speed;
+    attack_timer = scr_sec_from_now(weapon.cd);
 }
 
 // Right attack
-if (spell_button and stamina &gt;= spell.fatigue and alarm[1] &lt;= 0) {
+if (spell_button and stamina &gt;= spell.fatigue and scr_alarm_passed(spell_timer)) {
     script_execute(spell.script);
     stamina -= spell.fatigue;
-    alarm[1] = spell.cd * room_speed;
+    spell_timer = scr_sec_from_now(spell.cd);
 }
 </string>
           </argument>
