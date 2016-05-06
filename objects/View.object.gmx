@@ -47,6 +47,7 @@ map_open = false;
 inv_open = false;
 menu_open = false;
 
+instance_create(-999,-999,Inventory);
 instance_deactivate_object(Menu_Parent);
 </string>
           </argument>

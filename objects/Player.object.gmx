@@ -378,8 +378,11 @@ if (len &gt; 0) {
 }
 
 // Move the player
-phy_position_x += hspd;
-phy_position_y += vspd;
+if (!tile_layer_find(666,x+hspd,y)) phy_position_x += hspd;
+if (!tile_layer_find(666,x,y+vspd)) phy_position_y += vspd;
+//phy_position_y += vspd;
+
+
 
 var weapon = scr_get_weapon();
 var spell = scr_get_spell();

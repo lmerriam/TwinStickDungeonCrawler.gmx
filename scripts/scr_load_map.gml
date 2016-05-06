@@ -34,19 +34,22 @@ var tileset = ds_list_find_value(lst_tileset, 0);
 var tileset_img = ds_map_find_value(tileset, "image");
 var tile_cols = ds_map_find_value(tileset, "imagewidth") / global.tilewidth;
 var tile_rows = ds_map_find_value(tileset, "imageheight") / global.tileheight;
-var layer_depth = 1000;
+//var layer_depth = 1000;
 tileset_bg = background_add(working_directory + tileset_img, 1, false );
 
 var lst_layers = ds_map_find_value( json, "layers" );
 //show_debug_message(string(ds_list_size(lst_layers)));
 for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
     var layer_object = ds_list_find_value( lst_layers, layer_i);
+    var layer_properties = ds_map_find_value( layer_object, "properties");
     var layer_type = ds_map_find_value( layer_object, "type");
     switch(layer_type){
         case "tilelayer":
             var layer_height = ds_map_find_value( layer_object, "height" );
             var layer_width = ds_map_find_value( layer_object, "width" );
-            layer_depth -= 1 * layer_i;
+            var layer_depth = ds_map_find_value( layer_properties, "depth" );
+            //show_debug_message(layer_depth);
+            //layer_depth -= 1 * layer_i;
             var lst_data = ds_map_find_value( layer_object, "data" );
             //build tile layer
             var i;
@@ -68,13 +71,12 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
             for ( var o = 0; o < ds_list_size( lst_objects ); o++ ) {
                 var object_map = ds_list_find_value( lst_objects, o);
                 var object_type = asset_get_index( ds_map_find_value( object_map, "type"));
-                show_debug_message(object_type);
+                show_debug_message(object_get_name(object_type));
                 var object_x = ds_map_find_value( object_map, "x" );
                 var object_y = ds_map_find_value( object_map, "y" );
                 var object_width = ds_map_find_value( object_map, "width");
                 var object_height = ds_map_find_value( object_map, "height");
                 if object_exists(object_type){
-                    show_debug_message("exists at " + string(object_x) + ", " + string(object_y));
                     var object = instance_create( object_x, object_y, object_type);
                     //var object_scale_x =  (object_width / object.sprite_width);
                     //var object_scale_y = ( object_height / object.sprite_height);
