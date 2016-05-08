@@ -41,12 +41,12 @@ var lst_layers = ds_map_find_value( json, "layers" );
 //show_debug_message(string(ds_list_size(lst_layers)));
 for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
     var layer_object = ds_list_find_value( lst_layers, layer_i);
-    var layer_properties = ds_map_find_value( layer_object, "properties");
     var layer_type = ds_map_find_value( layer_object, "type");
     switch(layer_type){
         case "tilelayer":
             var layer_height = ds_map_find_value( layer_object, "height" );
             var layer_width = ds_map_find_value( layer_object, "width" );
+            var layer_properties = ds_map_find_value( layer_object, "properties");
             var layer_depth = ds_map_find_value( layer_properties, "depth" );
             //show_debug_message(layer_depth);
             //layer_depth -= 1 * layer_i;
@@ -76,6 +76,7 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
                 var object_y = ds_map_find_value( object_map, "y" );
                 var object_width = ds_map_find_value( object_map, "width");
                 var object_height = ds_map_find_value( object_map, "height");
+                var object_properties = ds_map_find_value( object_map, "properties");
                 if object_exists(object_type){
                     var object = instance_create( object_x, object_y, object_type);
                     //var object_scale_x =  (object_width / object.sprite_width);
@@ -87,6 +88,7 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
                     //object.y = object_y + ( object.sprite_yoffset);
                     object.x = object_x;
                     object.y = object_y;
+                    scr_custom_properties(object.object_index,object_properties);
                 }
             }
             ds_list_destroy(lst_objects);

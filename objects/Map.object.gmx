@@ -25,8 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>    /// Create surface
-    fullscreen_map = noone;
+            <string>/// Create surface
 </string>
           </argument>
         </arguments>
@@ -49,43 +48,28 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>    /// Draw the menu
-    event_inherited();
+            <string>/// Draw the map
+var maph, mapw, ratio;
+winw = global.window_width;
+winh = global.window_height;
+sprw = sprite_get_width(global.current_map);
+sprh = sprite_get_height(global.current_map);
+ratiow = winw/sprw;
+ratioh = winh/sprh;
 
-    var window_width = global.window_width;
-    var window_height = global.window_height;
+if (ratioh &gt; ratiow) {
+    ratio = ratiow;
+} else {
+    ratio = ratioh;
+}
 
-    // Draw fullscreen map
-    var map = global.current_map;
-    var ratio = window_width / room_width;
-    var fullscreen_map_x = global.player_x * ratio;
-    var fullscreen_map_y = global.player_y * ratio;
-    var map_width = sprite_get_width(map);
-    var map_height = sprite_get_height(map);
-    var map_sprite_x = (window_width / 2) - map_width / 2;
-    var map_sprite_y = (window_height / 2) - map_height / 2;
+mapw = sprw*ratio;
+maph = sprh*ratio;
 
 
-    if (surface_exists(fullscreen_map)) {
-        surface_set_target(fullscreen_map);
-        draw_clear_alpha(c_black,0.5);
-        draw_sprite(map, 0, map_sprite_x, map_sprite_y);
-        surface_reset_target();
-        // Draw fullscreen_map
-        draw_surface(fullscreen_map, 0, 0);
-        // Draw player position arrow
-        draw_circle_colour(fullscreen_map_x,fullscreen_map_y,1,c_yellow,c_yellow,false);
-        
-        for (var i = 0; i &lt; instance_number(Teleporter); i ++) {
-            var inst = instance_find(Teleporter,i);
-            draw_sprite(Teleporter.sprite_index,0,inst.x*ratio,inst.y*ratio)
-        }
-    } else {
-        fullscreen_map = surface_create(window_width,window_height);
-        surface_set_target(fullscreen_map);
-        draw_clear_alpha(c_black,0.5);
-        surface_reset_target();
-    }
+draw_sprite_stretched(global.current_map,0,0,0,mapw,maph);
+
+with(Location) draw_sprite(Location.sprite_index,0,x/(room_width/other.sprw)*ratio,y/(room_height/other.sprh)*ratio);
 </string>
           </argument>
         </arguments>

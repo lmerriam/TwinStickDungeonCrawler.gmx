@@ -48,6 +48,7 @@ inv_open = false;
 menu_open = false;
 
 instance_create(-999,-999,Inventory);
+instance_create(-999,-999,Map);
 instance_deactivate_object(Menu_Parent);
 </string>
           </argument>
@@ -244,7 +245,17 @@ prev_screen_scale = screen_scale;
             <string>/// Show map
 map_open = scr_toggle(map_open);
 
-if (map_open) scr_scale_view(room_width,room_height) else scr_scale_view(320,180); view_xview[0] = Player.x; view_yview[0] = Player.y;
+// If the menu open variable is now on, send the menu object to the deactivation handler
+if (map_open) {
+    // Make sure we know we're in a menu
+    in_menu = true;
+    scr_handle_deactivation(Map);
+    scr_activate_map();
+} else {
+    // Make sure we know we're not in a menu
+    in_menu = false;
+    scr_handle_deactivation(noone);
+}
 </string>
           </argument>
         </arguments>

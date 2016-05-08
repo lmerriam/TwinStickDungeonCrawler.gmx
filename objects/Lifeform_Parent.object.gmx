@@ -108,6 +108,11 @@ if (hp &lt;= 0) {
     instance_destroy();
 }
 
+if (tile_layer_find(666,phy_position_x,phy_position_y)) {
+    phy_position_x = phy_position_xprevious;
+    phy_position_y = phy_position_yprevious;
+}
+
 /// Effects
 if (ds_exists(effects, ds_type_map)) {
 

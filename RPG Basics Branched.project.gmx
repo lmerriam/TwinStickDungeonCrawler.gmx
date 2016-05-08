@@ -3,7 +3,7 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="2" name="datafiles">
+  <datafiles number="3" name="datafiles">
     <datafile>
       <name>terrain.png</name>
       <exists>-1</exists>
@@ -37,6 +37,23 @@
         </Config>
       </ConfigOptions>
       <filename>tsdcTest.json</filename>
+    </datafile>
+    <datafile>
+      <name>tsdcTest.png</name>
+      <exists>-1</exists>
+      <size>283357</size>
+      <exportAction>2</exportAction>
+      <exportDir></exportDir>
+      <overwrite>0</overwrite>
+      <freeData>-1</freeData>
+      <removeEnd>0</removeEnd>
+      <store>0</store>
+      <ConfigOptions>
+        <Config name="Default">
+          <CopyToMask>9223372036854775807</CopyToMask>
+        </Config>
+      </ConfigOptions>
+      <filename>tsdcTest.png</filename>
     </datafile>
   </datafiles>
   <NewExtensions/>
@@ -154,6 +171,7 @@
     </scripts>
     <scripts name="Helpers">
       <script>scripts\scr_get_input.gml</script>
+      <script>scripts\scr_chance.gml</script>
       <script>scripts\scr_calc_stats.gml</script>
       <script>scripts\scr_draw_tooltip.gml</script>
       <script>scripts\scr_announce.gml</script>
@@ -185,18 +203,19 @@
       <script>scripts\scr_sec_from_now.gml</script>
       <script>scripts\scr_alarm_passed.gml</script>
       <script>scripts\scr_alarm_running.gml</script>
+      <script>scripts\scr_string_copy_words.gml</script>
       <script>scripts\scr_scale_view.gml</script>
+      <script>scripts\scr_spawn_creeps.gml</script>
     </scripts>
     <scripts name="Catalogs">
       <script>scripts\scr_weapon_list.gml</script>
       <script>scripts\scr_spell_list.gml</script>
     </scripts>
-    <script>scripts\scr_chance.gml</script>
-    <script>scripts\scr_string_copy_words.gml</script>
-    <script>scripts\scr_spawn_creeps.gml</script>
-    <script>scripts\scr_init_blood.gml</script>
-    <script>scripts\scr_init_spark.gml</script>
-    <script>scripts\scr_init_flare.gml</script>
+    <scripts name="Particles">
+      <script>scripts\scr_init_blood.gml</script>
+      <script>scripts\scr_init_flare.gml</script>
+      <script>scripts\scr_init_spark.gml</script>
+    </scripts>
     <scripts name="Attacks">
       <script>scripts\scr_attack_blade.gml</script>
       <script>scripts\scr_attack_hammer.gml</script>
@@ -219,7 +238,6 @@
     <scripts name="Turret States">
       <script>scripts\scr_turret_follow_state.gml</script>
     </scripts>
-    <script>scripts\scr_apply_gem_effects.gml</script>
     <scripts name="Equipment">
       <script>scripts\scr_equip.gml</script>
       <script>scripts\scr_get_weapon.gml</script>
@@ -228,7 +246,10 @@
       <script>scripts\scr_get_gem.gml</script>
       <script>scripts\scr_update_drop_tooltip.gml</script>
       <script>scripts\scr_activate_inv.gml</script>
+      <script>scripts\scr_activate_map.gml</script>
+      <script>scripts\scr_apply_gem_effects.gml</script>
     </scripts>
+    <script>scripts\scr_custom_properties.gml</script>
     <script>scripts\scr_load_map.gml</script>
   </scripts>
   <fonts name="fonts">

@@ -380,7 +380,6 @@ if (len &gt; 0) {
 // Move the player
 if (!tile_layer_find(666,x+hspd,y)) phy_position_x += hspd;
 if (!tile_layer_find(666,x,y+vspd)) phy_position_y += vspd;
-//phy_position_y += vspd;
 
 
 
