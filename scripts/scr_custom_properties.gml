@@ -7,6 +7,6 @@ switch argument0 {
         Chest.level = ds_map_find_value( argument1, "level" );
         break;
     default:
-        show_debug_message("No match");
+        //show_debug_message("No match");
         break;
 }

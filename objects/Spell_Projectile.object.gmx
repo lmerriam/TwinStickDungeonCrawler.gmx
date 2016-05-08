@@ -81,8 +81,7 @@ phy_position_y += lengthdir_y(len,dir);
             <kind>1</kind>
             <string>/// Damage all life forms
 event_inherited();
-show_debug_message(other.id);
-show_debug_message(creator);
+
 if (other.id != creator) { //Make sure the damage object doesn't damage the player
     other.hp -= Player.spell_damage;
     scr_knockback(self, other, Player.spell_knockback);

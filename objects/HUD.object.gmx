@@ -171,6 +171,11 @@ if (global.cast_mode) {
         with(View) {
             event_perform(ev_keypress,ord('I'));
         }
+    
+    } else if (scr_mouse_over_ui(minimap_window_x,minimap_window_y,minimap_window_x+minimap_width,minimap_window_y+minimap_height)) {
+        with(View) {
+            event_perform(ev_keypress,ord('M'));
+        }
         
     // Detect pickup button click
     } else if (nearest_drop != noone and scr_mouse_over_ui(nearest_button_x1,nearest_button_y1,nearest_button_x2,nearest_button_y2)) {

@@ -57,7 +57,6 @@ buffs = ds_map_create();
 
 if (creator == Player.id) {
     other.hp -= damage;
-    show_debug_message(knockback);
     scr_knockback(self, other, knockback);
     
     // Blood particles

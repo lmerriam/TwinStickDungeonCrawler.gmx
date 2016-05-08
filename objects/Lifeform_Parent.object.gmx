@@ -109,9 +109,11 @@ if (hp &lt;= 0) {
     instance_destroy();
 }
 
-if (scr_alarm_running(checking_collisions) and tile_layer_find(666,phy_position_x,phy_position_y)) {
-    phy_position_x = phy_position_xprevious;
-    phy_position_y = phy_position_yprevious;
+if (scr_tile_collision(x + phy_speed_x,y)) {
+    phy_speed_x = 0;
+}
+if (scr_tile_collision(x,y + phy_speed_y)) {
+    phy_speed_y = 0;
 }
 
 /// Effects
