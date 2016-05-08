@@ -88,7 +88,7 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
                     //object.y = object_y + ( object.sprite_yoffset);
                     object.x = object_x;
                     object.y = object_y;
-                    scr_custom_properties(object.object_index,object_properties);
+                    if (object_properties != undefined) scr_custom_properties(object.object_index,object_properties);
                 }
             }
             ds_list_destroy(lst_objects);

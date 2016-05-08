@@ -29,6 +29,7 @@
 phy_fixed_rotation = true;
 freeze_slow = 0;
 effects = ds_map_create();
+checking_collisions = false;
 </string>
           </argument>
         </arguments>
@@ -108,7 +109,7 @@ if (hp &lt;= 0) {
     instance_destroy();
 }
 
-if (tile_layer_find(666,phy_position_x,phy_position_y)) {
+if (scr_alarm_running(checking_collisions) and tile_layer_find(666,phy_position_x,phy_position_y)) {
     phy_position_x = phy_position_xprevious;
     phy_position_y = phy_position_yprevious;
 }

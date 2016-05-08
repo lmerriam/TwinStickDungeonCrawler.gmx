@@ -55,9 +55,9 @@ draw_set_font(PixelSmall);
 
 // Init cast mode
 global.cast_mode = false;
-cast_btn_width = 64;
+cast_btn_width = 96;
 cast_btn_x1 = window_width - cast_btn_width - windowpadding;
-cast_btn_y1 = window_height/2;
+cast_btn_y1 = window_height - windowpadding - cast_btn_width;
 cast_btn_x2 = cast_btn_x1 + cast_btn_width;
 cast_btn_y2 = cast_btn_y1 + cast_btn_width;
 
@@ -271,7 +271,7 @@ if (global.cast_mode) {
     draw_surface_stretched(minimap,minimap_window_x,minimap_window_y,minimap_width,minimap_height);
     draw_rectangle_colour(minimap_window_x, minimap_window_y, minimap_window_x+minimap_width, minimap_window_y+minimap_height, c_black, c_black, c_black, c_black, true);
     draw_sprite_ext(spr_player_arrow,0,(minimap_window_x + (minimap_width/2)),(minimap_window_y + (minimap_height/2)),1,1,global.mousedir,c_white,1);
-    
+
     // Draw menu button
     draw_sprite(spr_menu_button,0,menu_btn_x1,menu_btn_y1);
     
@@ -318,17 +318,20 @@ if (global.cast_mode) {
           <argument>
             <kind>1</kind>
             <string>/// Draw the minimap surface
+var sprw = sprite_get_width(global.current_map);
+var sprh = sprite_get_height(global.current_map);
 
-if (!surface_exists(minimap)) {
-    minimap = surface_create(view_wview[1], view_hview[1]);
-    
+if (surface_exists(minimap)) {
+
     surface_set_target(minimap);
     
-    if (!view_visible[1]) view_visible[1] = true;
+    draw_clear(c_black);
+    draw_sprite_part(global.current_map,0,Player.x/4-100,Player.y/4-100,200,200,0,0);
     
-    view_surface_id[1] = minimap;
-
     surface_reset_target();
+    
+} else {
+    minimap = surface_create(200,200);
 }
 </string>
           </argument>

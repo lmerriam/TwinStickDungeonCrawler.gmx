@@ -10,4 +10,5 @@ var yforce = lengthdir_y(force, dir);
 
 with (obj2) {
     physics_apply_impulse(x, y, xforce, yforce);
+    checking_collisions = scr_sec_from_now(1);
 }
