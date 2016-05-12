@@ -160,9 +160,11 @@ if (global.cast_mode) {
     script_execute(spell);
     global.cast_mode = false;
     global.timescale = 1;
+    //Player.spell_timer = scr_sec_from_now(Player.spell_cd);
+    Player.stamina -= scr_get_spell().fatigue;
 } else {
     // Detect click on cast mode butn
-    if (scr_mouse_over_ui(cast_btn_x1,cast_btn_y1,cast_btn_x2,cast_btn_y2) and Player.alarm[1] &lt;= 0 and Player.stamina &gt;= scr_get_spell().fatigue) {
+    if (scr_mouse_over_ui(cast_btn_x1,cast_btn_y1,cast_btn_x2,cast_btn_y2) and scr_alarm_passed(Player.spell_timer) and Player.stamina &gt;= scr_get_spell().fatigue) {
         global.cast_mode = true;
         global.timescale = .1;
         
@@ -263,6 +265,9 @@ if (global.cast_mode) {
     draw_set_alpha(.1);
     draw_rectangle_colour(0,0,global.window_width,global.window_height,c_fuchsia,c_fuchsia,c_fuchsia,c_fuchsia,false);
     draw_set_alpha(1);
+    draw_set_halign(fa_center);
+    draw_text(window_width/2,window_height*.75,scr_get_spell().tooltip);
+    draw_set_halign(fa_left);
 } else {
     // Draw nearest drop tooltip
     if (nearest_drop_in_range) {

@@ -132,6 +132,7 @@
     <sprite>sprites\spr_hammer</sprite>
     <sprite>sprites\spr_hammer_slash</sprite>
     <sprite>sprites\spr_barrel</sprite>
+    <sprite>sprites\sprite67</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_grass</background>
