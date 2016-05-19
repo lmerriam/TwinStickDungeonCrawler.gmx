@@ -8,7 +8,7 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="7" enumb="4">
+    <event eventtype="3" enumb="1">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,8 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Deactivate self
-instance_deactivate_object(id);
+            <string>/// Get UI click
+
+mouse_over_ui = false;
+
+for (i = 0; i &lt; ds_list_size(buttons); i++ ) {
+    var btn = buttons[| i];
+    if scr_check_btn(btn) mouse_over_ui = true;
+}
 </string>
           </argument>
         </arguments>
@@ -49,10 +55,11 @@ instance_deactivate_object(id);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Draw background
-draw_set_color(c_gray);
-draw_rectangle(0,0,global.window_width,global.window_height,false);
-draw_set_color(c_white);
+            <string>/// Draw buttons
+for (i = 0; i &lt; ds_list_size(buttons); i++) {
+    var btn = buttons[| i];
+    if (btn[4] != noone) scr_draw_btn(btn);
+}
 </string>
           </argument>
         </arguments>

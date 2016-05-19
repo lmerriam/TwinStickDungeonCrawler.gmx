@@ -190,6 +190,7 @@
       <script>scripts\scr_compare_to_equipped.gml</script>
       <script>scripts\scr_send_to_inv.gml</script>
       <script>scripts\scr_mouse_over_ui.gml</script>
+      <script>scripts\scr_check_btn.gml</script>
       <script>scripts\scr_mouse_over_inv.gml</script>
       <script>scripts\scr_drop_item.gml</script>
       <script>scripts\scr_draw_inv_slot.gml</script>
@@ -253,6 +254,7 @@
     </scripts>
     <script>scripts\scr_custom_properties.gml</script>
     <script>scripts\scr_load_map.gml</script>
+    <script>scripts\scr_draw_btn.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\PixelSmall</font>

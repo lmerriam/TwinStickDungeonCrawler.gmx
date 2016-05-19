@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>-1</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>Menu_Parent</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -56,38 +56,49 @@ draw_set_font(PixelSmall);
 // Init cast mode
 global.cast_mode = false;
 cast_btn_width = 96;
-cast_btn_x1 = window_width - cast_btn_width - windowpadding;
-cast_btn_y1 = window_height - windowpadding - cast_btn_width;
-cast_btn_x2 = cast_btn_x1 + cast_btn_width;
-cast_btn_y2 = cast_btn_y1 + cast_btn_width;
+cast_btn[0] = window_width - cast_btn_width - windowpadding;
+cast_btn[1] = window_height - windowpadding - cast_btn_width;
+cast_btn[2] = cast_btn_width;
+cast_btn[3] = cast_btn_width;
+cast_btn[4] = spr_menu_button;
 
 // Init minimap
+minimap = -1;
 minimap_width = window_height/5;
 minimap_height = minimap_width;
 minimap_window = 500;
 minimap_window_x = window_width - minimap_width - windowpadding;
 minimap_window_y = windowpadding;
-minimap = -1;
+minimap_btn[0] = window_width - cast_btn_width - windowpadding;
+minimap_btn[1] = window_height - windowpadding - cast_btn_width;
+minimap_btn[2] = minimap_width;
+minimap_btn[3] = minimap_height;
+minimap_btn[4] = noone;
 
 // Init menu button
 var width = .1 * window_width;
 var height = width;
 menu_btn_origin_x = windowpadding + width/2;
 menu_btn_origin_y = windowpadding + height/2;
-menu_btn_x1 = windowpadding;
-menu_btn_x2 = menu_btn_x1+width;
-menu_btn_y1 = windowpadding;
-menu_btn_y2 = menu_btn_y1 + height;
+menu_btn[0] = windowpadding;
+menu_btn[1] = windowpadding;
+menu_btn[2] = windowpadding+width;
+menu_btn[3] = windowpadding + height;
+menu_btn[4] = spr_menu_button;
 
 // Init nearest drop UI
 nearest_drop = noone;
 nearest_drop_in_range = false;
 nearest_button_height = 40;
 
-nearest_button_x1 = 0;
-nearest_button_x2 = 0;
-nearest_button_y1 = 0;
-nearest_button_y2 = 0;
+nearest_btn[0] = 0;
+nearest_btn[1] = 0;
+nearest_btn[2] = 0;
+nearest_btn[3] = 0;
+nearest_btn[4] = noone;
+
+buttons = ds_list_create();
+ds_list_add(buttons,cast_btn,menu_btn,nearest_btn);
 </string>
           </argument>
         </arguments>
@@ -261,6 +272,8 @@ if (surface_exists(minimap)) {
           <argument>
             <kind>1</kind>
             <string>/// Draw HUD elements
+event_inherited();
+
 if (global.cast_mode) {
     draw_set_alpha(.1);
     draw_rectangle_colour(0,0,global.window_width,global.window_height,c_fuchsia,c_fuchsia,c_fuchsia,c_fuchsia,false);
@@ -275,7 +288,7 @@ if (global.cast_mode) {
     }
     
     // Draw cast button
-    draw_sprite_stretched(spr_menu_button,0,cast_btn_x1,cast_btn_y1,cast_btn_width,cast_btn_width);
+    //draw_sprite_stretched(spr_menu_button,0,cast_btn_x1,cast_btn_y1,cast_btn_width,cast_btn_width);
     
     // Draw the minimap
     draw_surface_stretched(minimap,minimap_window_x,minimap_window_y,minimap_width,minimap_height);
@@ -283,10 +296,10 @@ if (global.cast_mode) {
     draw_sprite_ext(spr_player_arrow,0,(minimap_window_x + (minimap_width/2)),(minimap_window_y + (minimap_height/2)),1,1,global.mousedir,c_white,1);
 
     // Draw menu button
-    draw_sprite(spr_menu_button,0,menu_btn_x1,menu_btn_y1);
+    //draw_sprite(spr_menu_button,0,menu_btn_x1,menu_btn_y1);
     
     // Draw the stats
-    draw_text(32,96,"LVL " + string(Player.level));
+    //draw_text(32,96,"LVL " + string(Player.level));
     
     // Draw health and stamina
     var hp = Player.hp;
