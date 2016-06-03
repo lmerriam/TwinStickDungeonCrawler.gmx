@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>/// Init map elements
+event_inherited();
 
 //map
 winw = global.window_width;

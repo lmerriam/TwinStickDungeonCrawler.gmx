@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>/// Init the inventory
+event_inherited();
 
 // Set up inv slots
 global.inventory_slots = ds_grid_create(6,6);

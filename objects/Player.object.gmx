@@ -266,6 +266,8 @@ var dir;
 attack_button = false;
 spell_button = false;
 
+if (!global.cast_mode) {
+
 if (os_type == os_android) {
     
     if (device_mouse_check_button(0,mb_left)) {
@@ -387,7 +389,7 @@ var weapon = scr_get_weapon();
 var spell = scr_get_spell();
 
 // Left Attack
-if (attack_button and scr_alarm_passed(attack_timer)) {
+if (attack_button and scr_alarm_passed(attack_timer) and !global.mouse_over_ui) {
     script_execute(weapon.script);
     attack_timer = scr_sec_from_now(weapon.cd);
 }
@@ -397,6 +399,8 @@ if (spell_button and stamina &gt;= spell.fatigue and scr_alarm_passed(spell_time
     script_execute(spell.script);
     stamina -= spell.fatigue;
     spell_timer = scr_sec_from_now(spell.cd);
+}
+
 }
 </string>
           </argument>

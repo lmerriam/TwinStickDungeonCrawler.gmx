@@ -25,8 +25,13 @@ nearest_button_y1 = y_offset+(line_height*line_count)+padding+16;
 nearest_button_y2 = nearest_button_y1 + nearest_button_height;
 nearest_button_x1 = x_offset;
 nearest_button_x2 = x_offset + width;
+// Updated dimensions
+nearest_btn[0] = x_offset;
+nearest_btn[1] = y_offset+(line_height*line_count)+padding+16;
+nearest_btn[2] = width;
 
 draw_rectangle_colour(nearest_button_x1,nearest_button_y1,nearest_button_x2,nearest_button_y2,c_green,c_green,c_green,c_green,false);
+//scr_draw_btn(nearest_btn);
 
 draw_set_halign(fa_center);
 draw_set_color(c_white);

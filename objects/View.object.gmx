@@ -212,6 +212,7 @@ if (global.screen_shake &gt; 4) {
 
 if (global.cast_mode) {
    if (screen_scale &lt; 1.2) screen_scale += .05;
+   global.mouse_over_ui = true;
 } else {
    if (screen_scale &gt; 1) screen_scale -= .05;
 }

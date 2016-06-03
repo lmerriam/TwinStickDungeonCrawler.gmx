@@ -48,6 +48,9 @@ show_debug_overlay(true);
           <argument>
             <kind>1</kind>
             <string>/// Init GUI elements
+event_inherited();
+
+// Window properties
 window_width = global.window_width;
 window_height = global.window_height;
 windowpadding = .01 * window_width;
@@ -69,8 +72,8 @@ minimap_height = minimap_width;
 minimap_window = 500;
 minimap_window_x = window_width - minimap_width - windowpadding;
 minimap_window_y = windowpadding;
-minimap_btn[0] = window_width - cast_btn_width - windowpadding;
-minimap_btn[1] = window_height - windowpadding - cast_btn_width;
+minimap_btn[0] = minimap_window_x;
+minimap_btn[1] = minimap_window_y;
 minimap_btn[2] = minimap_width;
 minimap_btn[3] = minimap_height;
 minimap_btn[4] = noone;
@@ -80,6 +83,8 @@ var width = .1 * window_width;
 var height = width;
 menu_btn_origin_x = windowpadding + width/2;
 menu_btn_origin_y = windowpadding + height/2;
+menu_btn_x2 = menu_btn_origin_x + width;
+
 menu_btn[0] = windowpadding;
 menu_btn[1] = windowpadding;
 menu_btn[2] = windowpadding+width;
@@ -94,10 +99,9 @@ nearest_button_height = 40;
 nearest_btn[0] = 0;
 nearest_btn[1] = 0;
 nearest_btn[2] = 0;
-nearest_btn[3] = 0;
+nearest_btn[3] = nearest_button_height;
 nearest_btn[4] = noone;
 
-buttons = ds_list_create();
 ds_list_add(buttons,cast_btn,menu_btn,nearest_btn);
 </string>
           </argument>
@@ -174,24 +178,21 @@ if (global.cast_mode) {
     //Player.spell_timer = scr_sec_from_now(Player.spell_cd);
     Player.stamina -= scr_get_spell().fatigue;
 } else {
-    // Detect click on cast mode butn
-    if (scr_mouse_over_ui(cast_btn_x1,cast_btn_y1,cast_btn_x2,cast_btn_y2) and scr_alarm_passed(Player.spell_timer) and Player.stamina &gt;= scr_get_spell().fatigue) {
+    if (scr_check_btn(cast_btn)) {
         global.cast_mode = true;
         global.timescale = .1;
-        
-    // Detect click on menu btn
-    } else if (xx &gt; menu_btn_x1 and xx &lt; menu_btn_x2 and yy &gt; menu_btn_y1 and yy &lt; menu_btn_y2) {
+    } else if (scr_check_btn(menu_btn)) {
         with(View) {
             event_perform(ev_keypress,ord('I'));
         }
     
-    } else if (scr_mouse_over_ui(minimap_window_x,minimap_window_y,minimap_window_x+minimap_width,minimap_window_y+minimap_height)) {
+    } else if (scr_check_btn(minimap_btn)) {
         with(View) {
             event_perform(ev_keypress,ord('M'));
         }
         
     // Detect pickup button click
-    } else if (nearest_drop != noone and scr_mouse_over_ui(nearest_button_x1,nearest_button_y1,nearest_button_x2,nearest_button_y2)) {
+    } else if (nearest_drop != noone and scr_check_btn(nearest_btn)) {
         scr_send_to_inv(nearest_drop);
     }
 }
