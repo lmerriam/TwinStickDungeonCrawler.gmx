@@ -57,7 +57,7 @@ targety = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Loot and XP
+            <string>/// Loot and XP and 
 event_inherited();
 
 for (var i = 0; i &lt;= xp; i++) {

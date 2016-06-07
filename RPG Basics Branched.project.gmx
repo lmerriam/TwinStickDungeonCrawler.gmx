@@ -134,6 +134,7 @@
     <sprite>sprites\spr_barrel</sprite>
     <sprite>sprites\sprite67</sprite>
     <sprite>sprites\spr_square</sprite>
+    <sprite>sprites\spr_stronghold</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_grass</background>
@@ -271,10 +272,13 @@
     <object>objects\Dialog_Box</object>
     <object>objects\Particles</object>
     <object>objects\Spawn_Button</object>
-    <object>objects\Enemy_Spawner</object>
     <object>objects\Lifeform_Parent</object>
     <object>objects\Powerup_Parent</object>
     <object>objects\Location</object>
+    <object>objects\Time</object>
+    <object>objects\Announcement</object>
+    <object>objects\Spawner_Parent</object>
+    <object>objects\Enemy_Spawner</object>
     <objects name="Damage">
       <object>objects\Damage_Parent</object>
       <object>objects\Attack_Radius</object>
@@ -347,8 +351,9 @@
       <object>objects\Cast_Mode</object>
       <object>objects\Map</object>
     </objects>
-    <object>objects\Announcement</object>
-    <object>objects\Time</object>
+    <objects name="Strongholds">
+      <object>objects\Stronghold_Parent</object>
+    </objects>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_spell_blink</timeline>
