@@ -29,7 +29,7 @@
 display_set_gui_size(view_wport[0],view_hport[0]);
 global.window_width = view_wport[0];
 global.window_height = view_hport[0];
-surface_resize(application_surface, view_wview[0], view_hview[0]);
+//surface_resize(application_surface, view_wview[0], view_hview[0]);
 //application_surface_enable(false);
 // Set GUI size
 

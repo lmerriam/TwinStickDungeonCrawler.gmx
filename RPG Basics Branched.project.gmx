@@ -135,6 +135,7 @@
     <sprite>sprites\sprite67</sprite>
     <sprite>sprites\spr_square</sprite>
     <sprite>sprites\spr_stronghold</sprite>
+    <sprite>sprites\spr_cottage</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_grass</background>
@@ -353,6 +354,7 @@
     </objects>
     <objects name="Strongholds">
       <object>objects\Stronghold_Parent</object>
+      <object>objects\Outpost_Parent</object>
     </objects>
   </objects>
   <timelines name="timelines">
