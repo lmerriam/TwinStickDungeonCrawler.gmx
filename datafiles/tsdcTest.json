@@ -137,13 +137,13 @@
                 {
                  "height":0,
                  "id":48,
-                 "name":"Stronghold_Parent",
+                 "name":"Stronghold_1",
                  "rotation":0,
-                 "type":"Stronghold_Parent",
+                 "type":"Stronghold_1",
                  "visible":true,
                  "width":0,
-                 "x":1235.66666666667,
-                 "y":1115.66666666667
+                 "x":1327.66666666667,
+                 "y":1297.66666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -157,25 +157,6 @@
          "height":200,
          "name":"Spawners",
          "objects":[
-                {
-                 "height":0,
-                 "id":20,
-                 "name":"",
-                 "properties":
-                    {
-                     "level":5
-                    },
-                 "propertytypes":
-                    {
-                     "level":"int"
-                    },
-                 "rotation":0,
-                 "type":"Enemy_Spawner",
-                 "visible":true,
-                 "width":0,
-                 "x":2313.33333333333,
-                 "y":1460
-                }, 
                 {
                  "height":0,
                  "id":21,
@@ -219,17 +200,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":29,
-                 "name":"",
-                 "rotation":0,
-                 "type":"Enemy_Spawner",
-                 "visible":true,
-                 "width":0,
-                 "x":1578,
-                 "y":1330
-                }, 
-                {
-                 "height":0,
                  "id":36,
                  "name":"",
                  "rotation":0,
@@ -238,39 +208,6 @@
                  "width":0,
                  "x":1232.33333333333,
                  "y":1487
-                }, 
-                {
-                 "height":0,
-                 "id":41,
-                 "name":"",
-                 "rotation":0,
-                 "type":"Enemy_Spawner",
-                 "visible":true,
-                 "width":0,
-                 "x":1445,
-                 "y":1605
-                }, 
-                {
-                 "height":0,
-                 "id":45,
-                 "name":"",
-                 "rotation":0,
-                 "type":"Enemy_Spawner",
-                 "visible":true,
-                 "width":0,
-                 "x":1630,
-                 "y":1507
-                }, 
-                {
-                 "height":0,
-                 "id":46,
-                 "name":"",
-                 "rotation":0,
-                 "type":"Enemy_Spawner",
-                 "visible":true,
-                 "width":0,
-                 "x":1630,
-                 "y":1506
                 }],
          "opacity":1,
          "type":"objectgroup",
