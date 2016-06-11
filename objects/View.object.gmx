@@ -114,6 +114,11 @@ ds_list_add(map, Map);
 cast_mode = ds_list_create();
 ds_list_add(cast_mode, Cast_Mode);
 
+instance_create(-999,-999,Store)
+store = ds_list_create();
+ds_list_add(store, Store);
+store_open = false;
+
 // Initial
 menu = noone;
 </string>
@@ -255,6 +260,42 @@ if (global.cast_mode) {
 if (prev_screen_scale != screen_scale) scr_scale_view(screen_scale*320,screen_scale*180);
 
 prev_screen_scale = screen_scale;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="86">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Open inventory
+store_open = scr_toggle(store_open);
+
+// If the menu open variable is now on, send the menu object to the deactivation handler
+if (store_open) {
+    // Make sure we know we're in a menu
+    in_menu = true;
+    scr_handle_deactivation(store);
+    scr_activate_inv();
+} else {
+    // Make sure we know we're not in a menu
+    in_menu = false;
+    scr_handle_deactivation(noone);
+}
 </string>
           </argument>
         </arguments>

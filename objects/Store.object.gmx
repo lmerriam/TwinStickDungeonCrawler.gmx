@@ -28,12 +28,7 @@
             <string>/// Init the inventory
 event_inherited();
 
-// Set up inv slots
-global.inventory_slots = ds_grid_create(5,5);
-ds_grid_clear(global.inventory_slots,noone);
-
 // Init the drag item
-global.drag_item = noone;
 selected_item = noone;
 current_inventory = noone;
 current_item = noone;
@@ -54,20 +49,18 @@ var inventory_offset_top = (view_hport[0] - slot_width * ds_grid_height(global.i
 // Get the inventory coordinates
 inventory_coords = scr_init_inventory(global.inventory_slots, slot_width, inventory_offset_left, inventory_offset_top);
 
-// Set up the equipment slots
-global.equipment_slots = ds_grid_create(1,4);
-ds_grid_clear(global.equipment_slots,noone);
-scr_equip(instance_create(0,0,Bomb));
-scr_equip(instance_create(0,0,Scroll_Projectile));
-scr_equip(instance_create(0,0,Armor_Heavy));
-scr_equip(instance_create(0,0,Gem_Burn));
-
 // Set up the equipment slot offsets
 var equipment_offset_left = inventory_coords[2] + equipment_left_padding;
 var equipment_offset_top = inventory_coords[1];
 
 // Get the equipment slot coordinates
 equipment_coords = scr_init_inventory(global.equipment_slots, slot_width, equipment_offset_left, equipment_offset_top);
+
+// Set up store slots
+store_slots = ds_grid_create(2,6);
+ds_grid_clear(store_slots,noone);
+
+store_coords = scr_init_inventory(store_slots, slot_width, 32, 32);
 </string>
           </argument>
         </arguments>
@@ -131,30 +124,6 @@ eqp_btn_y2 = eqp_btn_y1 + 32;
         </arguments>
       </action>
     </event>
-    <event eventtype="1" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Destroy DS
-if (ds_exists(slots,ds_type_grid)) ds_grid_destroy(slots);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -175,33 +144,6 @@ if (ds_exists(slots,ds_type_grid)) ds_grid_destroy(slots);
             <string>/// Detect the Inventory slot the mouse is over and store it
 var mousex = device_mouse_x_to_gui(0);
 var mousey = device_mouse_y_to_gui(0);
-
-// TODO: figure out why the fuck div seems to be rounding up so I can remove these -3s
-if (scr_mouse_over_inv()) {
-    current_inventory = global.inventory_slots;
-    current_slot_x = (mousex - inventory_coords[0]-3) div slot_width;
-    current_slot_y = (mousey - inventory_coords[1]-3) div slot_width;
-    if(current_slot_x == 6) show_message(string(mousex - inventory_coords[0]) + " " + string(slot_width));
-    current_item = global.inventory_slots[# current_slot_x,current_slot_y];    
-} else if (scr_mouse_over_ui(equipment_coords[0],equipment_coords[1],equipment_coords[2],equipment_coords[3])) {
-    current_inventory = global.equipment_slots;
-    current_slot_x = (mousex - equipment_coords[0]-3) div slot_width;
-    current_slot_y = (mousey - equipment_coords[1]-3) div slot_width;
-    current_item = global.equipment_slots[# current_slot_x,current_slot_y];
-} else {
-    current_inventory = noone;
-    current_slot_x = 0;
-    current_slot_y = 0;
-    current_item = noone;
-}
-
-if (selected_item != noone) {
-    inv_tooltip_height = array_height_2d(selected_item.text)*inv_tooltip_line_height+inv_tooltip_padding*2;
-    if (eqp_btn) {
-        eqp_btn_y1 = inv_tooltip_y + inv_tooltip_height + 16;
-        eqp_btn_y2 = eqp_btn_y1 + 32;
-    }
-}
 </string>
           </argument>
         </arguments>
@@ -286,6 +228,10 @@ scr_draw_inventory(global.inventory_slots, slot_width, inventory_coords[0], inve
 // Draw the equipment slots
 scr_draw_inventory(global.equipment_slots, slot_width, equipment_coords[0], equipment_coords[1]);
 
+// Draw the store slots
+scr_draw_inventory(store_slots, slot_width, store_coords[0], store_coords[1]);
+
+// Draw selected item stats
 if (selected_item != noone) {
     scr_draw_inv_tooltip(selected_item.text,32,64,200);
 }

@@ -348,6 +348,7 @@
     <objects name="Menus">
       <object>objects\Menu_Parent</object>
       <object>objects\Inventory</object>
+      <object>objects\Store</object>
       <object>objects\Pause_Menu</object>
       <object>objects\Cast_Mode</object>
       <object>objects\Map</object>

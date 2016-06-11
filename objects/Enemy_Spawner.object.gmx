@@ -55,12 +55,9 @@ enemy_object = noone;
             <kind>1</kind>
             <string>/// Spawn instances
 
-repeat(quantity) ds_list_add(spawns, enemy_object);
-
-var size = ds_list_size(spawns);
-for (var i = 0; i &lt; size; i += 1)
+for (var i = 0; i &lt; quantity; i += 1)
 {
-    scr_find_spawn_point(x,y,64,spawns[| i],level);
+    scr_find_spawn_point(x,y,64,enemy_object,level);
 }
 
 instance_destroy();
