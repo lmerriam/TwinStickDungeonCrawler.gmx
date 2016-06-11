@@ -279,7 +279,6 @@
     <object>objects\Time</object>
     <object>objects\Announcement</object>
     <object>objects\Spawner_Parent</object>
-    <object>objects\Enemy_Spawner</object>
     <objects name="Damage">
       <object>objects\Damage_Parent</object>
       <object>objects\Attack_Radius</object>
@@ -318,6 +317,7 @@
       <object>objects\Attack_Parent</object>
     </objects>
     <objects name="Enemies">
+      <object>objects\Enemy_Spawner</object>
       <object>objects\Enemy_Parent</object>
       <object>objects\Slime</object>
       <object>objects\Slime_2</object>
