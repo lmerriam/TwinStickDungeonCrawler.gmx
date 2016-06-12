@@ -358,6 +358,9 @@
       <object>objects\Stronghold_Parent</object>
       <object>objects\Outpost_Parent</object>
     </objects>
+    <objects name="NPC">
+      <object>objects\NPC_Vendor</object>
+    </objects>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_spell_blink</timeline>

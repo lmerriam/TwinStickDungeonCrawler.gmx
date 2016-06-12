@@ -36,17 +36,6 @@ global.window_height = view_hport[0];
 screen_scale = 1;
 prev_screen_scale = screen_scale;
 
-
-// We do not start in a menu
-in_menu = false;
-
-// Set the various menus to not open (TODO: should these vars be in the respective menus?
-// ...cont Then we wouldn't have to pass them to the toggle_menu script separately)
-pause_menu_open = false;
-map_open = false;
-inv_open = false;
-menu_open = false;
-
 instance_create(-999,-999,Inventory);
 instance_create(-999,-999,Map);
 instance_deactivate_object(Menu_Parent);
@@ -117,10 +106,9 @@ ds_list_add(cast_mode, Cast_Mode);
 instance_create(-999,-999,Store)
 store = ds_list_create();
 ds_list_add(store, Store);
-store_open = false;
 
 // Initial
-menu = noone;
+current_menu = noone;
 </string>
           </argument>
         </arguments>
@@ -144,8 +132,8 @@ menu = noone;
           <argument>
             <kind>1</kind>
             <string>/// Handle instance activation
-if (!in_menu) {
-    scr_handle_deactivation(noone);
+if (current_menu = noone) {
+    scr_handle_deactivation();
     with (Drop_Parent) scr_update_drop_tooltip(object_index);
 }
 alarm[1] = .5 * room_speed;
@@ -282,20 +270,9 @@ prev_screen_scale = screen_scale;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Open inventory
-store_open = scr_toggle(store_open);
+            <string>/// Open store
 
-// If the menu open variable is now on, send the menu object to the deactivation handler
-if (store_open) {
-    // Make sure we know we're in a menu
-    in_menu = true;
-    scr_handle_deactivation(store);
-    scr_activate_inv();
-} else {
-    // Make sure we know we're not in a menu
-    in_menu = false;
-    scr_handle_deactivation(noone);
-}
+scr_toggle_menu(store);
 </string>
           </argument>
         </arguments>
@@ -319,19 +296,8 @@ if (store_open) {
           <argument>
             <kind>1</kind>
             <string>/// Show map
-map_open = scr_toggle(map_open);
 
-// If the menu open variable is now on, send the menu object to the deactivation handler
-if (map_open) {
-    // Make sure we know we're in a menu
-    in_menu = true;
-    scr_handle_deactivation(map);
-    scr_activate_map();
-} else {
-    // Make sure we know we're not in a menu
-    in_menu = false;
-    scr_handle_deactivation(noone);
-}
+scr_toggle_menu(map);
 </string>
           </argument>
         </arguments>
@@ -355,19 +321,8 @@ if (map_open) {
           <argument>
             <kind>1</kind>
             <string>/// Open inventory
-inv_open = scr_toggle(inv_open);
 
-// If the menu open variable is now on, send the menu object to the deactivation handler
-if (inv_open) {
-    // Make sure we know we're in a menu
-    in_menu = true;
-    scr_handle_deactivation(inventory);
-    scr_activate_inv();
-} else {
-    // Make sure we know we're not in a menu
-    in_menu = false;
-    scr_handle_deactivation(noone);
-}
+scr_toggle_menu(inventory);
 </string>
           </argument>
         </arguments>

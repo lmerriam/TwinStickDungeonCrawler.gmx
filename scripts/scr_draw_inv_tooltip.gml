@@ -1,4 +1,4 @@
-///scr_draw_equipment_comparison(text,xx,yy,width)
+///scr_draw_inv_tooltip(text,xx,yy,width)
 var text = argument[0];
 var xx = argument[1];
 var yy = argument[2];
