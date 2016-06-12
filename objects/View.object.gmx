@@ -91,24 +91,23 @@ alarm[1] = 1;
           <argument>
             <kind>1</kind>
             <string>/// Init menus
-hud = ds_list_create();
-ds_list_add(hud,HUD);
+instance_create(-999,-999,Menu_Navigation);
 
-inventory = ds_list_create();
-ds_list_add(inventory, Inventory);
+global.menu_inventory = ds_list_create();
+ds_list_add(global.menu_inventory, Inventory, Menu_Navigation);
 
-map = ds_list_create();
-ds_list_add(map, Map);
+global.menu_map = ds_list_create();
+ds_list_add(global.menu_map, Map, Menu_Navigation);
 
-cast_mode = ds_list_create();
-ds_list_add(cast_mode, Cast_Mode);
+global.menu_cast_mode = ds_list_create();
+ds_list_add(global.menu_cast_mode, Cast_Mode);
 
-instance_create(-999,-999,Store)
-store = ds_list_create();
-ds_list_add(store, Store);
+instance_create(-999,-999,Store);
+global.menu_store = ds_list_create();
+ds_list_add(global.menu_store, Store);
 
 // Initial
-current_menu = noone;
+global.current_menu = noone;
 </string>
           </argument>
         </arguments>
@@ -132,7 +131,7 @@ current_menu = noone;
           <argument>
             <kind>1</kind>
             <string>/// Handle instance activation
-if (current_menu = noone) {
+if (global.current_menu = noone) {
     scr_handle_deactivation();
     with (Drop_Parent) scr_update_drop_tooltip(object_index);
 }
@@ -272,7 +271,7 @@ prev_screen_scale = screen_scale;
             <kind>1</kind>
             <string>/// Open store
 
-scr_toggle_menu(store);
+scr_toggle_menu(global.menu_store);
 </string>
           </argument>
         </arguments>
@@ -297,7 +296,7 @@ scr_toggle_menu(store);
             <kind>1</kind>
             <string>/// Show map
 
-scr_toggle_menu(map);
+scr_toggle_menu(global.menu_map);
 </string>
           </argument>
         </arguments>
@@ -322,7 +321,7 @@ scr_toggle_menu(map);
             <kind>1</kind>
             <string>/// Open inventory
 
-scr_toggle_menu(inventory);
+scr_toggle_menu(global.menu_inventory);
 </string>
           </argument>
         </arguments>
