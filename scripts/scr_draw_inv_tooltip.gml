@@ -1,4 +1,4 @@
-///scr_draw_equipment_comparison(text,xx,yy,width)
+///scr_draw_inv_tooltip(text,xx,yy,width)
 var text = argument[0];
 var xx = argument[1];
 var yy = argument[2];
@@ -6,12 +6,14 @@ var width = argument[3];
 
 var line_count = array_height_2d(text);
 
-var padding = 3;
+var padding = inv_tooltip_padding;
 
 // Draw tooltip box
 draw_set_color(c_black);
 draw_set_alpha(.5);
-draw_rectangle( inv_tooltip_x, inv_tooltip_y, inv_tooltip_x+inv_tooltip_width, inv_tooltip_y+inv_tooltip_height, false);
+draw_roundrect_ext( inv_tooltip_x, inv_tooltip_y, inv_tooltip_x+inv_tooltip_width, inv_tooltip_y+inv_tooltip_height, 2, 2, false);
+draw_set_color(c_yellow);
+draw_roundrect_ext( inv_tooltip_x, inv_tooltip_y, inv_tooltip_x+inv_tooltip_width, inv_tooltip_y+inv_tooltip_height, 2, 2, true);
 
 draw_set_color(c_white);
 draw_set_alpha(1);
@@ -25,11 +27,17 @@ for (i=0;i<line_count;i++) {
     draw_text_transformed(xcur, ycur, finaltext, 1, 1, 0);
 }
 
+draw_set_color(c_white);
+
 // Draw de eqp button
 if (eqp_btn) {
-    draw_rectangle_colour(eqp_btn_x1,eqp_btn_y1,eqp_btn_x2,eqp_btn_y2,c_green,c_green,c_green,c_green,false);
+    draw_set_color(c_black);
+    draw_roundrect(eqp_btn_x1,eqp_btn_y1,eqp_btn_x2,eqp_btn_y2+4,false);
+    draw_set_color(c_yellow);
+    draw_roundrect(eqp_btn_x1,eqp_btn_y1,eqp_btn_x2,eqp_btn_y2,false);
     draw_set_halign(fa_center);
-    draw_text(eqp_btn_x1 + (eqp_btn_x2-eqp_btn_x1)/2,eqp_btn_y1+10,"Equip");
+    draw_set_color(c_black);
+    draw_text(eqp_btn_x1 + (eqp_btn_x2-eqp_btn_x1)/2,eqp_btn_y1+10,"EQUIP");
 }
 
 // Reset stuff

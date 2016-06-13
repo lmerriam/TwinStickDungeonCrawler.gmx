@@ -257,8 +257,12 @@
     </scripts>
     <script>scripts\scr_custom_properties.gml</script>
     <script>scripts\scr_load_map.gml</script>
-    <script>scripts\scr_draw_btn.gml</script>
+    <script>scripts\scr_draw_btn_sprite.gml</script>
+    <script>scripts\scr_draw_tab_btn.gml</script>
     <script>scripts\scr_move_player.gml</script>
+    <script>scripts\scr_draw_btn.gml</script>
+    <script>scripts\scr_map_x.gml</script>
+    <script>scripts\scr_map_y.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\PixelSmall</font>
@@ -279,7 +283,6 @@
     <object>objects\Time</object>
     <object>objects\Announcement</object>
     <object>objects\Spawner_Parent</object>
-    <object>objects\Enemy_Spawner</object>
     <objects name="Damage">
       <object>objects\Damage_Parent</object>
       <object>objects\Attack_Radius</object>
@@ -318,6 +321,7 @@
       <object>objects\Attack_Parent</object>
     </objects>
     <objects name="Enemies">
+      <object>objects\Enemy_Spawner</object>
       <object>objects\Enemy_Parent</object>
       <object>objects\Slime</object>
       <object>objects\Slime_2</object>
@@ -352,14 +356,12 @@
       <object>objects\Pause_Menu</object>
       <object>objects\Cast_Mode</object>
       <object>objects\Map</object>
+      <object>objects\Menu_Navigation</object>
     </objects>
     <objects name="Strongholds">
       <object>objects\Stronghold_1</object>
       <object>objects\Stronghold_Parent</object>
       <object>objects\Outpost_Parent</object>
-    </objects>
-    <objects name="NPCs">
-      <object>objects\NPC_Vendor</object>
     </objects>
   </objects>
   <timelines name="timelines">
@@ -372,6 +374,9 @@
     <room>rooms\gmare_test</room>
     <room>rooms\rm_demo</room>
   </rooms>
+  <constants number="1">
+    <constant name="TAB_BAR_HEIGHT">64</constant>
+  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>

@@ -28,19 +28,31 @@
             <string>/// Init map elements
 event_inherited();
 
-//map
-winw = global.window_width;
-winh = global.window_height;
+current_location = noone;
+
+// Map offsets
+map_offset_y = 68;
+map_offset_x = 2;
+// Map dimensions
+mapw = global.window_width;
+maph = global.window_height-70;
+// Map image sprite width
 sprw = sprite_get_width(global.current_map);
 sprh = sprite_get_height(global.current_map);
-ratiow = winw/sprw;
-ratioh = winh/sprh;
+// Ratio of map sprite dimensions to final map area dimensions
+ratiow = mapw/sprw;
+ratioh = maph/sprh;
 
-// Exit button
-close_btn_x1 = 0;
-close_btn_x2 = 32;
-close_btn_y1 = 0;
-close_btn_y2 = 32;
+// Choose which dimension to fit to, that is our final ratio
+if (ratioh &gt; ratiow) {
+    ratio = ratiow;
+} else {
+    ratio = ratioh;
+}
+
+// Get map sprite dimensions
+map_spr_w = sprw*ratio;
+map_spr_h = sprh*ratio;
 </string>
           </argument>
         </arguments>
@@ -64,17 +76,19 @@ close_btn_y2 = 32;
           <argument>
             <kind>1</kind>
             <string>/// Check location clicked
+current_location = noone;
+
 with(Location) {
     var x1 = map_x - 15;
     var x2 = map_x + 15;
     var y1 = map_y - 15;
     var y2 = map_y + 15;
     if (scr_mouse_over_ui(x1,y1,x2,y2)) {
-        show_debug_message(object_index);
         global.teleport_player_x = x;
         global.teleport_player_y = y;
         with (View) event_perform(ev_keypress,ord('M'));
-    } 
+        other.current_location = name;
+    }
 }
 </string>
           </argument>
@@ -99,25 +113,23 @@ with(Location) {
           <argument>
             <kind>1</kind>
             <string>/// Draw the map
-var maph, mapw, ratio;
+//var maph, mapw, ratio;
 
-if (ratioh &gt; ratiow) {
-    ratio = ratiow;
-} else {
-    ratio = ratioh;
-}
+// Draw the current map sprite
+draw_sprite_stretched(global.current_map,0,map_offset_x,map_offset_y,map_spr_w,map_spr_h);
 
-mapw = sprw*ratio;
-maph = sprh*ratio;
-
-
-draw_sprite_stretched(global.current_map,0,0,0,mapw,maph);
-
+// Draw the marker and set its map coordinates
 with(Location) {
-    map_x = x/(room_width/other.sprw)*ratio;
-    map_y = y/(room_height/other.sprh)*ratio;
+    map_x = scr_map_x(x);
+    map_y = scr_map_y(y);
     draw_sprite(sprite_index,0,map_x,map_y);
 }
+
+// Draw player position
+draw_sprite(spr_player_idle,0,scr_map_x(global.player_x),scr_map_y(global.player_y));
+
+// Draw the current location
+draw_text(32,32,current_location);
 </string>
           </argument>
         </arguments>

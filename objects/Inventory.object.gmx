@@ -42,14 +42,14 @@ current_slot_y = 0;
 eqp_btn = false;
 
 // Setup some layout stuff
-slot_width = 64 ;
-equipment_left_padding = 20;
+slot_width = 80;
+inv_margin = 20;
 
 // Set up the inventory offsets
 // Centering that shit
 // TODO: why the fuck can I not get global.window_width yet
 var inventory_offset_left = (view_wport[0] - slot_width * ds_grid_width(global.inventory_slots)) / 2;
-var inventory_offset_top = (view_hport[0] - slot_width * ds_grid_height(global.inventory_slots)) / 2;
+var inventory_offset_top = (view_hport[0] - slot_width * ds_grid_height(global.inventory_slots)) / 2 + 32;
 
 // Get the inventory coordinates
 inventory_coords = scr_init_inventory(global.inventory_slots, slot_width, inventory_offset_left, inventory_offset_top);
@@ -63,7 +63,7 @@ scr_equip(instance_create(0,0,Armor_Heavy));
 scr_equip(instance_create(0,0,Gem_Burn));
 
 // Set up the equipment slot offsets
-var equipment_offset_left = inventory_coords[2] + equipment_left_padding;
+var equipment_offset_left = inventory_coords[0] - slot_width - inv_margin;
 var equipment_offset_top = inventory_coords[1];
 
 // Get the equipment slot coordinates
@@ -88,43 +88,18 @@ equipment_coords = scr_init_inventory(global.equipment_slots, slot_width, equipm
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Set up the inventory close btn
-close_btn_x1 = 16;
-close_btn_y1 = 16;
-close_btn_x2 = 128;
-close_btn_y2 = 128;
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
             <string>/// Set up inventory tooltip and equip button
 inv_tooltip_width = 200;
-inv_tooltip_x = inventory_coords[0] - 16 - inv_tooltip_width; 
+inv_tooltip_x = inventory_coords[2] + 16; 
 inv_tooltip_y = inventory_coords[1];
-inv_tooltip_line_height = 20;
-inv_tooltip_padding = 3;
+inv_tooltip_line_height = 24;
+inv_tooltip_padding = 13;
 inv_tooltip_height = 0;
 
 eqp_btn_x1 = inv_tooltip_x;
 eqp_btn_x2 = eqp_btn_x1 + inv_tooltip_width;
 eqp_btn_y1 = 0;
-eqp_btn_y2 = eqp_btn_y1 + 32;
+eqp_btn_y2 = eqp_btn_y1 + 48;
 
 </string>
           </argument>
@@ -199,7 +174,7 @@ if (selected_item != noone) {
     inv_tooltip_height = array_height_2d(selected_item.text)*inv_tooltip_line_height+inv_tooltip_padding*2;
     if (eqp_btn) {
         eqp_btn_y1 = inv_tooltip_y + inv_tooltip_height + 16;
-        eqp_btn_y2 = eqp_btn_y1 + 32;
+        eqp_btn_y2 = eqp_btn_y1 + 48;
     }
 }
 </string>
@@ -230,10 +205,6 @@ if (selected_item != noone) {
 if (eqp_btn and scr_mouse_over_ui(eqp_btn_x1,eqp_btn_y1,eqp_btn_x2,eqp_btn_y2)) {
     global.inventory_slots[# selected_item_x,selected_item_y] = noone;
     scr_equip(selected_item);
-    
-// Check for close button
-} else if (scr_mouse_over_ui(close_btn_x1,close_btn_y1,close_btn_x2,close_btn_y2)) {
-    with (View) event_perform(ev_keypress,ord('I'));
 }
 
 
@@ -293,28 +264,6 @@ if (selected_item != noone) {
 // Reset the color and alpha
 draw_set_color(c_white);
 draw_set_alpha(1);
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Draw the close btn
-draw_sprite(spr_menu_button,0,close_btn_x1,close_btn_y1);
 </string>
           </argument>
         </arguments>
