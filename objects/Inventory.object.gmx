@@ -43,7 +43,7 @@ eqp_btn = false;
 
 // Setup some layout stuff
 slot_width = 64 ;
-equipment_left_padding = 20;
+inv_margin = 20;
 
 // Set up the inventory offsets
 // Centering that shit
@@ -63,7 +63,7 @@ scr_equip(instance_create(0,0,Armor_Heavy));
 scr_equip(instance_create(0,0,Gem_Burn));
 
 // Set up the equipment slot offsets
-var equipment_offset_left = inventory_coords[2] + equipment_left_padding;
+var equipment_offset_left = inventory_coords[0] - slot_width - inv_margin;
 var equipment_offset_top = inventory_coords[1];
 
 // Get the equipment slot coordinates
@@ -90,16 +90,16 @@ equipment_coords = scr_init_inventory(global.equipment_slots, slot_width, equipm
             <kind>1</kind>
             <string>/// Set up inventory tooltip and equip button
 inv_tooltip_width = 200;
-inv_tooltip_x = inventory_coords[0] - 16 - inv_tooltip_width; 
+inv_tooltip_x = inventory_coords[2] + 16; 
 inv_tooltip_y = inventory_coords[1];
-inv_tooltip_line_height = 20;
-inv_tooltip_padding = 3;
+inv_tooltip_line_height = 24;
+inv_tooltip_padding = 13;
 inv_tooltip_height = 0;
 
 eqp_btn_x1 = inv_tooltip_x;
 eqp_btn_x2 = eqp_btn_x1 + inv_tooltip_width;
 eqp_btn_y1 = 0;
-eqp_btn_y2 = eqp_btn_y1 + 32;
+eqp_btn_y2 = eqp_btn_y1 + 48;
 
 </string>
           </argument>
@@ -174,7 +174,7 @@ if (selected_item != noone) {
     inv_tooltip_height = array_height_2d(selected_item.text)*inv_tooltip_line_height+inv_tooltip_padding*2;
     if (eqp_btn) {
         eqp_btn_y1 = inv_tooltip_y + inv_tooltip_height + 16;
-        eqp_btn_y2 = eqp_btn_y1 + 32;
+        eqp_btn_y2 = eqp_btn_y1 + 48;
     }
 }
 </string>

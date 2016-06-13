@@ -257,9 +257,10 @@
     </scripts>
     <script>scripts\scr_custom_properties.gml</script>
     <script>scripts\scr_load_map.gml</script>
-    <script>scripts\scr_draw_btn.gml</script>
+    <script>scripts\scr_draw_btn_sprite.gml</script>
     <script>scripts\scr_draw_tab_btn.gml</script>
     <script>scripts\scr_move_player.gml</script>
+    <script>scripts\scr_draw_btn.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\PixelSmall</font>

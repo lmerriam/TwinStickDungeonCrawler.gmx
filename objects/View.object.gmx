@@ -91,22 +91,34 @@ alarm[1] = 1;
           <argument>
             <kind>1</kind>
             <string>/// Init menus
-instance_create(-999,-999,Menu_Navigation);
 
+// Inventory
 global.menu_inventory = ds_list_create();
-ds_list_add(global.menu_inventory, Inventory, Menu_Navigation);
+ds_list_add(global.menu_inventory, Menu_Navigation, Inventory);
 
+// Map
 global.menu_map = ds_list_create();
 ds_list_add(global.menu_map, Map, Menu_Navigation);
 
+// Cast mode
 global.menu_cast_mode = ds_list_create();
 ds_list_add(global.menu_cast_mode, Cast_Mode);
 
+// Store
 instance_create(-999,-999,Store);
 global.menu_store = ds_list_create();
 ds_list_add(global.menu_store, Store);
 
-// Initial
+// Character
+global.menu_character = ds_list_create();
+
+// Settings
+global.menu_settings = ds_list_create();
+
+// Create navigation submenu
+instance_create(-999,-999,Menu_Navigation);
+
+// Set initial current menu
 global.current_menu = noone;
 </string>
           </argument>
@@ -345,12 +357,12 @@ scr_toggle_menu(global.menu_inventory);
           <argument>
             <kind>1</kind>
             <string>/// Pause the game
-if (in_menu) {
-    scr_handle_deactivation(noone);
-    in_menu = false;
+if (global.current_menu != noone) {
+    global.current_menu = noone;
+    scr_handle_deactivation();
 } else {
-    in_menu = true;
-    scr_handle_deactivation(Pause_Menu);
+    global.current_menu = global.menu_settings;
+    scr_handle_deactivation();
 }
 </string>
           </argument>
