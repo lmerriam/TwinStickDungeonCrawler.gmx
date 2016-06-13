@@ -269,6 +269,10 @@ scr_get_input();
 
 var len;
 var dir;
+
+global.player_x = x;
+global.player_y = y;
+
 attack_button = false;
 spell_button = false;
 

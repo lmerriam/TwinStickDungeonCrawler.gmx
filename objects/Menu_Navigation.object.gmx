@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>/// Init buttons
-var tab_width = global.window_width/5;
-var tab_height = 64;
+tab_width = global.window_width/5;
+tab_height = 64;
 
 inv_btn[0] = 0;
 inv_btn[1] = 0;

@@ -261,6 +261,8 @@
     <script>scripts\scr_draw_tab_btn.gml</script>
     <script>scripts\scr_move_player.gml</script>
     <script>scripts\scr_draw_btn.gml</script>
+    <script>scripts\scr_map_x.gml</script>
+    <script>scripts\scr_map_y.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\PixelSmall</font>
@@ -375,6 +377,9 @@
     <room>rooms\gmare_test</room>
     <room>rooms\rm_demo</room>
   </rooms>
+  <constants number="1">
+    <constant name="TAB_BAR_HEIGHT">64</constant>
+  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>

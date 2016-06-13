@@ -42,14 +42,14 @@ current_slot_y = 0;
 eqp_btn = false;
 
 // Setup some layout stuff
-slot_width = 64 ;
+slot_width = 80;
 inv_margin = 20;
 
 // Set up the inventory offsets
 // Centering that shit
 // TODO: why the fuck can I not get global.window_width yet
 var inventory_offset_left = (view_wport[0] - slot_width * ds_grid_width(global.inventory_slots)) / 2;
-var inventory_offset_top = (view_hport[0] - slot_width * ds_grid_height(global.inventory_slots)) / 2;
+var inventory_offset_top = (view_hport[0] - slot_width * ds_grid_height(global.inventory_slots)) / 2 + 32;
 
 // Get the inventory coordinates
 inventory_coords = scr_init_inventory(global.inventory_slots, slot_width, inventory_offset_left, inventory_offset_top);
