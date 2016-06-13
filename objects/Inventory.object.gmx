@@ -29,7 +29,7 @@
 event_inherited();
 
 // Set up inv slots
-global.inventory_slots = ds_grid_create(6,6);
+global.inventory_slots = ds_grid_create(5,5);
 ds_grid_clear(global.inventory_slots,noone);
 
 // Init the drag item
