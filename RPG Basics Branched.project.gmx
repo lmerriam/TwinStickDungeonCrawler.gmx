@@ -62,6 +62,7 @@
     <sprite>sprites\spr_wall</sprite>
     <sprite>sprites\spr_slime</sprite>
     <sprite>sprites\spr_slime_orange</sprite>
+    <sprite>sprites\spr_slime_boss</sprite>
     <sprites name="Player">
       <sprite>sprites\spr_player_shadow</sprite>
       <sprite>sprites\spr_player_attack_right</sprite>
@@ -325,6 +326,7 @@
       <object>objects\Enemy_Parent</object>
       <object>objects\Slime</object>
       <object>objects\Slime_2</object>
+      <object>objects\Enemy_Boss_Slime</object>
     </objects>
     <objects name="Spells">
       <object>objects\Spell_Column</object>
