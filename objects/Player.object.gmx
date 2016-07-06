@@ -442,6 +442,61 @@ if (global.teleport_player_x != noone) {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Render tiles
+var tile_x = x div global.tilewidth;
+var tile_y = y div global.tileheight;
+
+var tile_left = tile_x - 12;
+var tile_right = tile_x + 12;
+var tile_top = tile_y - 12;
+var tile_bottom = tile_y + 12;
+
+var curr_tile = global.map_tiles[# tile_x,tile_y];
+show_debug_message(curr_tile);
+if (curr_tile != 0) {
+    tile_add(curr_tile[3],curr_tile[4],curr_tile[5],global.tilewidth,global.tileheight,curr_tile[6],curr_tile[7],curr_tile[2])
+}
+for (row = tile_top; row&lt;tile_bottom; row++) {
+    for (col = tile_left; col&lt;tile_right; col++) {
+        if (!global.visible_tiles[# col,row] and global.map_tiles[# col,row] != 0) {
+            var tile = global.map_tiles[# col,row];
+            var tile_id = tile[0];
+            var tile_visible = tile[1];
+            var tile_depth = tile[2];
+            var tileset = tile[3];
+            var left = tile[4];
+            var top = tile[5];
+            var xx = tile[6];
+            var yy = tile[7];
+            
+            //show_debug_message(string(xx) + ", " + string(yy));
+            
+            
+            tile_add(tileset,left,top,global.tilewidth,global.tileheight,xx,yy,tile_depth);
+            global.visible_tiles[# col,row] = true;
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="4" ename="Health">
       <action>
