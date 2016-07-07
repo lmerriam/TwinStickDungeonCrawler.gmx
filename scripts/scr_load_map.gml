@@ -1,6 +1,6 @@
 ///scr_load_map(filename)
 ///Tiled_GMS v0.alpha, by @angrymobofsteve
-
+///Expanded by @captfitz
 
 var filename;
 var tileheight, tilewidth;
@@ -42,7 +42,6 @@ global.collision_tiles = ds_grid_create(map_width,map_height);
 global.map_tiles = ds_grid_create(map_width,map_height);
 global.visible_tiles = ds_grid_create(map_width,map_height);
 ds_grid_clear(global.visible_tiles,false);
-
 
 for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
     var layer_object = ds_list_find_value( lst_layers, layer_i);
