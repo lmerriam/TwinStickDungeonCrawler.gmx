@@ -462,16 +462,13 @@ if (global.teleport_player_x != noone) {
 var tile_x = x div global.tilewidth;
 var tile_y = y div global.tileheight;
 
-var tile_left = tile_x - 12;
-var tile_right = tile_x + 12;
-var tile_top = tile_y - 12;
-var tile_bottom = tile_y + 12;
+var tile_left = tile_x - 3;
+var tile_right = tile_x + 3;
+var tile_top = tile_y - 3;
+var tile_bottom = tile_y + 3;
 
 var curr_tile = global.map_tiles[# tile_x,tile_y];
-show_debug_message(curr_tile);
-if (curr_tile != 0) {
-    tile_add(curr_tile[3],curr_tile[4],curr_tile[5],global.tilewidth,global.tileheight,curr_tile[6],curr_tile[7],curr_tile[2])
-}
+if (Time.now mod 20 = 0) {
 for (row = tile_top; row&lt;tile_bottom; row++) {
     for (col = tile_left; col&lt;tile_right; col++) {
         if (!global.visible_tiles[# col,row] and global.map_tiles[# col,row] != 0) {
@@ -492,6 +489,7 @@ for (row = tile_top; row&lt;tile_bottom; row++) {
             global.visible_tiles[# col,row] = true;
         }
     }
+}
 }
 </string>
           </argument>
