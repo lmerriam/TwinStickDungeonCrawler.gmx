@@ -87,8 +87,6 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
                         tile[6] = k * global.tilewidth;
                         tile[7] = j * global.tileheight;
                         global.map_tiles[# k, j] = tile;
-                       // tile_add(tileset_bg, ((( tile_id - 1) mod tile_cols ) *global.tilewidth ), ((( tile_id - 1) div tile_rows ) * global.tileheight ),
-                       //        global.tilewidth, global.tileheight, k *global.tilewidth, j * global.tileheight, layer_depth);
                     }                
                 }
             }
