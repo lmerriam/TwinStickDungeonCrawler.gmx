@@ -462,8 +462,8 @@ if (global.teleport_player_x != noone) {
 var tile_x = x div global.tilewidth;
 var tile_y = y div global.tileheight;
 
-var tile_left = tile_x - 6;
-var tile_right = tile_x + 6;
+var tile_left = tile_x - 8;
+var tile_right = tile_x + 8;
 var tile_top = tile_y - 6;
 var tile_bottom = tile_y + 6;
 
@@ -487,17 +487,17 @@ if (floor(Time.now) mod 30 = 0) {
             }
         }
     }
-} else if(floor(Time.now) mod 100 = 0) {
-    for (row = 0; row&lt;ds_grid_height(global.visible_tiles); row++) {
-        for (col = 0; col&lt;ds_grid_width(global.visible_tiles); col++) {
-            var tile = global.map_tiles[# col,row];
-            if (tile!=0 and tile_exists(tile[0])) {
-                tile_delete(tile[0]);
-            }
-            global.visible_tiles[# col,row] = false;
-        }
-    }
-}
+} //else if(floor(Time.now) mod 100 = 0) {
+    //for (row = 0; row&lt;ds_grid_height(global.visible_tiles); row++) {
+        //for (col = 0; col&lt;ds_grid_width(global.visible_tiles); col++) {
+            //var tile = global.map_tiles[# col,row];
+            //if (tile!=0 and tile_exists(tile[0])) {
+                //tile_delete(tile[0]);
+            //}
+            //global.visible_tiles[# col,row] = false;
+        //}
+    //}
+//}
 </string>
           </argument>
         </arguments>
