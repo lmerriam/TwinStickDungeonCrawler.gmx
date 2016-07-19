@@ -87,7 +87,7 @@ if (discovered == false and distance_to_object(Player) &lt; 600) {
           <argument>
             <kind>1</kind>
             <string>/// Draw the marker
-if (discovered and view_current == 1) {
+if (discovered) {
     draw_self();
 }
 </string>

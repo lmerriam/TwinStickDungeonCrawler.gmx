@@ -1,6 +1,6 @@
 ///scr_load_map(filename)
 ///Tiled_GMS v0.alpha, by @angrymobofsteve
-
+///Expanded by @captfitz
 
 var filename;
 var tileheight, tilewidth;
@@ -38,6 +38,11 @@ var layer_depth = 1000;
 tileset_bg = background_add(working_directory + tileset_img, 1, false );
 var lst_layers = ds_map_find_value( json, "layers" );
 
+global.collision_tiles = ds_grid_create(map_width,map_height);
+global.map_tiles = ds_grid_create(map_width,map_height);
+global.visible_tiles = ds_grid_create(map_width,map_height);
+ds_grid_clear(global.visible_tiles,false);
+
 for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
     var layer_object = ds_list_find_value( lst_layers, layer_i);
     var layer_type = ds_map_find_value( layer_object, "type");
@@ -52,7 +57,6 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
             
             // Build collision grid
             if (collision == true) {
-                global.collision_tiles = ds_grid_create(map_width,map_height);
                 for ( row = 0; row < map_height; row++ ){
                     for ( col = 0; col < map_width; col++ ){
                         var i = ( row * map_width) + col;           
@@ -66,15 +70,24 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
                 }
             }
             
-            // Place tile grid
+            // Build tile grid
             for ( j = 0; j < map_height; j++ ){
                 for ( k = 0; k < map_width; k++ ){   
                     var i = ( j * map_width) + k;          
                     var tile_id = ds_list_find_value(lst_data, i);
+                    
                     if ( tile_id > 0 ) {
-                        tile_add(tileset_bg, ((( tile_id - 1) mod tile_cols ) *global.tilewidth ), ((( tile_id - 1) div tile_rows ) * global.tileheight ),
-                               global.tilewidth, global.tileheight, k *global.tilewidth, j * global.tileheight, layer_depth);
-                    }                         
+                        var tile = ds_map_create();
+                        tile[0] = tile_id;
+                        tile[1] = false;
+                        tile[2] = layer_depth;
+                        tile[3] = tileset_bg;
+                        tile[4] = (tile_id - 1) mod tile_cols * global.tilewidth;
+                        tile[5] = (tile_id - 1) div tile_rows * global.tileheight;
+                        tile[6] = k * global.tilewidth;
+                        tile[7] = j * global.tileheight;
+                        global.map_tiles[# k, j] = tile;
+                    }                
                 }
             }
             ds_list_destroy(lst_data);

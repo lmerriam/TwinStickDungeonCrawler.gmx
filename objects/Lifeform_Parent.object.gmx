@@ -210,8 +210,8 @@ if (ds_exists(effects, ds_type_map)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Draw only if in main view
-if view_current = 0 draw_self();
+            <string>///draw thyself
+draw_self();
 </string>
           </argument>
         </arguments>
