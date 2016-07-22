@@ -33,11 +33,11 @@ name = "Push";
 
 script = scr_spell_cone;
 
-// Roll for stats (eventually make this conditional based on spell)
-damage = irandom_range(5,10);
-knockback = 0;
-cd = 2;
-fatigue = 5;
+// Damage
+stats[? "Damage"] = irandom_range(5,10);
+stats[? "Knockback"] = 0;
+stats[? "Cooldown"] = 2;
+stats[? "Fatigue"] = 5;
 </string>
           </argument>
         </arguments>

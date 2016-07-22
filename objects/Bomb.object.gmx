@@ -33,9 +33,9 @@ name = "Bomb";
 script = scr_attack_bomb;
 
 // Roll stats
-damage = irandom_range(5,8);
-knockback = irandom_range(10,20);
-cd = 1.5;
+stats[? "Damage"] = irandom_range(5,8);
+stats[? "Knockback"] = irandom_range(10,20);
+stats[? "Atk Delay"] = 1.5;
 </string>
           </argument>
         </arguments>

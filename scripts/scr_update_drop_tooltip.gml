@@ -2,6 +2,15 @@
 // TODO: find some way of comparing directly from the drop stats without constructing these fucking things
 drop_index = argument[0];
 
+text[0,0] = string(name);
+text[0,1] = "";
+text[0,2] = c_white;
+
+text[1,0] = "Level " + string(stats[? "Level"]);
+text[1,1] = "";
+text[1,2] = c_white;
+
+/*
 if (object_get_parent(drop_index) == Drop_Weapon_Parent) {
     var weapon = scr_get_weapon();
     
@@ -92,3 +101,4 @@ if (object_get_parent(drop_index) == Drop_Weapon_Parent) {
 } else if (object_get_parent(drop_index) == Drop_Gem_Parent) {
 
 }
+*/

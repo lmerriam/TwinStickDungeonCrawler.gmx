@@ -32,9 +32,9 @@ name = "Blade";
 script = scr_attack_blade;
 
 // Roll stats
-damage = irandom_range(3,5);
-knockback = 10;
-cd = 1;
+stats[? "Damage"] = irandom_range(3,5);
+stats[? "Knockback"] = 10;
+stats[? "Atk Delay"] = 1;
 </string>
           </argument>
         </arguments>

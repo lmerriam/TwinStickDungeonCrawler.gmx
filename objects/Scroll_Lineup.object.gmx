@@ -33,10 +33,10 @@ name = "Lineup";
 script = scr_spell_lineup;
 
 // Roll for stats (eventually make this conditional based on spell)
-damage = 0;
-knockback = 0;
-cd = 5;
-fatigue = 5;
+stats[? "Damage"] = 0;
+stats[? "Knockback"] = 0;
+stats[? "Cooldown"] = 5;
+stats[? "Fatigue"] = 5;
 </string>
           </argument>
         </arguments>

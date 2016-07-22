@@ -34,9 +34,9 @@ name = "Shotgun";
 script = scr_attack_shotgun;
 
 // Roll stats
-damage = irandom_range(6,9);
-knockback = irandom_range(2,5);
-cd = 1;
+stats[? "Damage"] = irandom_range(6,9);
+stats[? "Knocback"] = irandom_range(2,5);
+stats[? "Atk Delay"] = 1;
 </string>
           </argument>
         </arguments>

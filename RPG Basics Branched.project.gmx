@@ -247,7 +247,12 @@
     </scripts>
     <scripts name="Equipment">
       <script>scripts\scr_equip.gml</script>
+      <script>scripts\scr_level_stat.gml</script>
       <script>scripts\scr_get_weapon.gml</script>
+      <script>scripts\scr_weapon_stat.gml</script>
+      <script>scripts\scr_spell_stat.gml</script>
+      <script>scripts\scr_gem_stat.gml</script>
+      <script>scripts\scr_armor_stat.gml</script>
       <script>scripts\scr_get_spell.gml</script>
       <script>scripts\scr_get_armor.gml</script>
       <script>scripts\scr_get_gem.gml</script>

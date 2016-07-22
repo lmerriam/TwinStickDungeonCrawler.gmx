@@ -30,15 +30,14 @@ event_inherited();
 
 name = "Heavy Armor";
 
-level = 1;
-
 // Roll stats
-hp = irandom_range(5,10);
-stamina = 0;
-hp_regen = irandom_range(1,3);
-stamina_regen = 0;
-spd = 0;
-defense = irandom_range(3,5);
+stats = ds_map_create();
+stats[? "Health"] = irandom_range(5,10);
+stats[? "Health Regen"] = irandom_range(1,3);
+stats[? "Stamina"] = 0;
+stats[? "Stamina Regen"] = 0;
+stats[? "Speed"] = 0;
+stats[? "Defense"] = irandom_range(3,5);
 
 // Buffs
 buffs = ds_map_create();

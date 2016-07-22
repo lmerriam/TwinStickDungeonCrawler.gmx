@@ -197,7 +197,7 @@ alarm[0] = .2 * room_speed;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Move view0 10% toward player and screen shake
+            <string>/// Move view toward player
 
 if (instance_exists(Player)) {
     var dis;
@@ -309,6 +309,50 @@ scr_toggle_menu(global.menu_store);
             <string>/// Show map
 
 scr_toggle_menu(global.menu_map);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="76">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Load the inventory
+
+// Open the save file and decode it to a ds_map
+var file = file_text_open_read(working_directory + "inventory.txt");
+var save_data = json_decode(file_text_read_string(file));
+file_text_close(file);
+
+// Iterate through inventory
+for (column = 0; column &lt; ds_grid_width(global.inventory_slots); column++) {
+    for (row = 0; row &lt; ds_grid_height(global.inventory_slots); row++) {
+    
+        // Get the inventory slot and find the related item
+        var slot = (row*4)+column;
+        var item = ds_map_find_value(save_data, string(slot));
+        var index = item[? "object_index"];
+        
+        // Populate the slot with the correct item
+        if (index != noone) global.inventory_slots[# column,row] = instance_create(-999,-999,index);
+    }
+}
+
+ds_map_destroy(save_data);
 </string>
           </argument>
         </arguments>

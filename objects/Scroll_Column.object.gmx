@@ -32,11 +32,11 @@ event_inherited();
 name = "Column";
 script = scr_spell_column;
 
-// Roll for stats (eventually make this conditional based on spell)
-damage = irandom_range(8,12);
-knockback = irandom_range(10,20);
-cd = 3;
-fatigue = 5;
+// Roll for stats
+stats[? "Damage"] = irandom_range(8,12);
+stats[? "Knockback"] = irandom_range(10,20);
+stats[? "Cooldown"] = 3;
+stats[? "Fatigue"] = 5;
 </string>
           </argument>
         </arguments>

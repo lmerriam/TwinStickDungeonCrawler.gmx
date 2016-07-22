@@ -33,10 +33,10 @@ name = "Area";
 script = scr_spell_area;
 
 // Roll for stats (eventually make this conditional based on spell)
-damage = irandom_range(3,8);
-knockback = irandom_range(10,20);
-cd = 2;
-fatigue = 3;
+stats[? "Damage"] = irandom_range(3,8);
+stats[? "Knockback"] = irandom_range(10,20);
+stats[? "Cooldown"] = 2;
+stats[? "Fatigue"] = 3;
 </string>
           </argument>
         </arguments>

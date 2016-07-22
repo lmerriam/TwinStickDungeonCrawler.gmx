@@ -29,6 +29,9 @@
 event_inherited();
 
 tooltip = "Tap to fire spell";
+
+stats = ds_map_create();
+stats[? "Level"] = 1;
 </string>
           </argument>
         </arguments>
@@ -52,7 +55,7 @@ tooltip = "Tap to fire spell";
           <argument>
             <kind>1</kind>
             <string>/// Level stats
-damage = damage + ((level-1) * damage * .1);
+scr_level_stat("Damage");
 scr_update_drop_tooltip(object_index);
 </string>
           </argument>
