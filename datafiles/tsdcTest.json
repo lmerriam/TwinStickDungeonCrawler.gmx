@@ -160,7 +160,7 @@
                 {
                  "height":0,
                  "id":36,
-                 "name":"",
+                 "name":"Enemy_Spawner",
                  "properties":
                     {
                      "Object":"Slime",

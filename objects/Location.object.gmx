@@ -91,6 +91,7 @@ if (stats[? "Discovered"] == false and distance_to_object(Player) &lt; 600) {
           <argument>
             <kind>1</kind>
             <string>/// Draw the marker
+
 </string>
           </argument>
         </arguments>

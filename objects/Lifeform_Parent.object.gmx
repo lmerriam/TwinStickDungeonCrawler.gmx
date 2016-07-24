@@ -128,12 +128,12 @@ if (ds_exists(effects, ds_type_map)) {
         }
         effects[? "burn_duration"]--;
     }
-    
+
     if (effects[? "combust_duration"] &gt; 0) {
         part_particles_create(global.particles_below, x, y, global.spark_particles, 1);
         effects[? "combust_duration"]--;
     }
-    
+
     if (effects[? "freeze_duration"] &gt; 0) {
         freeze_slow = effects[? "freeze_slow"];
         image_blend = c_aqua;
@@ -142,7 +142,7 @@ if (ds_exists(effects, ds_type_map)) {
         freeze_slow = 0;
         image_blend = c_white;
     }
-    
+
 }
 </string>
           </argument>

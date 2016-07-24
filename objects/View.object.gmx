@@ -212,13 +212,13 @@ if (instance_exists(Player)) {
         }
         var targetx = Player.x + lengthdir_x(dis/5,global.mousedir);
         var targety = Player.y + lengthdir_y(dis/5,global.mousedir);
-        
+
         global.crosshair_x = targetx;
         global.crosshair_y = targety;
-    
+
         x += (targetx - x) * .1  * (30/room_speed);
         y += (targety - y) * .1 * (30/room_speed);
-    
+
     }
 }
 
@@ -332,7 +332,6 @@ scr_toggle_menu(global.menu_map);
           <argument>
             <kind>1</kind>
             <string>/// Load the inventory
-
 // Open the save file and decode it to a ds_map
 var file = file_text_open_read(working_directory + "inventory.txt");
 var save_data = json_decode(file_text_read_string(file));
@@ -341,12 +340,12 @@ file_text_close(file);
 // Iterate through inventory
 for (column = 0; column &lt; ds_grid_width(global.inventory_slots); column++) {
     for (row = 0; row &lt; ds_grid_height(global.inventory_slots); row++) {
-    
+
         // Get the inventory slot and find the related item
         var slot = (row*4)+column;
         var item = ds_map_find_value(save_data, string(slot));
         var index = item[? "object_index"];
-        
+
         // Populate the slot with the correct item
         if (index != noone) {
             var inst = instance_create(item[? "x"],item[? "y"],index);

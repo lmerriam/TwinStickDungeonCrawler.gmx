@@ -474,6 +474,66 @@ if (global.teleport_player_x != noone) {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Render tiles
+var tile_x = x div global.tilewidth;
+var tile_y = y div global.tileheight;
+
+var tile_left = tile_x - 8;
+var tile_right = tile_x + 8;
+var tile_top = tile_y - 6;
+var tile_bottom = tile_y + 6;
+
+if (floor(Time.now) mod 30 = 0) {
+    for (row = tile_top; row&lt;tile_bottom; row++) {
+        for (col = tile_left; col&lt;tile_right; col++) {
+            if (!global.visible_tiles[# col,row] and global.map_tiles[# col,row] != 0) {
+                var tile = global.map_tiles[# col,row];
+                var tile_id = tile[0];
+                var tile_visible = tile[1];
+                var tile_depth = tile[2];
+                var tileset = tile[3];
+                var left = tile[4];
+                var top = tile[5];
+                var xx = tile[6];
+                var yy = tile[7];
+                
+                
+                tile_add(tileset,left,top,global.tilewidth,global.tileheight,xx,yy,tile_depth);
+                global.visible_tiles[# col,row] = true;
+            }
+        }
+    }
+} //else if(floor(Time.now) mod 100 = 0) {
+    //for (row = 0; row&lt;ds_grid_height(global.visible_tiles); row++) {
+        //for (col = 0; col&lt;ds_grid_width(global.visible_tiles); col++) {
+            //var tile = global.map_tiles[# col,row];
+            //if (tile!=0 and tile_exists(tile[0])) {
+                //tile_delete(tile[0]);
+            //}
+            //global.visible_tiles[# col,row] = false;
+        //}
+    //}
+//}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="4" ename="Health">
       <action>

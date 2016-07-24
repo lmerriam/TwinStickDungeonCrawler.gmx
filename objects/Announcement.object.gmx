@@ -166,7 +166,7 @@ scr_draw_text_shadow(global.window_width/2,global.window_height*.75,text,c_white
           <argument>
             <kind>1</kind>
             <string>/// Draw pointer to location
-if (view_current = 0 and creator != noone) {
+if (creator != noone) {
     draw_sprite_ext(spr_location_pointer,0,pointer_x,pointer_y,1,1,pointer_dir,c_white,text_opacity);
 }
 </string>
