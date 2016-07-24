@@ -28,8 +28,8 @@
             <string>/// Init spawner
 event_inherited();
 
-quantity = noone;
-enemy_object = noone;
+stats[? "Quantity"] = 0;
+stats[? "Object"] = noone;
 
 </string>
           </argument>
@@ -55,12 +55,12 @@ enemy_object = noone;
             <kind>1</kind>
             <string>/// Spawn instances
 
-for (var i = 0; i &lt; quantity; i += 1)
-{
-    scr_find_spawn_point(x,y,64,enemy_object,level);
+// Add objects to spawn list
+repeat(stats[? "Quantity"]) {
+    ds_list_add(spawns,asset_get_index(stats[? "Object"]));
 }
 
-instance_destroy();
+event_inherited();
 </string>
           </argument>
         </arguments>

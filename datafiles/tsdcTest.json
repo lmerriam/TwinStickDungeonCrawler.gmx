@@ -42,11 +42,11 @@
                  "name":"Chest",
                  "properties":
                     {
-                     "level":5
+                     "Level":5
                     },
                  "propertytypes":
                     {
-                     "level":"int"
+                     "Level":"int"
                     },
                  "rotation":0,
                  "type":"Chest",
@@ -163,20 +163,20 @@
                  "name":"",
                  "properties":
                     {
-                     "enemy_object":"Slime",
-                     "quantity":8
+                     "Object":"Slime",
+                     "Quantity":8
                     },
                  "propertytypes":
                     {
-                     "enemy_object":"string",
-                     "quantity":"int"
+                     "Object":"string",
+                     "Quantity":"int"
                     },
                  "rotation":0,
                  "type":"Enemy_Spawner",
                  "visible":true,
                  "width":0,
-                 "x":1232.33333333333,
-                 "y":1722
+                 "x":1130.83333333333,
+                 "y":1323
                 }, 
                 {
                  "height":0,
@@ -207,11 +207,11 @@
                  "name":"Secret cache",
                  "properties":
                     {
-                     "name":"Secret cache"
+                     "Name":"Secret cache"
                     },
                  "propertytypes":
                     {
-                     "name":"string"
+                     "Name":"string"
                     },
                  "rotation":0,
                  "type":"Location",

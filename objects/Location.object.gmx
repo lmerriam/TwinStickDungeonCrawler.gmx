@@ -26,13 +26,14 @@
           <argument>
             <kind>1</kind>
             <string>/// Init location
-name = "Inidentificado";
+stats = ds_map_create()
+stats[? "Name"] = "Inidentificado";
+stats[? "Discovered"] = false;
 creator = noone;
 
 image_xscale = 5;
 image_yscale = 5;
 
-discovered = false;
 alarm[0] = 1;
 </string>
           </argument>
@@ -57,9 +58,12 @@ alarm[0] = 1;
           <argument>
             <kind>1</kind>
             <string>/// Check for player near
-if (discovered == false and distance_to_object(Player) &lt; 600) {
-    discovered = true;
-    scr_announce("Discovered " + name,id);
+
+scr_debug_map(stats);
+
+if (stats[? "Discovered"] == false and distance_to_object(Player) &lt; 600) {
+    stats[? "Discovered"] = true;
+    scr_announce("Discovered " + stats[? "Name"],id);
     alarm[0] = -1;
 } else {
     alarm[0] = 0.5 * room_speed;
@@ -87,9 +91,6 @@ if (discovered == false and distance_to_object(Player) &lt; 600) {
           <argument>
             <kind>1</kind>
             <string>/// Draw the marker
-if (discovered and view_current == 1) {
-    draw_self();
-}
 </string>
           </argument>
         </arguments>

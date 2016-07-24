@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Init scroll
+            <string>/// Init armor
 event_inherited();
 
 stats = ds_map_create();
@@ -53,9 +53,9 @@ stats[? "Level"] = 1;
           <argument>
             <kind>1</kind>
             <string>/// Level armor stats
-hp_regen += ((level-1) * hp_regen) * .1;
-stamina_regen += ((level-1) * stamina_regen) * .1;
-defense += ((level-1) * defense) * .2;
+scr_level_stat("Health Regen");
+scr_level_stat("Stamina Regen");
+scr_level_stat("Defense");
 
 scr_update_drop_tooltip(object_index);
 </string>

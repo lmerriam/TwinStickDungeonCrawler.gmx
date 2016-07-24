@@ -30,32 +30,21 @@ event_inherited();
 image_speed = .1 * (30/room_speed);
 base_image_speed = image_speed;
 
-level = 1;
-
 // Damage
-starting_damage = 3;
-damage = starting_damage;
-
-// HP
-starting_hp = 20;
-base_hp = starting_hp;
-hp = base_hp;
-
-// XP
-starting_xp = 3;
-xp = starting_xp;
-
-// Constant stats
-knockback = 5;
-spd = 1 * (30/room_speed);
+stats[? "Damage"] = 3;
+stats[? "Max Health"] = 20;
+stats[? "Health"] = stats[? "Max Health"];
+stats[? "Experience"] = 3;
+stats[? "Knockback"] = 5;
+stats[? "Speed"] = 1 * (30/room_speed);
 
 // Loot
 loot = ds_map_create();
-ds_map_add(loot, Pistol, .2);
-ds_map_add(loot, Shotgun, .2);
-ds_map_add(loot, SMG, .2);
-ds_map_add(loot, Bomb, .2);
-ds_map_add(loot, Blade, .2);
+ds_map_add(loot, Weapon_Pistol, .2);
+ds_map_add(loot, Weapon_Shotgun, .2);
+ds_map_add(loot, Weapon_SMG, .2);
+ds_map_add(loot, Weapon_Bomb, .2);
+ds_map_add(loot, Weapon_Blade, .2);
 ds_map_add(loot, Scroll_Vorpal, .2);
 ds_map_add(loot, Scroll_Projectile, .2);
 ds_map_add(loot, Scroll_Column, .2);
@@ -92,42 +81,12 @@ if (state != scr_enemy_stall_state) {
     var xdir = lengthdir_x(1, dir);
     var ydir = lengthdir_y(1, dir);
     
-    scr_damage(other.x+xdir, other.y+ydir, Attack_Radius, id, damage, knockback, 0);
+    scr_damage(other.x+xdir, other.y+ydir, Attack_Radius, id, stats[? "Damage"], stats[? "Knockback"], 0);
     
     
     state = scr_enemy_stall_state;
     stall_alarm = scr_sec_from_now(1);
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="10">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Level the instance
-
-damage = starting_damage + ((level-1) * starting_damage * .1);
-
-base_hp = starting_hp + ((level-1) * starting_hp * .1);
-hp = base_hp;
-
-xp = starting_xp + (level-1);
 </string>
           </argument>
         </arguments>

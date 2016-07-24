@@ -1,19 +1,17 @@
-///scr_custom_properties(instance,properties,object)
+///scr_custom_properties(instance,properties)
 var instance = argument0;
 var properties = argument1;
-var object = argument2;
 
-switch object {
-    case Location:
-        instance.name = ds_map_find_value( properties, "name" );
-        break;
-    case Chest:
-        instance.level = ds_map_find_value( properties, "level" );
-        break;
-    case Enemy_Spawner:
-        instance.enemy_object = asset_get_index( ds_map_find_value( properties, "enemy_object"));
-        instance.quantity = ds_map_find_value(properties, "quantity");
-    default:
-        //show_debug_message("No match");
-        break;
+// Iterate through custom props
+var current_key = ds_map_find_first(properties);
+var size = ds_map_size(properties);
+for(var i = 0; i<ds_map_size(properties); i++) {
+    
+    // Update the related player stat to include item boosts
+    instance.stats[? current_key] = ds_map_find_value(properties, current_key);
+    
+    // Increment the current ds_map key
+    current_key = ds_map_find_next(properties, current_key);
 }
+
+ds_map_destroy(properties);

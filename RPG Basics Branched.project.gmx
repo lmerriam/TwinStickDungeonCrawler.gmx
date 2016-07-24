@@ -176,6 +176,8 @@
     </scripts>
     <scripts name="Helpers">
       <script>scripts\scr_get_input.gml</script>
+      <script>scripts\scr_debug_map.gml</script>
+      <script>scripts\scr_debug_list.gml</script>
       <script>scripts\scr_chance.gml</script>
       <script>scripts\scr_calc_stats.gml</script>
       <script>scripts\scr_draw_tooltip.gml</script>
@@ -190,6 +192,7 @@
       <script>scripts\scr_find_spawn_point.gml</script>
       <script>scripts\scr_random_list_item.gml</script>
       <script>scripts\scr_damage.gml</script>
+      <script>scripts\scr_damage_other.gml</script>
       <script>scripts\scr_create_instance_with_level.gml</script>
       <script>scripts\scr_compare_to_equipped.gml</script>
       <script>scripts\scr_send_to_inv.gml</script>
@@ -250,6 +253,8 @@
       <script>scripts\scr_level_stat.gml</script>
       <script>scripts\scr_get_weapon.gml</script>
       <script>scripts\scr_weapon_stat.gml</script>
+      <script>scripts\scr_player_base_stat.gml</script>
+      <script>scripts\scr_player_stat.gml</script>
       <script>scripts\scr_spell_stat.gml</script>
       <script>scripts\scr_gem_stat.gml</script>
       <script>scripts\scr_armor_stat.gml</script>
@@ -290,7 +295,7 @@
     <object>objects\Announcement</object>
     <object>objects\Spawner_Parent</object>
     <objects name="Damage">
-      <object>objects\Damage_Parent</object>
+      <object>objects\Attack_Radius_Parent</object>
       <object>objects\Attack_Radius</object>
       <object>objects\Attack_Radius_Large</object>
       <object>objects\Attack_Radius_Medium</object>
@@ -301,12 +306,12 @@
       <object>objects\Drop_Weapon_Parent</object>
       <object>objects\Drop_Armor_Parent</object>
       <object>objects\Drop_Gem_Parent</object>
-      <object>objects\Pistol</object>
-      <object>objects\SMG</object>
-      <object>objects\Bomb</object>
-      <object>objects\Shotgun</object>
-      <object>objects\Blade</object>
-      <object>objects\Hammer</object>
+      <object>objects\Weapon_Pistol</object>
+      <object>objects\Weapon_SMG</object>
+      <object>objects\Weapon_Bomb</object>
+      <object>objects\Weapon_Shotgun</object>
+      <object>objects\Weapon_Blade</object>
+      <object>objects\Weapon_Hammer</object>
       <object>objects\Gem_Burn</object>
       <object>objects\Gem_Combust</object>
       <object>objects\Gem_Freeze</object>

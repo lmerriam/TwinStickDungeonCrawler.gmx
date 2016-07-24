@@ -56,7 +56,11 @@ buffs = ds_map_create();
             <string>/// Damage all life forms
 
 if (creator == Player.id) {
-    other.hp -= damage;
+
+    show_debug_message(damage);
+    show_debug_message(other.stats[? "Health"]);
+    
+    other.stats[? "Health"] -= damage;
     scr_knockback(self, other, knockback);
     
     // Blood particles
@@ -95,7 +99,7 @@ if (creator == Player.id) {
             <string>/// Damage player
 
 if (other.id != creator) {
-    other.hp -= clamp(damage-(scr_get_armor().defense/2),1,9999);
+    other.stats[? "Health"] -= clamp(damage-(other.stats[? "Defense"]),1,9999);
     
     //knockback
     scr_knockback(self, other, knockback);
@@ -110,7 +114,7 @@ if (other.id != creator) {
     // Thorns
     if (scr_get_armor().buffs[? "thorns"] = true and instance_exists(creator)) {
         //scr_damage(other.x,other.y,Attack_R
-        creator.hp -= scr_get_armor().buffs[? "thorns_damage"];
+        creator.stats[? "Health"] -= scr_get_armor().buffs[? "thorns_damage"];
     }
 }
 </string>

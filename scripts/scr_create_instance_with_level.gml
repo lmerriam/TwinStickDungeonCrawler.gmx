@@ -5,7 +5,7 @@ obj = argument[2];
 level = argument[3];
 
 inst = instance_create(xx,yy,obj); // Create the instance
-inst.level = level; // Assign the level
+inst.stats[? "Level"] = level; // Assign the level
 with(inst) event_user(0); // Run the levelling script
 
 return inst;

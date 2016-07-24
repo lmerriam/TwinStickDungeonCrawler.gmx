@@ -26,10 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>/// Init
-loot = choose(Shotgun,Bomb,Pistol,SMG);
-opened = false;
 image_speed = 0;
-level = 1;
+
+stats = ds_map_create();
+stats[? "Loot"] = choose(Weapon_Shotgun,Weapon_Bomb,Weapon_Pistol,Weapon_SMG);
+stats[? "Open"] = false;
+stats[? "Level"] = 1;
 </string>
           </argument>
         </arguments>
@@ -53,10 +55,10 @@ level = 1;
           <argument>
             <kind>1</kind>
             <string>/// Spawn loot
-if (!opened) {
-    var drop = scr_create_instance_with_level(x,y,loot,level);
+if (!stats[? "Opened"]) {
+    var drop = scr_create_instance_with_level(x,y,stats[? "Loot"],stats[? "Level"]);
     image_index = 1;
-    opened = true;
+    stats[? "Opened"] = true;
 }
 </string>
           </argument>

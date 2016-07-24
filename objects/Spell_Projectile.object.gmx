@@ -83,8 +83,8 @@ phy_position_y += lengthdir_y(len,dir);
 event_inherited();
 
 if (other.id != creator) { //Make sure the damage object doesn't damage the player
-    other.hp -= Player.spell_damage;
-    scr_knockback(self, other, Player.spell_knockback);
+    scr_damage_other(Player.stats[? "Spell Damage"]);
+    scr_knockback(self, other, Player.stats[? "Spell Knockback"]);
 }
 </string>
           </argument>

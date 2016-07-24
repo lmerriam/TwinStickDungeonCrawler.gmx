@@ -5,35 +5,9 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>Prop_Parent</parentName>
+  <parentName>Spawner_Parent</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="0" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Init stronghold
-
-spawns = ds_list_create();
-alarm[0] = 1;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="1" enumb="0">
       <action>
         <libid>1</libid>
@@ -52,36 +26,13 @@ alarm[0] = 1;
           <argument>
             <kind>1</kind>
             <string>/// Convert to outpost
-scr_find_spawn_point(x,y,64,Chest,level);
+scr_find_spawn_point(x,y,64,Chest,stats[? "Level"]);
 instance_create(x,y,Outpost_Parent);
 
 scr_announce("Outpost liberated!",noone);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="2" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// Spawn stuff
-for (i=0;i&lt;ds_list_size(spawns);i++) {
-    spawns[| i] = instance_create(x,y,spawns[| i]);
-}
+
+ds_list_destroy(spawns);
+ds_map_destroy(stats);
 </string>
           </argument>
         </arguments>
@@ -134,7 +85,7 @@ pointer_y = Player.y + lengthdir_y(len,pointer_dir);
 event_inherited();
 
 cleared = true;
-for(i = 0; i &lt; ds_list_size(spawns); i++) {
+for(var i = 0; i &lt; ds_list_size(spawns); i++) {
     with(spawns[| i]) other.cleared = false;
 }
 if (cleared) instance_destroy();

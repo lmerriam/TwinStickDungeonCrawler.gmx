@@ -11,7 +11,7 @@ var line_height = 20;
 
 draw_set_color(c_black);
 draw_set_alpha(.75);
-draw_rectangle(x_offset,y_offset,x_offset+width,y_offset+line_count*line_height+padding, false);
+draw_rectangle(x_offset,y_offset,x_offset+width,y_offset+line_count*line_height+padding*2, false);
 
 draw_set_color(c_white);
 draw_set_alpha(1);

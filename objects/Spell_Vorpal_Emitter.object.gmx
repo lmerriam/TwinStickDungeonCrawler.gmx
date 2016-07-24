@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>/// Init vorpal emitter
-expire_alarm = scr_sec_from_now(3);
-emit_alarm = scr_sec_from_now(.3);
+expire_timer = scr_sec_from_now(3);
+emit_timer = scr_sec_from_now(.3);
 </string>
           </argument>
         </arguments>
@@ -63,8 +63,8 @@ with (Enemy_Parent) {
 }
 
 // emit damage and reset emit timer
-scr_damage(x,y,Attack_Radius_Medium,Player.id,Player.spell_damage,0,0);
-emit_alarm = scr_sec_from_now(.3);
+scr_damage(x,y,Attack_Radius_Medium,Player.id,Player.stats[? "Spell Damage"],0,0);
+emit_timer = scr_sec_from_now(.3);
 </string>
           </argument>
         </arguments>

@@ -55,7 +55,7 @@ stats[? "Level"] = 1;
           <argument>
             <kind>1</kind>
             <string>/// Level stats
-scr_level_stat("Damage");
+scr_level_stat("Spell Damage");
 scr_update_drop_tooltip(object_index);
 </string>
           </argument>

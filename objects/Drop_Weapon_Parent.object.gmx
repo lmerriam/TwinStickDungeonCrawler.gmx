@@ -53,7 +53,7 @@ stats[? "Level"] = 1;
           <argument>
             <kind>1</kind>
             <string>/// Level stats
-damage = damage + ((level-1) * damage * .2);
+scr_level_stat("Damage");
 scr_update_drop_tooltip(object_index);
 </string>
           </argument>

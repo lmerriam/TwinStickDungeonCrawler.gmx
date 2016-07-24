@@ -38,6 +38,10 @@ stall_alarm = 0;
 sight = 96;
 targetx = 0;
 targety = 0;
+
+// Stats
+stats = ds_map_create();
+stats[? "Level"] = 1;
 </string>
           </argument>
         </arguments>
@@ -63,17 +67,20 @@ targety = 0;
             <string>/// Loot and XP and 
 event_inherited();
 
-for (var i = 0; i &lt;= xp; i++) {
+for (var i = 0; i &lt;= stats[? "Experience"]; i++) {
     instance_create(x+random_range(-16,16),y+random_range(-16,16),Expr);
 }
 
 var current_key = ds_map_find_first(loot); // Start with the first key in the map
 for (i=0; i &lt; ds_map_size(loot); i++) {
     if (scr_chance(ds_map_find_value(loot, current_key))) { // Get the spawn chance of the current drop
-        scr_spawn_drop(x, y, current_key, level-(irandom_range(0,level/5))); // Spawn the current drop
+        scr_spawn_drop(x, y, current_key, stats[? "Level"]-(irandom_range(0,stats[? "Level"]/5))); // Spawn the current drop
     }
     current_key = ds_map_find_next(loot,current_key); // Move to next key
 }
+
+if ds_exists(stats,ds_type_map) ds_map_destroy(stats);
+if ds_exists(loot,ds_type_map) ds_map_destroy(loot);
 </string>
           </argument>
         </arguments>
@@ -144,8 +151,36 @@ for (i=0; i &lt; ds_map_size(loot); i++) {
             <kind>1</kind>
             <string>/// Run current state
 event_inherited();
-percent = (hp / base_hp) * 100;
-script_execute(state);
+if (ds_exists(stats,ds_type_map)) {
+    percent = (stats[? "Health"] / stats[? "Max Health"]) * 100;
+    script_execute(state);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Level the instance
+scr_level_stat("Damage");
+scr_level_stat("Health");
+scr_level_stat("Experience");
 </string>
           </argument>
         </arguments>
@@ -171,7 +206,7 @@ script_execute(state);
             <string>/// Draw health bar
 event_inherited();
 
-if (view_current == 0) {
+if (percent &lt; 100) {
 
     var statetext;
     if (state = scr_enemy_idle_state) statetext = "idle";

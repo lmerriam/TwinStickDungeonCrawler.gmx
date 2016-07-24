@@ -85,7 +85,7 @@ script_execute(state);
           <argument>
             <kind>1</kind>
             <string>/// Damage enemy
-other.hp -= 2;
+scr_damage_other(2);
 scr_knockback(Player, other, 10);
 /// backfire
 scr_knockback(other, self, 5);

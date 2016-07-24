@@ -116,7 +116,13 @@ if (scr_check_btn(inv_btn)) {
             // Save the items data to it's own map
             var item_data = ds_map_create();
             if (item != noone) {
+                // Save the object index so it can be recreated later
                 item_data[? "object_index"] = item.object_index;
+                // Save the item's stats
+                ds_map_add_map(item_data,"Stats",item.stats);
+                // Save the item's position
+                item_data[? "x"] = item.x;
+                item_data[? "y"] = item.y;
             } else {
                 item_data[? "object_index"] = noone;
             }

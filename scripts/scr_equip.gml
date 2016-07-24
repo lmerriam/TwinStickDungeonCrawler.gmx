@@ -24,7 +24,7 @@ if (prev_obj != noone) scr_send_to_inv(prev_obj);
 scr_activate_inv();
 
 // Update drop tooltips
-with(Drop_Parent) scr_update_drop_tooltip(object_index);
+with(Drop_Parent) scr_update_drop_tooltip(instance_id);
 
 if (obj.persistent = false) obj.persistent = true;
 obj.phy_position_x = -999;

@@ -26,7 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>/// Init spawner
-level = 1;
+stats = ds_map_create();
+stats[? "Level"] = 1;
 
 spawns = ds_list_create();
 
@@ -84,7 +85,7 @@ if (ds_exists(spawns,ds_type_list)) ds_list_destroy(spawns);
 var size = ds_list_size(spawns);
 for (var i = 0; i &lt; size; i += 1)
 {
-    scr_find_spawn_point(x,y,64,spawns[| i],level);
+    scr_find_spawn_point(x,y,64,spawns[| i],stats[? "Level"]);
 }
 
 instance_destroy();

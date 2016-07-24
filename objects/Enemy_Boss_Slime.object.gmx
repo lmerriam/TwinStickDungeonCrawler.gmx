@@ -28,25 +28,17 @@
             <string>/// Init the slime
 event_inherited();
 
-level = 10;
+stats[? "Level"] = 10;
+stats[? "Damage"] = 15;
+stats[? "Max Health"] = 60;
+stats[? "Health"] = stats[? "Max Health"];
+stats[? "Experience"] = 25;
 
-// Damage
-starting_damage = 15;
-damage = starting_damage;
-
-// HP
-starting_hp = 60;
-base_hp = starting_hp;
-hp = base_hp;
-
-// XP
-starting_xp = 25;
-xp = starting_xp;
 
 // Loot
 loot = ds_map_create();
-ds_map_add(loot, Pistol, .05);
-ds_map_add(loot, Blade, .05);
+ds_map_add(loot, Weapon_Pistol, .05);
+ds_map_add(loot, Weapon_Blade, .05);
 ds_map_add(loot, Health, .1);
 </string>
           </argument>

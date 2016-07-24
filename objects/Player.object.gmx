@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Init stats
+            <string>/// Init Player object
 event_inherited();
 
 device_mouse_dbclick_enable(false);
@@ -40,22 +40,6 @@ global.mousedir = 0;
 attack_button = false;
 spell_button = false;
 
-// Stats
-level = 1;
-expr = 0;
-maxexpr = 3;
-attack_spd = 1;
-attack_range = 10;
-
-// Base stats
-base_maxhp = 50 + (5 * level);
-base_maxstamina = 10 + (2 * level);
-base_damage = 3 + level;
-base_spd = 2;
-
-hp = base_maxhp;
-stamina = base_maxstamina;
-
 // Timers
 attack_timer = 0;
 spell_timer = 0;
@@ -64,6 +48,54 @@ stamina_timer = 0;
 // Teleport
 global.teleport_player_x = noone;
 global.teleport_player_y = noone;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Init stats
+stats = ds_map_create();
+base_stats = ds_map_create();
+
+// Levels
+base_stats[? "Level"] = 1;
+base_stats[? "Experience"] = 0;
+base_stats[? "Next Level Experience"] = 5;
+
+// Health
+base_stats[? "Max Health"] = 50;
+base_stats[? "Health"] = base_stats[? "Max Health"];
+base_stats[? "Health Regen"] = 10;
+
+// Stamina
+base_stats[? "Max Stamina"] = 10;
+base_stats[? "Stamina"] = base_stats[? "Max Stamina"];
+base_stats[? "Stamina Regen"] = 1;
+
+// Attack stats
+base_stats[? "Damage"] = 3;
+base_stats[? "Spell Damage"] = 3;
+
+// Defense
+base_stats[? "Defense"] = 10;
+
+// Speed
+base_stats[? "Speed"] = 2;
 </string>
           </argument>
         </arguments>
@@ -86,8 +118,8 @@ global.teleport_player_y = noone;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>    /// Inherit
-    event_inherited();
+            <string>/// Inherit
+event_inherited();
 </string>
           </argument>
         </arguments>
@@ -233,14 +265,14 @@ global.mouse_screen_y = window_mouse_get_y();
             <string>/// Control stats
 scr_calc_stats();
 
-// HP
-if (hp &lt; 0) {
-    hp = 0;
+// Health
+if (stats[? "Health"] &lt; 0) {
+    stats[? "Health"] = 0;
 }
 
 // Stamina regen
-if (stamina &lt; maxstamina and scr_alarm_passed(stamina_timer)) {
-    stamina++;
+if (stats[? "Stamina"] &lt; stats[? "Max Stamina"] and scr_alarm_passed(stamina_timer)) {
+    stats[? "Stamina"] += stats[? "Stamina Regen"];
     stamina_timer = scr_sec_from_now(1);
 }
 </string>
@@ -316,7 +348,7 @@ if (!global.cast_mode) {
             
             // Get the length if the move device is active
             if (device_mouse_check_button(move_device,mb_left)) {
-                len = clamp(point_distance(move_origin_x,move_origin_y,move_device_x,move_device_y),0,spd);
+                len = clamp(point_distance(move_origin_x,move_origin_y,move_device_x,move_device_y),0,stats[? "Speed"]);
                 dir = point_direction(move_origin_x,move_origin_y,move_device_x,move_device_y);
                 global.mousedir = dir;
             } else {
@@ -354,7 +386,7 @@ if (!global.cast_mode) {
         if (xaxis == 0 and yaxis == 0) {
             len = 0;
         } else {
-            len = spd;
+            len = stats[? "Speed"];
         }
         
         if (mouse_left) attack_button = true;
@@ -405,9 +437,9 @@ if (!global.cast_mode) {
     }
     
     // Right attack
-    if (spell_button and stamina &gt;= spell.stats[? "Fatigue"] and scr_alarm_passed(spell_timer)) {
+    if (spell_button and stats[? "Stamina"] &gt;= spell.stats[? "Fatigue"] and scr_alarm_passed(spell_timer)) {
         script_execute(spell.script);
-        stamina -= spell.stats[? "Fatigue"];
+        stats[? "Stamina"] -= spell.stats[? "Fatigue"];
         spell_timer = scr_sec_from_now(spell.stats[? "Cooldown"]);
     }
 
@@ -461,10 +493,10 @@ if (global.teleport_player_x != noone) {
           <argument>
             <kind>1</kind>
             <string>/// Collect health
-with (other) instance_destroy();
+with (other) { instance_destroy(); exit; }
 
 // Health up
-hp = min(hp+5, maxhp); // min always returns the minimum of the array, helps us not go over maxhp
+stats[? "Health"] = min(stats[? "Health"]+5, stats[? "Max Health"]);
 
 
 </string>
@@ -529,19 +561,19 @@ hp = min(hp+5, maxhp); // min always returns the minimum of the array, helps us 
           <argument>
             <kind>1</kind>
             <string>/// Collect expr
-with (other) instance_destroy();
+with (other) { instance_destroy(); exit; }
 
 // Level up
-expr += 1;
-if (expr &gt;= maxexpr) {
-    level += 1;
-    expr = expr-maxexpr;
-    maxexpr += level;
-    base_maxhp += 2;
-    hp = maxhp;
-    base_maxstamina += 2;
-    stamina = maxstamina;
-    scr_announce("Achieved level " + string(level), noone);
+stats[? "Experience"] += 1;
+
+if (base_stats[? "Experience"] &gt;= base_stats[? "Next Level Experience"]) {
+    base_stats[? "Level"] += 1;
+    base_stats[? "Next Level Experience"] += base_stats[? "Next Level Experience"] + (base_stats[? "Level"] * 2);
+    base_stats[? "Max Health"] += 2;
+    base_stats[? "Health"] = base_stats[? "Max Health"];
+    base_stats[? "Max Stamina"] += 2;
+    base_stats[? "Stamina"] = base_stats[? "Max Stamina"];
+    scr_announce("Achieved level " + string(base_stats[? "Level"]), noone);
 }
 
 

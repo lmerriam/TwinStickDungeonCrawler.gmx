@@ -35,7 +35,7 @@ var tileset_img = ds_map_find_value(tileset, "image");
 var tile_cols = ds_map_find_value(tileset, "imagewidth") / global.tilewidth;
 var tile_rows = ds_map_find_value(tileset, "imageheight") / global.tileheight;
 var layer_depth = 1000;
-tileset_bg = background_add(working_directory + tileset_img, 1, false );
+var tileset_bg = background_add(working_directory + tileset_img, 1, false );
 var lst_layers = ds_map_find_value( json, "layers" );
 
 for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
@@ -77,7 +77,7 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
                     }                         
                 }
             }
-            ds_list_destroy(lst_data);
+            //ds_list_destroy(lst_data);
         break;
         case "objectgroup":
             var lst_objects = ds_map_find_value( layer_object, "objects");
@@ -95,18 +95,23 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
                     object.y = object_y;
                     
                     // Pull in custom object properties
-                    if (object_properties != undefined) scr_custom_properties(object,object_properties,object_type);
+                    if (object_properties != undefined) scr_custom_properties(object,object_properties);
                 }
             }
-            ds_list_destroy(lst_objects);
+            //ds_list_destroy(lst_objects);
         break;
         default:
             show_message("unknown layer type");
         break;
     }
-    ds_map_destroy(layer_object);
+    //show_debug_message("Layer object: " + string(layer_object));
+    //scr_debug_map(layer_object);
+    //ds_map_destroy(layer_object);
 }
 
-ds_list_destroy(lst_layers);
-ds_list_destroy(lst_tileset);
+//scr_debug_list(lst_layers);
+//show_debug_message("List layers: " + string(lst_layers));
+//ds_list_destroy(lst_layers);
+//ds_list_destroy(lst_tileset);
+
 ds_map_destroy(json);

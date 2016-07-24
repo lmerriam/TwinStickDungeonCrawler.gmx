@@ -28,6 +28,7 @@
             <string>/// Init the lifeform
 phy_fixed_rotation = true;
 freeze_slow = 0;
+//stats = ds_map_create();
 effects = ds_map_create();
 checking_collisions = false;
 </string>
@@ -105,8 +106,9 @@ ds_map_destroy(effects);
             <kind>1</kind>
             <string>/// Depth and state and effects
 depth = -y;
-if (hp &lt;= 0) {
+if (stats[? "Health"] &lt;= 0) {
     instance_destroy();
+    exit;
 }
 
 if (scr_tile_collision(x + phy_speed_x,y)) {
@@ -122,7 +124,7 @@ if (ds_exists(effects, ds_type_map)) {
     if (effects[? "burn_duration"] &gt; 0) {
         if (effects[? "burn_duration"] mod effects[? "burn_interval"] == 0) {
             part_particles_create(global.particles_below, x, y, global.flare_particles, 1);
-            hp -= effects[? "burn_damage"];
+            stats[? "Health"] -= effects[? "burn_damage"];
         }
         effects[? "burn_duration"]--;
     }
