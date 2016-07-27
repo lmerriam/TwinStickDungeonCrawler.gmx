@@ -166,6 +166,11 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
+    <scripts name="Loading">
+      <script>scripts\scr_load_map.gml</script>
+      <script>scripts\scr_load_game.gml</script>
+      <script>scripts\scr_load_instance.gml</script>
+    </scripts>
     <scripts name="Enemy states">
       <script>scripts\scr_enemy_idle_state.gml</script>
       <script>scripts\scr_enemy_stall_state.gml</script>
@@ -268,7 +273,6 @@
       <script>scripts\scr_apply_gem_effects.gml</script>
     </scripts>
     <script>scripts\scr_custom_properties.gml</script>
-    <script>scripts\scr_load_map.gml</script>
     <script>scripts\scr_draw_btn_sprite.gml</script>
     <script>scripts\scr_draw_tab_btn.gml</script>
     <script>scripts\scr_move_player.gml</script>
