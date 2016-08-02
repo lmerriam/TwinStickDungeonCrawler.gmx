@@ -1,15 +1,16 @@
 #define scr_load_game
 ///scr_load_game()
 // Open the save file and decode it to a ds_map
-var file = file_text_open_read(working_directory + "inventory.txt");
+var file = file_text_open_read(working_directory + "save.txt");
 var save_data = json_decode(file_text_read_string(file));
 file_text_close(file);
 
 // Clear the inventory
 ds_grid_clear(global.inventory_slots, noone);
 
+// Load the inventory
 inventory_data = save_data[? "Inventory"];
-// Iterate through inventory
+
 for (column = 0; column < ds_grid_width(global.inventory_slots); column++) {
     for (row = 0; row < ds_grid_height(global.inventory_slots); row++) {
 
@@ -24,6 +25,23 @@ for (column = 0; column < ds_grid_width(global.inventory_slots); column++) {
     }
 }
 with(Drop_Parent) scr_update_drop_tooltip();
+
+// Load instances
+// First destroy existing
+/*
+with (Spawner_Parent) instance_destroy();
+
+var instance_data = save_data[? "Instances"];
+
+var current_key = ds_map_find_first(instance_data);
+for (var i = 0; i < ds_map_size(instance_data); i++) {
+    var inst = instance_data[? current_key];
+    scr_load_instance(inst);
+    current_key = ds_map_find_next(instance_data,current_key);
+}
+*/
+
+// Clean up after yourself
 ds_map_destroy(save_data);
 
 #define scr_save_game
@@ -52,12 +70,18 @@ for (column = 0; column < ds_grid_width(global.inventory_slots); column++) {
     }
 }
 
+// Save spawners
+//var instance_data = ds_map_create();
+//instance_activate_object(Spawner_Parent);
+//with (Spawner_Parent) scr_save_instance(id,instance_data);
+
 // Combine all the maps and save dat shit
 var save_data = ds_map_create();
 ds_map_add_map(save_data,"Inventory",inventory_data);
+//ds_map_add_map(save_data,"Instances",instance_data);
 
 // Open the save file and save the data to it
-var file = file_text_open_write(working_directory + "inventory.txt");
+var file = file_text_open_write(working_directory + "save.txt");
 file_text_write_string(file,json_encode(save_data));
 file_text_close(file);
 ds_map_destroy(save_data);

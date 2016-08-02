@@ -386,6 +386,7 @@
   </timelines>
   <rooms name="rooms">
     <room>rooms\room5</room>
+    <room>rooms\Dungeon1</room>
     <room>rooms\rm1</room>
     <room>rooms\rm2</room>
     <room>rooms\gmare_test</room>

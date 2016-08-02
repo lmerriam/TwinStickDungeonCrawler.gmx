@@ -57,8 +57,8 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
             
             // Build collision grid
             if (collision == true) {
-                for ( row = 0; row < map_height; row++ ){
-                    for ( col = 0; col < map_width; col++ ){
+                for (var row = 0; row < map_height; row++ ){
+                    for (var col = 0; col < map_width; col++ ){
                         var i = ( row * map_width) + col;           
                         var tile_id = ds_list_find_value(lst_data, i);
                         if ( tile_id > 0 ) {
@@ -117,7 +117,7 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
             show_message("unknown layer type");
         break;
     }
-    //show_debug_message("Layer object: " + string(layer_object));
+    show_debug_message("Layer object: " + string(layer_object));
     //scr_debug_map(layer_object);
     //ds_map_destroy(layer_object);
 }

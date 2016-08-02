@@ -26,10 +26,10 @@
           <argument>
             <kind>1</kind>
             <string>/// Init door
-
-new_x = 0;
-new_y = 0;
-new_room = noone;
+stats = ds_map_create();
+stats[? "New X"] = 0;
+stats[? "New Y"] = 0;
+stats[? "New Room"] = 0;
 
 
 </string>

@@ -13,5 +13,5 @@ for(var i = 0; i<ds_map_size(properties); i++) {
     // Increment the current ds_map key
     current_key = ds_map_find_next(properties, current_key);
 }
-
-ds_map_destroy(properties);
+// TODO: figure out if this map is persisting, because it doesn't seem like the json map in scr_load_map contains this
+//ds_map_destroy(properties);

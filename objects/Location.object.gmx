@@ -35,6 +35,8 @@ image_xscale = 5;
 image_yscale = 5;
 
 alarm[0] = 1;
+
+
 </string>
           </argument>
         </arguments>
@@ -59,7 +61,7 @@ alarm[0] = 1;
             <kind>1</kind>
             <string>/// Check for player near
 
-scr_debug_map(stats);
+//scr_debug_map(stats);
 
 if (stats[? "Discovered"] == false and distance_to_object(Player) &lt; 600) {
     stats[? "Discovered"] = true;

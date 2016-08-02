@@ -136,14 +136,26 @@
                 }, 
                 {
                  "height":0,
-                 "id":48,
-                 "name":"Stronghold_1",
+                 "id":61,
+                 "name":"Dungeon 1",
+                 "properties":
+                    {
+                     "New Room":"Dungeon1",
+                     "New X":32,
+                     "New Y":32
+                    },
+                 "propertytypes":
+                    {
+                     "New Room":"string",
+                     "New X":"int",
+                     "New Y":"int"
+                    },
                  "rotation":0,
-                 "type":"Stronghold_1",
+                 "type":"Door",
                  "visible":true,
                  "width":0,
-                 "x":1327.66666666667,
-                 "y":1297.66666666667
+                 "x":1264.33333333333,
+                 "y":1180.66666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -175,8 +187,8 @@
                  "type":"Enemy_Spawner",
                  "visible":true,
                  "width":0,
-                 "x":1130.83333333333,
-                 "y":1323
+                 "x":1149.5,
+                 "y":1288.33333333333
                 }, 
                 {
                  "height":0,
@@ -186,8 +198,82 @@
                  "type":"Enemy_Boss_Slime",
                  "visible":true,
                  "width":0,
-                 "x":1392,
-                 "y":1334
+                 "x":2373.33333333333,
+                 "y":1471.33333333333
+                }, 
+                {
+                 "height":0,
+                 "id":58,
+                 "name":"Enemy_Spawner",
+                 "properties":
+                    {
+                     "Object":"Slime",
+                     "Quantity":8
+                    },
+                 "propertytypes":
+                    {
+                     "Object":"string",
+                     "Quantity":"int"
+                    },
+                 "rotation":0,
+                 "type":"Enemy_Spawner",
+                 "visible":true,
+                 "width":0,
+                 "x":1180.66666666667,
+                 "y":1347.33333333333
+                }, 
+                {
+                 "height":0,
+                 "id":59,
+                 "name":"Enemy_Spawner",
+                 "properties":
+                    {
+                     "Object":"Slime",
+                     "Quantity":8
+                    },
+                 "propertytypes":
+                    {
+                     "Object":"string",
+                     "Quantity":"int"
+                    },
+                 "rotation":0,
+                 "type":"Enemy_Spawner",
+                 "visible":true,
+                 "width":0,
+                 "x":1694.66666666667,
+                 "y":1364
+                }, 
+                {
+                 "height":0,
+                 "id":60,
+                 "name":"Enemy_Spawner",
+                 "properties":
+                    {
+                     "Object":"Slime",
+                     "Quantity":8
+                    },
+                 "propertytypes":
+                    {
+                     "Object":"string",
+                     "Quantity":"int"
+                    },
+                 "rotation":0,
+                 "type":"Enemy_Spawner",
+                 "visible":true,
+                 "width":0,
+                 "x":2200,
+                 "y":1562
+                }, 
+                {
+                 "height":0,
+                 "id":48,
+                 "name":"Stronghold_1",
+                 "rotation":0,
+                 "type":"Stronghold_1",
+                 "visible":true,
+                 "width":0,
+                 "x":1327.66666666667,
+                 "y":1297.66666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -227,7 +313,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":52,
+ "nextobjectid":62,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,

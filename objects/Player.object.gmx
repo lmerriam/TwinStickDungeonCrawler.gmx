@@ -581,23 +581,23 @@ stats[? "Health"] = min(stats[? "Health"]+5, stats[? "Max Health"]);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>    /// Go through door
+            <string>/// Go through door
 
-    if (room_exists(other.new_room)) {
+if (room_exists(other.stats[? "New Room"])) {
 
-        // Activate objects that need to persist
-        // They will automatically be deactivated again by the view after they've transitioned to the new room
-        scr_activate_inv();
+    // Activate objects that need to persist
+    // They will automatically be deactivated again by the view after they've transitioned to the new room
+    scr_activate_inv();
 
-        instance_activate_object(Menu_Parent);
-        
-        room_goto(other.new_room);
-        x = other.new_x;
-        y = other.new_y;
-        View.x = other.new_x;
-        View.y = other.new_y;
-        
-    }
+    instance_activate_object(Menu_Parent);
+    
+    room_goto(other.stats[? "New Room"]);
+    x = other.stats[? "New X"];
+    y = other.stats[? "New Y"];
+    View.x = other.stats[? "New X"];
+    View.y = other.stats[? "New Y"];
+    
+}
 </string>
           </argument>
         </arguments>
