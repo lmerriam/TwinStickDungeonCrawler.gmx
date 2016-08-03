@@ -1,13 +1,13 @@
-///scr_load_map(filename)
+///scr_load_map(roomname)
 ///Tiled_GMS v0.alpha, by @angrymobofsteve
 ///Expanded by @captfitz
 
-var filename;
+var roomname;
 var tileheight, tilewidth;
 
-filename = argument0;
+roomname = argument0;
 
-var data_file = file_text_open_read(working_directory + filename);
+var data_file = file_text_open_read(working_directory + roomname + ".json");
 var json_data = "";
 while (!file_text_eof(data_file))
 {

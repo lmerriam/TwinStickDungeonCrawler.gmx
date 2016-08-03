@@ -11,7 +11,7 @@
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
   <code>global.current_map = sprite_add(working_directory + "tsdcTest.png",0,0,false,0,0);
-scr_load_map("tsdcTest.json");</code>
+scr_load_map("tsdcTest");</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
