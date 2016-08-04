@@ -385,6 +385,7 @@
     <timeline>timelines\tl_spell_blink</timeline>
   </timelines>
   <rooms name="rooms">
+    <room>rooms\rm_loading</room>
     <room>rooms\room5</room>
     <room>rooms\Dungeon1</room>
     <room>rooms\rm1</room>

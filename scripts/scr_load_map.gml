@@ -38,11 +38,27 @@ var layer_depth = 1000;
 var tileset_bg = background_add(working_directory + tileset_img, 1, false );
 var lst_layers = ds_map_find_value( json, "layers" );
 
+// Clear existing DS if they exist
+/*
+if (ds_exists(global.map_tiles,ds_type_grid)) {
+    ds_grid_destroy(global.map_tiles);
+    ds_grid_destroy(global.collision_tiles);
+    ds_grid_destroy(global.visible_tiles);
+}
+*/
+
+
 global.collision_tiles = ds_grid_create(map_width,map_height);
 global.map_tiles = ds_grid_create(map_width,map_height);
 global.visible_tiles = ds_grid_create(map_width,map_height);
 ds_grid_clear(global.visible_tiles,false);
 
+// Create the new room
+new_room = room_add();
+room_set_width(new_room,map_width * global.tilewidth);
+room_set_height(new_room,map_height * global.tileheight);
+
+// Loop through the tile and object layers in the JSON
 for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
     var layer_object = ds_list_find_value( lst_layers, layer_i);
     var layer_type = ds_map_find_value( layer_object, "type");
@@ -90,9 +106,9 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
                     }                
                 }
             }
-            //ds_list_destroy(lst_data);
         break;
         case "objectgroup":
+            // Load up the room objects
             var lst_objects = ds_map_find_value( layer_object, "objects");
             
             // Place objects
@@ -103,7 +119,7 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
                 var object_y = ds_map_find_value( object_map, "y" );
                 var object_properties = ds_map_find_value( object_map, "properties");
                 if object_exists(object_type){
-                    var object = instance_create( object_x, object_y, object_type);
+                    var object = room_instance_add(new_room, object_x, object_y, object_type);
                     object.x = object_x;
                     object.y = object_y;
                     
@@ -111,20 +127,14 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
                     if (object_properties != undefined) scr_custom_properties(object,object_properties);
                 }
             }
-            //ds_list_destroy(lst_objects);
         break;
         default:
             show_message("unknown layer type");
         break;
     }
     show_debug_message("Layer object: " + string(layer_object));
-    //scr_debug_map(layer_object);
-    //ds_map_destroy(layer_object);
 }
 
-//scr_debug_list(lst_layers);
-//show_debug_message("List layers: " + string(lst_layers));
-//ds_list_destroy(lst_layers);
-//ds_list_destroy(lst_tileset);
-
 ds_map_destroy(json);
+
+room_goto(new_room);
