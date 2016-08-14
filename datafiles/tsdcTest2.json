@@ -140,7 +140,7 @@
                  "name":"Dungeon 1",
                  "properties":
                     {
-                     "New Room":"tsdcTest2",
+                     "New Room":"Dungeon1",
                      "New X":32,
                      "New Y":32
                     },
