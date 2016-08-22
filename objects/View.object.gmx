@@ -264,6 +264,32 @@ prev_screen_scale = screen_scale;
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Destroy tile and collision maps
+ds_grid_destroy(global.map_tiles);
+ds_grid_destroy(global.collision_tiles);
+ds_grid_destroy(global.visible_tiles);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="4">
       <action>
         <libid>1</libid>
@@ -284,13 +310,8 @@ prev_screen_scale = screen_scale;
             <string>/// Load the map
 
 if (!global.room_loaded) {
-    ds_grid_destroy(global.map_tiles);
-    ds_grid_destroy(global.collision_tiles);
-    ds_grid_destroy(global.visible_tiles);
-    
+    show_message(global.current_room);
     scr_load_map(global.current_room);
-    
-    Player.phy_fixed_rotation = true;
 }
 </string>
           </argument>

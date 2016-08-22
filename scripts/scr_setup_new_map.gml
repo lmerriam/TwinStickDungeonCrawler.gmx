@@ -21,15 +21,19 @@ if ( !is_undefined(json_data) )
 else
     exit;
 
+    
+
 global.tilewidth = ds_map_find_value( json, "tilewidth" );
 global.tileheight = ds_map_find_value( json, "tileheight" );
 var map_width = ds_map_find_value( json, "width" );
 var map_height = ds_map_find_value( json, "height" );
 
+show_debug_message(roomname + ": " + string(map_width) + " x " + string(map_height));
+
 ds_map_destroy(json);
 
 // Create the new room
-var new_room = room_add();
+var new_room = room_duplicate(rm_template_overworld);
 room_set_width(new_room,map_width * global.tilewidth);
 room_set_height(new_room,map_height * global.tileheight);
 // Goto the new room
@@ -37,6 +41,7 @@ room_goto(new_room);
 // Store the new current room
 global.current_room = roomname;
 global.room_loaded = false;
+
 
 #define scr_load_map
 ///scr_load_map(roomname)
@@ -87,6 +92,7 @@ ds_grid_clear(global.visible_tiles,false);
 for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
     var layer_object = ds_list_find_value( lst_layers, layer_i);
     var layer_type = ds_map_find_value( layer_object, "type");
+    show_debug_message(layer_type);
     switch(layer_type){
         case "tilelayer":
             var layer_height = ds_map_find_value( layer_object, "height" );
@@ -157,9 +163,7 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
             show_message("unknown layer type");
         break;
     }
-    show_debug_message("Layer object: " + string(layer_object));
+    //show_debug_message("Layer object: " + string(layer_object));
 }
-physics_world_create(0.1000);
-physics_world_gravity(0,0);
 global.room_loaded = true;
 ds_map_destroy(json);

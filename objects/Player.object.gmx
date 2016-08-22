@@ -495,14 +495,15 @@ var tile_x = x div global.tilewidth;
 var tile_y = y div global.tileheight;
 
 var tile_left = tile_x - 8;
-var tile_right = tile_x + 8;
+var tile_right = tile_x + 8, ;
 var tile_top = tile_y - 6;
 var tile_bottom = tile_y + 6;
 
+// Every 30 steps of gametime populate the tiles around the player
 if (floor(Time.now) mod 30 = 0) {
     for (row = tile_top; row&lt;tile_bottom; row++) {
         for (col = tile_left; col&lt;tile_right; col++) {
-            if (!global.visible_tiles[# col,row] and global.map_tiles[# col,row] != 0) {
+            if (!global.visible_tiles[# col,row] and global.map_tiles[# col,row] != 0 and global.map_tiles[# col,row] != undefined) {
                 var tile = global.map_tiles[# col,row];
                 var tile_id = tile[0];
                 var tile_visible = tile[1];
@@ -583,20 +584,20 @@ stats[? "Health"] = min(stats[? "Health"]+5, stats[? "Max Health"]);
             <kind>1</kind>
             <string>/// Go through door
 
-
-
 // Activate objects that need to persist
 // They will automatically be deactivated again by the view after they've transitioned to the new room
 scr_activate_inv();
 
 instance_activate_object(Menu_Parent);
+instance_activate_object(Time);
 
 scr_setup_new_map(other.stats[? "New Room"]);
 x = other.stats[? "New X"];
 y = other.stats[? "New Y"];
 View.x = other.stats[? "New X"];
 View.y = other.stats[? "New Y"];
-
+Time.x = other.stats[? "New X"];
+Time.y = other.stats[? "New Y"];
 </string>
           </argument>
         </arguments>
@@ -635,6 +636,30 @@ if (base_stats[? "Experience"] &gt;= base_stats[? "Next Level Experience"]) {
     scr_announce("Achieved level " + string(base_stats[? "Level"]), noone);
 }
 
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Set up the player when transferring rooms
 
 </string>
           </argument>

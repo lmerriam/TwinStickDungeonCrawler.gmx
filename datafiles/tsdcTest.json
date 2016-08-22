@@ -140,9 +140,9 @@
                  "name":"Dungeon 1",
                  "properties":
                     {
-                     "New Room":"tsdcTest2",
-                     "New X":32,
-                     "New Y":32
+                     "New Room":"dungeon1",
+                     "New X":2368,
+                     "New Y":1024
                     },
                  "propertytypes":
                     {
