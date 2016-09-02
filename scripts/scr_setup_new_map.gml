@@ -124,7 +124,8 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
                     var tile_id = ds_list_find_value(lst_data, i);
                     
                     if ( tile_id > 0 ) {
-                        var tile = ds_map_create();
+                        //var tile = ds_map_create();
+                        var tile=0;
                         tile[0] = tile_id;
                         tile[1] = false;
                         tile[2] = layer_depth;
