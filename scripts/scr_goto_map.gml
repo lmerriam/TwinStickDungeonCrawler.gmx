@@ -1,5 +1,5 @@
-#define scr_setup_new_map
-///scr_setup_new_map(roomname)
+#define scr_goto_map
+///scr_goto_map(roomname)
 var tileheight, tilewidth;
 var roomname = argument0;
 
@@ -21,8 +21,6 @@ if ( !is_undefined(json_data) )
 else
     exit;
 
-    
-
 global.tilewidth = ds_map_find_value( json, "tilewidth" );
 global.tileheight = ds_map_find_value( json, "tileheight" );
 var map_width = ds_map_find_value( json, "width" );
@@ -40,7 +38,6 @@ room_set_height(new_room,map_height * global.tileheight);
 room_goto(new_room);
 // Store the new current room
 global.current_room = roomname;
-global.room_loaded = false;
 
 
 #define scr_load_map
@@ -82,7 +79,7 @@ var layer_depth = 1000;
 var tileset_bg = background_add(working_directory + tileset_img, 1, false );
 var lst_layers = ds_map_find_value( json, "layers" );
 
-// Clear existing DS if they exist
+// Create grids
 global.collision_tiles = ds_grid_create(map_width,map_height);
 global.map_tiles = ds_grid_create(map_width,map_height);
 global.visible_tiles = ds_grid_create(map_width,map_height);
@@ -166,5 +163,4 @@ for ( var layer_i = 0; layer_i < ds_list_size(lst_layers); layer_i++){
     }
     //show_debug_message("Layer object: " + string(layer_object));
 }
-global.room_loaded = true;
 ds_map_destroy(json);

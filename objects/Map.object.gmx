@@ -87,7 +87,7 @@ with(Location) {
         global.teleport_player_x = x;
         global.teleport_player_y = y;
         with (View) event_perform(ev_keypress,ord('M'));
-        other.current_location = name;
+        other.current_location = stats[? "Name"];
     }
 }
 </string>

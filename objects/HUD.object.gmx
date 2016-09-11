@@ -26,7 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>/// Show debug
-show_debug_overlay(true);
+//show_debug_overlay(true);
+total_fps = 0;
+avg_fps = 0;
 </string>
           </argument>
         </arguments>
@@ -143,6 +145,33 @@ if (!global.cast_mode) {
     } else {
         nearest_drop_in_range = false;   
     }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Get fps
+total_fps += fps_real;
+
+if Time.now mod 60 == 0 {
+    avg_fps = total_fps/60;
+    total_fps = fps_real;
 }
 </string>
           </argument>
@@ -311,6 +340,29 @@ if (global.cast_mode) {
     var maxexpr = Player.stats[? "Next Level Experience"];
     draw_healthbar(0,window_height-hbar,window_width,window_height,expr/maxexpr*100,c_black,c_white,c_white,0,true,true);
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Draw fps
+
+draw_text(0,0,avg_fps);
 </string>
           </argument>
         </arguments>

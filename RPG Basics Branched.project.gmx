@@ -201,7 +201,7 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="Loading">
-      <script>scripts\scr_setup_new_map.gml</script>
+      <script>scripts\scr_goto_map.gml</script>
       <script>scripts\scr_load_game.gml</script>
       <script>scripts\scr_load_instance.gml</script>
     </scripts>
@@ -414,18 +414,16 @@
       <object>objects\Stronghold_Parent</object>
       <object>objects\Outpost_Parent</object>
     </objects>
+    <object>objects\Init</object>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_spell_blink</timeline>
   </timelines>
   <rooms name="rooms">
+    <room>rooms\start</room>
     <room>rooms\room5</room>
     <room>rooms\rm_template_overworld</room>
-    <room>rooms\rm_loading</room>
-    <room>rooms\Dungeon1</room>
     <room>rooms\rm1</room>
-    <room>rooms\rm2</room>
-    <room>rooms\gmare_test</room>
     <room>rooms\rm_demo</room>
   </rooms>
   <constants number="1">

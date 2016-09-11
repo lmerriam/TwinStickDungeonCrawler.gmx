@@ -125,6 +125,7 @@ eqp_btn_y2 = eqp_btn_y1 + 48;
             <kind>1</kind>
             <string>/// Destroy DS
 if (ds_exists(slots,ds_type_grid)) ds_grid_destroy(slots);
+show_message("Inventory destroyed");
 </string>
           </argument>
         </arguments>

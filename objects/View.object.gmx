@@ -35,10 +35,6 @@ global.window_height = view_hport[0];
 
 screen_scale = 1;
 prev_screen_scale = screen_scale;
-
-instance_create(-999,-999,Inventory);
-instance_create(-999,-999,Map);
-instance_deactivate_object(Menu_Parent);
 </string>
           </argument>
         </arguments>
@@ -91,6 +87,11 @@ alarm[1] = 1;
           <argument>
             <kind>1</kind>
             <string>/// Init menus
+
+// Create menus
+instance_create(-999,-999,Inventory);
+instance_create(-999,-999,Map);
+instance_deactivate_object(Menu_Parent);
 
 // Inventory
 global.menu_inventory = ds_list_create();
@@ -282,9 +283,18 @@ prev_screen_scale = screen_scale;
           <argument>
             <kind>1</kind>
             <string>/// Destroy tile and collision maps
-ds_grid_destroy(global.map_tiles);
-ds_grid_destroy(global.collision_tiles);
-ds_grid_destroy(global.visible_tiles);
+if ds_exists(global.map_tiles,ds_type_grid) {
+    ds_grid_destroy(global.map_tiles);
+    ds_grid_destroy(global.collision_tiles);
+    ds_grid_destroy(global.visible_tiles);
+}
+
+// Activate objects that need to persist
+// They will automatically be deactivated again by the view after they've transitioned to the new room
+scr_activate_inv();
+
+instance_activate_object(Menu_Parent);
+instance_activate_object(Time);
 </string>
           </argument>
         </arguments>
@@ -308,11 +318,10 @@ ds_grid_destroy(global.visible_tiles);
           <argument>
             <kind>1</kind>
             <string>/// Load the map
+scr_load_map(global.current_room);
+global.current_map = sprite_add(working_directory + "tsdcTest.png",0,0,false,0,0);
 
-if (!global.room_loaded) {
-    show_message(global.current_room);
-    scr_load_map(global.current_room);
-}
+instance_deactivate_object(Menu_Parent);
 </string>
           </argument>
         </arguments>

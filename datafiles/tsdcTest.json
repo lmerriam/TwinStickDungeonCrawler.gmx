@@ -65,75 +65,8 @@
         {
          "draworder":"topdown",
          "height":200,
-         "name":"Player",
-         "objects":[
-                {
-                 "height":0,
-                 "id":8,
-                 "name":"Player",
-                 "rotation":0,
-                 "type":"Player",
-                 "visible":true,
-                 "width":0,
-                 "x":1143.63636363636,
-                 "y":1118.9696969697
-                }, 
-                {
-                 "height":0,
-                 "id":12,
-                 "name":"View",
-                 "rotation":0,
-                 "type":"View",
-                 "visible":true,
-                 "width":0,
-                 "x":1136.05303030303,
-                 "y":1091.80303030303
-                }, 
-                {
-                 "height":0,
-                 "id":13,
-                 "name":"Particles",
-                 "rotation":0,
-                 "type":"Particles",
-                 "visible":true,
-                 "width":0,
-                 "x":1158.10606060606,
-                 "y":1092.11363636364
-                }, 
-                {
-                 "height":0,
-                 "id":14,
-                 "name":"Time",
-                 "rotation":0,
-                 "type":"Time",
-                 "visible":true,
-                 "width":0,
-                 "x":1180.12878787879,
-                 "y":1092.33333333333
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "width":200,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "height":200,
          "name":"Stuff",
          "objects":[
-                {
-                 "height":0,
-                 "id":11,
-                 "name":"HUD",
-                 "rotation":0,
-                 "type":"HUD",
-                 "visible":true,
-                 "width":0,
-                 "x":1113.9696969697,
-                 "y":1091.80303030303
-                }, 
                 {
                  "height":0,
                  "id":61,

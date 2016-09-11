@@ -584,14 +584,7 @@ stats[? "Health"] = min(stats[? "Health"]+5, stats[? "Max Health"]);
             <kind>1</kind>
             <string>/// Go through door
 
-// Activate objects that need to persist
-// They will automatically be deactivated again by the view after they've transitioned to the new room
-scr_activate_inv();
-
-instance_activate_object(Menu_Parent);
-instance_activate_object(Time);
-
-scr_setup_new_map(other.stats[? "New Room"]);
+scr_goto_map(other.stats[? "New Room"]);
 x = other.stats[? "New X"];
 y = other.stats[? "New Y"];
 View.x = other.stats[? "New X"];
@@ -660,7 +653,7 @@ if (base_stats[? "Experience"] &gt;= base_stats[? "Next Level Experience"]) {
           <argument>
             <kind>1</kind>
             <string>/// Set up the player when transferring rooms
-
+phy_fixed_rotation = true;
 </string>
           </argument>
         </arguments>
